@@ -9,13 +9,15 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="153dp"
-        android:layout_height="83dp"
-        android:text="@string/Pet"
+        android:layout_width="251dp"
+        android:layout_height="104dp"
+        android:text="@string/Create_an_Event"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.725"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.256" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
