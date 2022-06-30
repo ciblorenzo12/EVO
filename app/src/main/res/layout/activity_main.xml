@@ -5,7 +5,7 @@
     android:id="@+id/create_an_Event_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#323030"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <Button
@@ -17,12 +17,11 @@
         android:text="@string/Create_an_Event"
         android:textColor="#222223"
         android:textSize="24sp"
-        app:backgroundTint="#F57F17"
+        app:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.499" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
