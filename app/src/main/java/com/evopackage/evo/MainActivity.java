@@ -11,9 +11,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.firebase_login_activity);
+
        create_an_Event_button =  findViewById(R.id.create_an_Event_id);
 
-
     }
+
 }
