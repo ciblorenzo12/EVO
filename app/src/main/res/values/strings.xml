@@ -2,4 +2,6 @@
     <string name="app_name">Evo</string>
     <string name="Create_an_Event">Create an Event</string>
     <string name="Join_Event">Join Event</string>
+    <string name="example_email">example@mail.com</string>
+    <string name="password_example">Password</string>
 </resources>

@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.41451990632318503" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_.xml" value="0.246" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_background.xml" value="0.246" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/icon_user.xml" value="0.1925" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.1" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
