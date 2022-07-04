@@ -11,4 +11,7 @@
     <string name="phone_number_example">(103)224-1518</string>
     <string name="dob">Date of birth</string>
     <string name="register">Register</string>
+    <string name="back">back</string>
+    <string name="reset_password">Reset your password</string>
+    <string name="submit">Submit</string>
 </resources>
