@@ -8,4 +8,7 @@
     <string name="forgot_pass">Forgot Password?</string>
     <string name="login">Login</string>
     <string name="profile_Picture">profile picture</string>
+    <string name="phone_number_example">(103)224-1518</string>
+    <string name="dob">Date of birth</string>
+    <string name="register">Register</string>
 </resources>
