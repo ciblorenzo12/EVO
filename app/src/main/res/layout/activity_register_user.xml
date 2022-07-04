@@ -13,10 +13,10 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145"
+        app:layout_constraintVertical_bias="0.09"
         app:srcCompat="@drawable/user_"
         app:tint="#C411C8FF"
         app:tintMode="multiply"
@@ -27,10 +27,9 @@
     <EditText
         android:id="@+id/register_email"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="416dp"
+        android:layout_width="209dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/example_email"
@@ -38,11 +37,10 @@
         android:minHeight="48dp"
         android:singleLine="true"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintHorizontal_bias="0.405"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture6" />
+        app:layout_constraintTop_toBottomOf="@+id/register_lastname" />
 
     <EditText
         android:id="@+id/register_password"
@@ -102,7 +100,9 @@
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="21dp"
+        android:clickable="true"
+        android:onClick="onClick"
         android:text="@string/register"
         android:textColor="#130B0B"
         android:textColorHighlight="#55E6D5"
@@ -131,5 +131,35 @@
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="?attr/actionModeCloseDrawable"
         tools:ignore="ImageContrastCheck" />
+
+    <EditText
+        android:id="@+id/register_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/full_names"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture6" />
+
+    <EditText
+        android:id="@+id/register_lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_firstname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
