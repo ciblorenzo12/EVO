@@ -4,4 +4,8 @@
     <string name="Join_Event">Join Event</string>
     <string name="example_email">example@mail.com</string>
     <string name="password_example">Password</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="profile_Picture">profile picture</string>
 </resources>

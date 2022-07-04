@@ -8,18 +8,21 @@
     tools:ignore="MissingDefaultResource">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="234dp"
-        android:layout_height="172dp"
+        android:id="@+id/profile_picture"
+        android:layout_width="248dp"
+        android:layout_height="168dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.11"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:tint="#8D10E3DD"
-        tools:ignore="ImageContrastCheck" />
+        app:srcCompat="@drawable/user_"
+        app:tint="#C411C8FF"
+        app:tintMode="multiply"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@drawable/user_"
+        tools:targetApi="m" />
 
     <EditText
         android:id="@+id/TextEmailAddress"
@@ -35,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -59,7 +62,8 @@
         android:layout_marginTop="76dp"
         android:text="Login"
         android:textColor="#4E342E"
-        app:backgroundTint="#0ABAB5"
+        android:textColorHighlight="#000000"
+        app:backgroundTint="#C411C8FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
@@ -67,15 +71,36 @@
         app:layout_constraintTop_toBottomOf="@+id/TextEmailAddress"
         app:layout_constraintVertical_bias="0.039" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="396dp" />
+    <TextView
+        android:id="@+id/create_an_account"
+        android:layout_width="125dp"
+        android:layout_height="28dp"
+        android:text="@string/create_an_account"
+        android:textAlignment="center"
+        android:textColorHighlight="#0C0909"
+        android:textColorLink="#0E0A0A"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.772" />
+
+    <TextView
+        android:id="@+id/forgota_password"
+        android:layout_width="125dp"
+        android:layout_height="28dp"
+        android:text="@string/forgot_pass"
+        android:textAlignment="center"
+        android:textColorHighlight="#0C0909"
+        android:textColorLink="#0E0A0A"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.772" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

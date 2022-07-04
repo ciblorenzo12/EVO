@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Button create_an_Event_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firebase_login_activity);
 
-       create_an_Event_button =  findViewById(R.id.create_an_Event_id);
+
+      //fields
+        FirebaseAuth authent = FirebaseAuth.getInstance();
 
     }
 
