@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "976479568343",
+    "project_id": "evos-33fca",
+    "storage_bucket": "evos-33fca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976479568343:android:29ece8c9096751d93c0b92",
+        "android_client_info": {
+          "package_name": "com.evopackage.evo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976479568343-jasir3a7rb0b6sjd0pd188u1q6gv70vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo8yLdUDlVrqhOzzB9qdfpsLgBH-jpy-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976479568343-jasir3a7rb0b6sjd0pd188u1q6gv70vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
