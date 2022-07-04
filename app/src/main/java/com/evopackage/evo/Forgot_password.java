@@ -31,10 +31,10 @@ _back.setOnClickListener(this);
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.reset_back:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
+       if(v.getId()==R.id.reset_back) {
+
+                startActivity(new Intent(this, Login_screen.class));
+
         }
     }
 }

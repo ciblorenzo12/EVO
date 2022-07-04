@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Login_screen extends AppCompatActivity implements View.OnClickListener {
 
     //clickable objects
 private TextView _forgotPass;
@@ -45,11 +45,10 @@ private EditText _email,password;
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.create_an_account:startActivity(new Intent(this,Register_user.class));
-            break;
-            case R.id.forgota_password:startActivity(new Intent(this,Forgot_password.class));
-            break;
+       if(v.getId()==R.id.create_an_account) {
+           startActivity(new Intent(this, Register_user.class));
+       }else if(v.getId()==R.id.forgota_password)
+           startActivity(new Intent(this,Forgot_password.class));
+
         }
     }
-}

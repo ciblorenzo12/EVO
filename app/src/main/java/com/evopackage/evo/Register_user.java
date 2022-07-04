@@ -46,10 +46,10 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.register_back:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
+       if (v.getId()==R.id.register_back) {
+
+           startActivity(new Intent(this, Login_screen.class));
+
         }
     }
 }
