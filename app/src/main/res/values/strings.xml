@@ -20,4 +20,12 @@
     <string name="select_dob">mm/dd/yyyy</string>
     <string name="Btn_test">Button Test</string>
     <string name="Sign_Google">Sign in with Google</string>
+    <string name="name">Name</string>
+    <string name="Adress">Address</string>
+    <string-array name="theme">
+        <item>Music</item>
+        <item>Comic</item>
+        <item>Cars</item>
+        <item>Movie</item>
+    </string-array>
 </resources>

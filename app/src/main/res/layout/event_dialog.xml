@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        android:inputType="textPersonName|text"
+        android:autofillHints="" />
+
+    <EditText
+
+        android:id="@+id/edit_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:hint="@string/dob"
+        android:inputType="datetime"
+        android:minHeight="48dp"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/edit_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_date"
+        android:layout_marginTop="1dp"
+        android:autofillHints=""
+        android:hint="@string/Adress"
+        android:inputType="textPostalAddress"
+        android:minHeight="48dp"
+
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_location"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:autofillHints="Theme"
+        android:contentDescription="@string/Sign_Google"
+        android:minHeight="48dp" />
+
+</RelativeLayout>
