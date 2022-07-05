@@ -95,7 +95,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
             return;
 
 
-        }if (_PASSWORD.length()<8) {
+        }if (_PASSWORD.length()<6) {
 
             _password.setError("You need to enter a password with at least 8 characters \nhint: P2345678 ");
             _password.requestFocus();

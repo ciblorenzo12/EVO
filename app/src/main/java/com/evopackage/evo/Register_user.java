@@ -198,6 +198,7 @@ Pick_a_Date();
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        month = month+1;
       String dob = month + "/" +dayOfMonth+"/"+year;
       _dob.setText(dob);
 
