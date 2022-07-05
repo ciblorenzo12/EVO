@@ -26,44 +26,45 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:text="Full Name"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
-    <Button
+    <TextView
         android:id="@+id/button3"
-        android:layout_width="173dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="20dp"
-        android:text="Change Phone Number"
-        android:textSize="16sp"
+        android:layout_width="169dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:text="Phone Number"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="173dp"
-        android:layout_height="72dp"
+        android:layout_width="179dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:text="Events Attended"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="173dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="24dp"
-        android:text="Change Password"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+    <TextView
+        android:id="@+id/button5"
+        android:layout_width="169dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:text="Change Password"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
