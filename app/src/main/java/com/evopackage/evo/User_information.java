@@ -15,7 +15,7 @@ public User_information( String _Firstname,String _Lastname,String _Dob,String _
     _email = _Email;
     _password = _Password;
     _phone = _Phone;
-
+String test = "test";
 
 
 }
