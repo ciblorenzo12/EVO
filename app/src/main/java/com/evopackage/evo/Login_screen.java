@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login_screen extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,7 +29,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
     private Button _login;
     //Firebase authentication
     private FirebaseAuth _authent;
-
+    private FirebaseUser _userdata=FirebaseAuth.getInstance().getCurrentUser();
 
     //textObjects
     private EditText _email, _password;
@@ -109,12 +110,20 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
         _authent.signInWithEmailAndPassword(_EMAIL,_PASSWORD).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
 
-            startActivity(new Intent(Login_screen.this,MainWindows_Create_Join_Event.class));
+             if(_userdata.isEmailVerified()) {
+
+                 startActivity(new Intent(Login_screen.this,MainWindows_Create_Join_Event.class));
+
+             }else {
+         _userdata.sendEmailVerification();
+         Toast.makeText(Login_screen.this,"Check your email for verification",Toast.LENGTH_LONG).show();
+             }
                 progressbar_.setVisibility(View.GONE);
+
 
             }else {
 
-                Toast.makeText(Login_screen.this,"Upps something went wrong please check your credentials",Toast.LENGTH_LONG).show();
+                Toast.makeText(Login_screen.this,"Ups something went wrong please check your credentials",Toast.LENGTH_LONG).show();
 
             }
         });

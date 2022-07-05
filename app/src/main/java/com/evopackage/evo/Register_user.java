@@ -1,6 +1,5 @@
 package com.evopackage.evo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -15,9 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,7 +49,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         //buttons
         _registerBtn = findViewById(R.id.register_btn);
         _back_Login = findViewById(R.id.register_back);
-         _progressbar = findViewById(R.id.register_progressBar);
+         _progressbar = findViewById(R.id.reset_progressBar);
 
         _back_Login.setOnClickListener(this);
         _dob.setOnClickListener(this);
