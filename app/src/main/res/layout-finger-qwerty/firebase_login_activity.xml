@@ -5,7 +5,9 @@
     android:id="@+id/Create_an_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingDefaultResource">
+    android:clickable="true"
+    tools:ignore="MissingDefaultResource"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/profile_picture"
@@ -42,6 +44,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
+        android:id="@+id/TextPass"
         android:layout_width="232dp"
         android:layout_height="68dp"
         android:ems="10"
@@ -60,6 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
+        android:clickable="true"
+        android:onClick="onClick"
         android:text="Login"
         android:textColor="#4E342E"
         android:textColorHighlight="#000000"
