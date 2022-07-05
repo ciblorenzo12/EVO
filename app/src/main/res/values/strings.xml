@@ -15,6 +15,7 @@
     <string name="reset_password">Reset your password</string>
     <string name="submit">Submit</string>
     <string name="full_name" />
-    <string name="full_names">Full name</string>
+    <string name="full_names">Name</string>
     <string name="last_name">Last Name</string>
+    <string name="select_dob">mm/dd/yyyy</string>
 </resources>

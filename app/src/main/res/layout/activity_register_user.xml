@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register_user">
+    android:clickable="true"
+    tools:context=".Register_user"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/profile_picture6"
@@ -85,10 +87,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:autofillHints=""
+        android:clickable="true"
         android:ems="10"
+        android:enabled="false"
+        android:allowClickWhenDisabled="true"
         android:hint="@string/dob"
-        android:inputType="date"
         android:minHeight="48dp"
+        android:onClick="onClick"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,10 +115,10 @@
         app:backgroundTint="#C411C8FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_dob"
-        app:layout_constraintVertical_bias="0.078"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <ImageButton

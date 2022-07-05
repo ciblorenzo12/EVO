@@ -18,7 +18,7 @@ private TextView _forgotPass;
 private TextView _create_User;
 private Button _login;
 //Firebase authentication
-private FirebaseAuth authent;
+private FirebaseAuth _authent;
 
 //textObjects
 private EditText _email,password;
@@ -33,7 +33,7 @@ private EditText _email,password;
       //fields
         _create_User = findViewById(R.id.create_an_account) ;
         _forgotPass =  findViewById(R.id.forgota_password) ;
-         authent = FirebaseAuth.getInstance();
+         _authent = FirebaseAuth.getInstance();
          _login= findViewById(R.id.login_btn);
 
 

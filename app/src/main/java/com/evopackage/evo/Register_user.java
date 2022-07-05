@@ -3,11 +3,13 @@ package com.evopackage.evo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -19,9 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.Objects;
 
-public class Register_user extends AppCompatActivity implements View.OnClickListener {
+public class Register_user extends AppCompatActivity implements View.OnClickListener ,DatePickerDialog.OnDateSetListener{
 
 
     //firebase Auth
@@ -53,7 +56,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
          _progressbar = findViewById(R.id.register_progressBar);
 
         _back_Login.setOnClickListener(this);
-
+        _dob.setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +70,26 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
             RegisterUser();
 
         }
+        if(v.getId()==R.id.register_dob) {
+
+Pick_a_Date();
+
+        }
+
+    }
+
+    private void Pick_a_Date() {
+
+        DatePickerDialog _choosedate = new DatePickerDialog(
+                this,
+                       this,
+                Calendar.getInstance().get(Calendar.YEAR ),
+                        Calendar.getInstance().get(Calendar.MONTH),
+                                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+
+        );
+        _choosedate.show();
 
     }
 
@@ -112,7 +135,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         }
         if (_Dob.isEmpty()) {
 
-            _dob.setError("Please enter your date of birth");
+            _dob.setError("Please enter your date of birth \n hint: select month day and year");
             _dob.requestFocus();
             return;
 
@@ -150,7 +173,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
                         if(task1.isComplete()){
 
                             Toast.makeText(Register_user.this ,"Yay! You are register!! ",Toast.LENGTH_LONG).show();
-                            _progressbar.setVisibility(View.VISIBLE);
+                            _progressbar.setVisibility(View.GONE);
                         }else {
 
                             Toast.makeText(Register_user.this ,"Oh no something went wrong ,Try again !! ",Toast.LENGTH_LONG).show();
@@ -176,7 +199,16 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         }
         return false;
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+      String dob = month + "/" +dayOfMonth+"/"+year;
+      _dob.setText(dob);
+
+
+
     }
+}
 
 
 
