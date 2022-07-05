@@ -99,59 +99,59 @@ Pick_a_Date();
 
 
         if (_FirstName.isEmpty()) {
-            _fullname.setError("You should enter your first name");
+            _fullname.setError("Please enter your first name");
             _fullname.requestFocus();
             return;
 
         }
 
         if (_LastName.isEmpty()) {
-            _fullname.setError("You should enter your last Name name");
+            _fullname.setError("Please enter your last name");
             _fullname.requestFocus();
             return;
 
         }
         if (_Email.isEmpty()) {
-            _email.setError("You should enter your email address");
+            _email.setError("Please enter your email address");
             _email.requestFocus();
             return;
         }
 
         if (_Password.isEmpty()) {
-            _password.setError("You should enter a valid Password");
+            _password.setError("Please enter a valid password");
             _password.requestFocus();
             return;
 
         }
         if (_Phone.isEmpty()) {
-            _phone.setError("Please enter a valid Phone number");
+            _phone.setError("Please enter a valid phone number");
             _phone.requestFocus();
             return;
 
         }
         if (_Dob.isEmpty()) {
 
-            _dob.setError("Please enter your date of birth \n hint: select month day and year");
+            _dob.setError("Please enter your date of birth \nHint: select month, day, and year");
             _dob.requestFocus();
             return;
 
 
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(_Email).matches()) {
-            _email.setError("You should enter a valid email");
+            _email.setError("You must enter a valid email");
             _email.requestFocus();
             return;
         }
         if (_Password.length() < 6) {
 
-            _password.setError("Password should be a minimum of  8 characters ");
+            _password.setError("Password must be a minimum of 8 characters");
 
             _password.requestFocus();
             return;
         }
         if (!HasCapitalLetters(_Password)) {
 
-            _password.setError("Password should have at least one capital letter ");
+            _password.setError("Password must contain at least one capital letter");
             _password.requestFocus();
 
         }
@@ -168,11 +168,11 @@ Pick_a_Date();
                     (task1 -> {
                         if(task1.isComplete()){
 
-                            Toast.makeText(Register_user.this ,"Yay! You are register!! ",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Register_user.this ,"Yay! You're registered!",Toast.LENGTH_LONG).show();
                             _progressbar.setVisibility(View.GONE);
                         }else {
 
-                            Toast.makeText(Register_user.this ,"Oh no something went wrong ,Try again !! ",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Register_user.this ,"Oh no, something went wrong! Try again.",Toast.LENGTH_LONG).show();
                             _progressbar.setVisibility(View.GONE);
 
                         }
@@ -180,7 +180,7 @@ Pick_a_Date();
 
                     }else {
 
-                        Toast.makeText(Register_user.this ,"Oh no something went wrong ,Try again !! ",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register_user.this ,"Oh no, something went wrong! Try again.",Toast.LENGTH_LONG).show();
                         _progressbar.setVisibility(View.GONE);
 
 
