@@ -19,4 +19,5 @@
     <string name="last_name">Last Name</string>
     <string name="select_dob">mm/dd/yyyy</string>
     <string name="Btn_test">Button Test</string>
+    <string name="Sign_Google">Sign in with Google</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.evopackage.evo;
 
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,10 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,7 +25,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
     private Button _login;
     //Firebase authentication
     private FirebaseAuth _authent;
-    private FirebaseUser _userdata=FirebaseAuth.getInstance().getCurrentUser();
+    private  FirebaseUser _userdata=FirebaseAuth.getInstance().getCurrentUser();
 
     //textObjects
     private EditText _email, _password;
