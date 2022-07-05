@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:clickable="true"
     tools:ignore="MissingDefaultResource"
-    android:focusable="true">
+    android:focusable="true"
+
+    >
 
     <ImageView
         android:id="@+id/profile_picture"
