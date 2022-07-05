@@ -2,22 +2,28 @@ package com.evopackage.evo;
 
 public class Event
 {
-    private String _name;
     private int _id;
+    private String _name, _date, _location, _category;
 
-    public Event(String name, int id)
+    public Event(int id, String name, String date, String location, String category)
     {
-        _name = name;
         _id = id;
-    }
-
-    public String GetName()
-    {
-        return _name;
+        _name = name;
+        _date = date;
+        _location = location;
+        _category = category;
     }
 
     public int GetId()
     {
         return _id;
     }
+
+    public String GetName() { return _name; }
+
+    public String GetDate() { return _date; }
+
+    public String GetLocation() { return _location; }
+
+    public String GetCategory() { return _category; }
 }
