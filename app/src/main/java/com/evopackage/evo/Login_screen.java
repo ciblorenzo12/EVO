@@ -64,6 +64,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
 
      if (v.getId() == R.id.login_btn) {
         firebase_user_credentials();
+
     }
         if (v.getId() == R.id.create_an_account) {
 
