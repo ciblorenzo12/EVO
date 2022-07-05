@@ -5,9 +5,9 @@ public class Event
     private int _id;
     private String _name, _date, _location, _category;
 
-    public Event(int id, String name, String date, String location, String category)
+    public Event(String name, String date, String location, String category)
     {
-        _id = id;
+        _id = 0; // will be implemented later
         _name = name;
         _date = date;
         _location = location;
