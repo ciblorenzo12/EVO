@@ -1,31 +1,21 @@
 package com.evopackage.evo;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
-
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Objects;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 
 public class create_event_popup extends AppCompatDialogFragment {
 
-    private EditText editName;
-    private EditText editLocation;
 
-
+    @SuppressLint("CutPasteId")
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceState)
@@ -44,8 +34,8 @@ public class create_event_popup extends AppCompatDialogFragment {
 
                 });
 
-           editName = v.findViewById(R.id.edit_name);
-           editLocation = v.findViewById(R.id.edit_location);
+        EditText editName = v.findViewById(R.id.txtName);
+        EditText editLocation = v.findViewById(R.id.txtName);
 
            return builder.create();
     }
