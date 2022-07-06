@@ -66,7 +66,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
 
             startActivity(new Intent(this, Register_user.class));
         }if (v.getId() == R.id.forgota_password) {
-            startActivity(new Intent(this, Forgot_password.class));
+            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
 
 
         }

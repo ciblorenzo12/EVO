@@ -24,6 +24,7 @@
     <string name="Adress">Address</string>
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
+    <string name="previous" />
     <string-array name="theme">
         <item>Music</item>
         <item>Comic</item>
