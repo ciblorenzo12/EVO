@@ -12,7 +12,7 @@
         android:layout_width="77dp"
         android:layout_height="66dp"
         android:background="#00FFFFFF"
-        
+
         android:contentDescription="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
