@@ -5,17 +5,21 @@
       <map>
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_.xml" value="0.246" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_background.xml" value="0.246" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/icon_user.xml" value="0.1925" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout-finger-qwerty-v23/firebase_login_activity.xml" value="0.40749414519906324" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.5" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.18125" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_profile.xml" value="0.25" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.188" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.41451990632318503" />
+        <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.2767857142857143" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_forgot_password.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_profile_page.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_user_profile_picture.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/content_profile_page.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/event_dialog.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/fragment_first.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/fragment_second.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/profile_page.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17" />
       </map>
     </option>
   </component>
