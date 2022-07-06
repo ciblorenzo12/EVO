@@ -22,6 +22,9 @@
     <string name="Sign_Google">Sign in with Google</string>
     <string name="name">Name</string>
     <string name="Adress">Address</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="previous" />
     <string-array name="theme">
         <item>Music</item>
         <item>Comic</item>

@@ -7,23 +7,6 @@
     tools:context=".User_Profile_picture">
 
     <ImageButton
-        android:id="@+id/register_back3"
-        android:layout_width="77dp"
-        android:layout_height="66dp"
-        android:background="#00FFFFFF"
-        android:clickable="true"
-        android:contentDescription="@string/back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="?attr/actionModeCloseDrawable"
-        tools:ignore="ImageContrastCheck"
-        app:tint="#35A9F6" />
-
-    <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="186dp"
         android:layout_height="179dp"
@@ -37,19 +20,18 @@
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/textview1000"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="169dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:text="First Name"
+        android:text="Full Name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
-
-    <EditText
+    <TextView
         android:id="@+id/button3"
         android:layout_width="169dp"
         android:layout_height="45dp"
@@ -58,50 +40,29 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <EditText
-        android:id="@+id/button5"
-        android:layout_width="172dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:text="Change Password"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/textView4"
-        android:layout_width="169dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:text="Last Name"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview1000" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="Save"
+        android:id="@+id/button4"
+        android:layout_width="179dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:text="Events Attended"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 
-    <EditText
-        android:id="@+id/textView5"
+    <TextView
+        android:id="@+id/button5"
         android:layout_width="169dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:text="Change UserName"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:text="Change Password"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
