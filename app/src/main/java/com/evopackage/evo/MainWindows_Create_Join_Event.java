@@ -2,6 +2,7 @@ package com.evopackage.evo;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,14 +13,15 @@ import java.util.Objects;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener {
 
+private ImageButton btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_windows_create_join_event);
 
-        Button evtButton = findViewById(R.id.button2);
-        evtButton.setOnClickListener(v -> openDialog());
+        btn = findViewById(R.id.plussymbol);
+
     }
 
     private void openDialog() {
@@ -31,6 +33,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     public void applyTexts(String _evtName, String _evtDate, String _evtAddr) {
 
     }
+
+
 
 
 
