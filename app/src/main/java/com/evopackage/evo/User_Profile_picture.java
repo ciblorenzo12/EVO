@@ -20,6 +20,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     private FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //Changes to be made to data on firebase
     private EditText _firstName, _lastName, _password, _phoneNumber;
+    public TextView _userID;
     //Clickable buttons
     //ProfPicture should open up the phones photo library and pick one to be the picture
     private Button ProfSaveBtn;
@@ -32,7 +33,10 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_user_profile_setting);
 
         _authetication = FirebaseAuth.getInstance();
-
+        FirebaseUser user = _authetication.getCurrentUser();
+        //UserID
+        _userID = findViewById(R.id.UserID);
+        _userID.setText(user.getEmail());
         //EditText
         _firstName = findViewById(R.id.ProfFirstName);
         _lastName = findViewById(R.id.ProfLastName);
@@ -64,12 +68,13 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     }
 
     private void SaveProfileChanges() {
+        String _UserID = _userID.getText().toString().trim();
         //String _FirstName = _firstName.getText().toString().trim();
         //String _LastName = _lastName.getText().toString().trim();
         String _PhoneNum = _phoneNumber.getText().toString().trim();
         String _Password = _password.getText().toString().trim();
 
-        FirebaseUser user = _authetication.getCurrentUser();
+
 
         //User_information info = User_information()
 
@@ -95,7 +100,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
                 _password.requestFocus();
                 return;
             }
-            user.updatePassword(_Password);
+            //user.updatePassword(_Password);
         }
     }
     public boolean HasCapitalLetters(String s){
