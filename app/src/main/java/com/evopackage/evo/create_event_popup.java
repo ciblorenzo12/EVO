@@ -7,8 +7,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 
-public class create_event_popup extends AppCompatDialogFragment {
+public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
     private EditText txtDate;
     private EditText txtAddress;
     private Button btnConfirm;
+    private Spinner spinner;
     private DialogListener listener;
     @SuppressLint("CutPasteId")
     @NonNull
@@ -39,8 +44,13 @@ public class create_event_popup extends AppCompatDialogFragment {
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
-        btnConfirm = v.findViewById(R.id.btnConfirm);
 
+        spinner = v.findViewById(R.id.spinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         builder.setView(v)
                 .setTitle("EventPopUp")
                 .setNegativeButton("cancel", (dialog, which) -> {
@@ -50,7 +60,8 @@ public class create_event_popup extends AppCompatDialogFragment {
                     String evtName = txtName.getText().toString();
                     String evtDate = txtDate.getText().toString();
                     String evtAddr = txtAddress.getText().toString();
-                    listener.applyTexts(evtName,evtDate,evtAddr);
+                    String evtTheme = spinner.getSelectedItem().toString();
+                    listener.applyTexts(evtName,evtDate,evtAddr, evtTheme);
                  //   FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
                           //  .getUid()).setValue(event);
                 });
@@ -72,9 +83,20 @@ public class create_event_popup extends AppCompatDialogFragment {
         }
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     public interface DialogListener
     {
-        void applyTexts(String _evtName, String _evtDate, String _evtAddr);
+        void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme);
     }
 
 }

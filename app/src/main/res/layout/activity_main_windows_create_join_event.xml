@@ -22,7 +22,7 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/eventBtn"
                 android:layout_width="149dp"
                 android:layout_height="94dp"
                 android:layout_alignParentStart="true"
@@ -50,7 +50,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginBottom="16dp"
-                app:srcCompat="@mipmap/ic_user_foreground" />
+                app:srcCompat="@mipmap/ic_user_foreground"
+                android:contentDescription="TODO"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 

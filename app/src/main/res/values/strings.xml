@@ -29,6 +29,10 @@
     <string name="phone_number">Phone Number</string>
     <string name="events_attended">Events Attended</string>
     <string name="change_password">Change Password</string>
+
+    <string name="Date">Date</string>
+
+
     <string-array name="theme">
         <item>Music</item>
         <item>Comic</item>
