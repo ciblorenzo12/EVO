@@ -58,6 +58,12 @@ public class create_event_popup extends AppCompatDialogFragment {
       //  EditText editName = v.findViewById(R.id.txtName);
       //  EditText editLocation = v.findViewById(R.id.txtName);
 
+        btnConfirm.setOnClickListener(vv -> {
+            Event event = new Event(txtName.getText().toString(), txtDate.getText().toString(), txtAddress.getText().toString(), "null category");
+            FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                    .getUid()).setValue(event);
+        });
+
            return builder.create();
     }
 
