@@ -6,32 +6,32 @@
 
     <EditText
 
-        android:id="@+id/edit_name"
+        android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:hint="@string/name"
-        android:inputType="textPersonName|text"
-        android:autofillHints="" />
+        android:inputType="textPersonName|text" />
 
     <EditText
 
-        android:id="@+id/edit_date"
+        android:id="@+id/txtDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_name"
+        android:layout_below="@id/txtName"
         android:layout_alignParentStart="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
+        android:autofillHints=""
         android:hint="@string/dob"
         android:inputType="datetime"
-        android:minHeight="48dp"
-        android:autofillHints="" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/edit_location"
+        android:id="@+id/txtLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_date"
+        android:layout_below="@id/txtDate"
         android:layout_marginTop="1dp"
         android:autofillHints=""
         android:hint="@string/Adress"
@@ -41,13 +41,28 @@
         />
 
     <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_location"
+        android:layout_below="@id/txtLocation"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:autofillHints="Theme"
         android:contentDescription="@string/Sign_Google"
         android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:hint="@string/create" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnConfirm"
+        android:hint="@string/cancel" />
 
 </RelativeLayout>
