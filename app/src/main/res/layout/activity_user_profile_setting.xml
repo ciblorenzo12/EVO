@@ -7,7 +7,24 @@
     tools:context=".User_Profile_picture">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/ProfileBack"
+        android:layout_width="77dp"
+        android:layout_height="66dp"
+        android:background="#00FFFFFF"
+
+        android:contentDescription="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        app:tint="#35A9F6"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/ProfilePicture"
         android:layout_width="186dp"
         android:layout_height="179dp"
         android:contentDescription="@string/previous"
@@ -16,55 +33,66 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
+        app:layout_constraintVertical_bias="0.063"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/ProfFirstName"
         android:layout_width="169dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:text="Full Name"
+        android:hint="First Name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
 
-    <TextView
-        android:id="@+id/button3"
+    <EditText
+        android:id="@+id/ProfPhoneNum"
         android:layout_width="169dp"
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
-        android:text="Phone Number"
+        android:hint="Phone Number"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfLastName" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/ProfSave"
         android:layout_width="179dp"
         android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:text="Save Changes"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfPassword" />
+
+    <EditText
+        android:id="@+id/ProfPassword"
+        android:layout_width="201dp"
+        android:layout_height="69dp"
         android:layout_marginTop="24dp"
-        android:text="Events Attended"
+        android:hint="Change Password"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfPhoneNum" />
 
-    <TextView
-        android:id="@+id/button5"
+    <EditText
+        android:id="@+id/ProfLastName"
         android:layout_width="169dp"
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
-        android:text="Change Password"
+        android:hint="Last Name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfFirstName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
