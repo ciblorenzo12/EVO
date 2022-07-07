@@ -28,7 +28,7 @@
 
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/EVO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -36,9 +36,9 @@
                 android:layout_alignParentEnd="true"
 
                 android:layout_alignParentBottom="false"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="249dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="246dp"
                 android:layout_marginBottom="53dp"
                 android:text="@string/evo"
                 android:textColor="@color/white"
@@ -53,11 +53,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="777dp"
-                android:layout_marginEnd="392dp"
-                android:layout_marginBottom="-1dp"
-                android:text="Settings" />
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="783dp"
+                android:layout_marginEnd="381dp"
+                android:layout_marginBottom="-9dp"
+                android:text="@string/_settings" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -67,11 +67,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="778dp"
-                android:layout_marginEnd="308dp"
-                android:layout_marginBottom="1dp"
-                android:text="Create" />
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="784dp"
+                android:layout_marginEnd="302dp"
+                android:layout_marginBottom="-5dp"
+                android:text="@string/_create" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -81,11 +81,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="325dp"
-                android:layout_marginTop="778dp"
-                android:layout_marginEnd="84dp"
-                android:layout_marginBottom="5dp"
-                android:text="Messages" />
+                android:layout_marginStart="315dp"
+                android:layout_marginTop="787dp"
+                android:layout_marginEnd="94dp"
+                android:layout_marginBottom="-3dp"
+                android:text="@string/messages" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -97,7 +97,131 @@
                 android:layout_marginStart="119dp"
                 android:layout_marginEnd="267dp"
                 android:layout_marginBottom="789dp"
-                android:text="TextView" />
+                android:text="@string/textview" />
+
+            <ImageButton
+                android:id="@+id/plussymbol"
+                android:layout_width="86dp"
+                android:layout_height="103dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="199dp"
+                android:layout_marginTop="678dp"
+                android:layout_marginEnd="199dp"
+                android:layout_marginBottom="27dp"
+                android:contentDescription="@string/_plus"
+                app:srcCompat="@mipmap/ps3"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/messagesymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="66dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="318dp"
+                android:layout_marginTop="719dp"
+                android:layout_marginEnd="94dp"
+                android:layout_marginBottom="23dp"
+                android:contentDescription="@string/_m"
+                app:srcCompat="@mipmap/ms2"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/calendarsymbol"
+                android:layout_width="72dp"
+                android:layout_height="67dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="103dp"
+                android:layout_marginTop="718dp"
+                android:layout_marginEnd="309dp"
+                android:layout_marginBottom="23dp"
+                android:contentDescription="@string/_mp"
+                app:srcCompat="@mipmap/cs2"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/settingssymbol"
+                android:layout_width="60dp"
+                android:layout_height="67dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="717dp"
+                android:layout_marginEnd="407dp"
+                android:layout_marginBottom="24dp"
+                android:contentDescription="@string/_sp"
+                app:srcCompat="@mipmap/ss2"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/profilesymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="405dp"
+                android:layout_marginTop="713dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="25dp"
+                android:contentDescription="@string/_p"
+                app:srcCompat="@mipmap/prp1"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="421dp"
+                android:layout_marginTop="787dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="1dp"
+                android:text="Profile" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="211dp"
+                android:layout_marginTop="772dp"
+                android:layout_marginEnd="178dp"
+                android:layout_marginBottom="9dp"
+                android:text="Join Event" />
+
+            <ImageButton
+                android:id="@+id/upprofile"
+                android:layout_width="106dp"
+                android:layout_height="86dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="356dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="701dp"
+                android:contentDescription="@string/_p2"
+                app:srcCompat="@mipmap/prpr"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         </RelativeLayout>
 
