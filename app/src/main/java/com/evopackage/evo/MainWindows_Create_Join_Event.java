@@ -26,10 +26,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(),"EventDialog");
     }
+
     @Override
     public void applyTexts(String _evtName, String _evtDate, String _evtAddr) {
-        Event event = new Event(_evtName,_evtDate,_evtAddr, null);
-        FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-          .getUid()).setValue(event);
+
     }
+
+
+
 }
