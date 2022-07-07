@@ -18,7 +18,7 @@ private Button button;
         setContentView(R.layout.activity_user_profile_setting);
 
         User_information info;
-        button.findViewById(R.id.textview1000);
+        //button.findViewById(R.id.textview1000);
         button.setOnClickListener(this);
 
 
@@ -30,7 +30,7 @@ private Button button;
             startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
         }
         //save changes
-        else if(view.getId() == R.id.button6){
+        else if(view.getId() == R.id.btn_Evt_Att){
 
         }
         //change profile pic
