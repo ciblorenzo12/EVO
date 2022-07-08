@@ -1,4 +1,5 @@
 <resources>
+    <string name="default_client_id">976479568343-jasir3a7rb0b6sjd0pd188u1q6gv70vg.apps.googleusercontent.com</string>
     <string name="app_name">Evo</string>
     <string name="Create_an_Event">Create an Event</string>
     <string name="Join_Event">Join Event</string>
