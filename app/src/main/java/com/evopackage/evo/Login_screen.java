@@ -1,9 +1,6 @@
 package com.evopackage.evo;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -14,16 +11,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -33,13 +29,12 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
     //clickable objects
     private TextView _forgotPass;
     private TextView _create_User;
-    private Button _login;
     private Button _google_button;
     //Firebase authentication
     private FirebaseAuth _authent;
     private FirebaseUser _userdata;
     //google
-
+int REQUEST_CODE=123456;
     GoogleSignInClient mGoogleSignInClient;
 
 
@@ -63,7 +58,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
         _create_User = findViewById(R.id.create_an_account);
         _forgotPass = findViewById(R.id.forgota_password);
         _authent = FirebaseAuth.getInstance();
-        _login = findViewById(R.id.login_btn);
+        Button _login = findViewById(R.id.login_btn);
         progressbar_ = findViewById(R.id.login_progressBar);
         _email = findViewById(R.id.TextEmailAddress);
         _password = findViewById(R.id.TextPass);
@@ -107,7 +102,7 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
     private void signin() {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 123);
+        startActivityForResult(signInIntent, REQUEST_CODE);
 
 
     }
@@ -172,37 +167,70 @@ public class Login_screen extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == 123) {
+        if (requestCode ==REQUEST_CODE) {
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount acct = task.getResult(ApiException.class);
-                AuthCredential credentials = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-                _authent.signInWithCredential(credentials)
-                        .addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                Intent intent = new Intent(getApplicationContext(), MainWindows_Create_Join_Event.class);
-                                startActivity(intent);
+            if(task.isSuccessful()) {
+                try {
+                    GoogleSignInAccount acct = task.getResult(ApiException.class);
+                   Firebase_google(acct.getIdToken());
 
-                            } else {
-                                Toast.makeText(Login_screen.this, "Upps something went wrong ", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                } catch (ApiException ae) {
 
-            } catch (ApiException ae) {
-                ae.printStackTrace();
+                    ae.printStackTrace();
+                }
             }
         }
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            Intent intent_ = new Intent(this,MainWindows_Create_Join_Event.class);
-            startActivity(intent_);
-        }
+
+    private void Firebase_google(String idToken) {
+
+        AuthCredential credential  = GoogleAuthProvider.getCredential(idToken,null);
+        _authent.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if(task.isSuccessful()){
+
+                        UI_Update();
+
+
+
+                    }
+                });
+
+
+
+
+
+
     }
+
+    private void UI_Update(){
+
+
+            Intent intent_ = new Intent(Login_screen.this,MainWindows_Create_Join_Event.class);
+            startActivity(intent_);
+Login_screen.this.finish();
+            Toast.makeText(this, "Successfully ", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+    }
+@Override
+    public void onStart() {
+FirebaseUser current = _authent.getCurrentUser();
+if(_userdata!=null) {
+    Intent intent_ = new Intent(Login_screen.this, MainWindows_Create_Join_Event.class);
+    startActivity(intent_);
+}
+    super.onStart();
+
+
+
+
+
+}
 
 
 }
