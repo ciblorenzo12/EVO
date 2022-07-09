@@ -22,8 +22,8 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     private FirebaseAuth _authetication;
     private FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //Changes to be made to data on firebase
-    private EditText _firstName, _lastName, _password, _phoneNumber;
-    public TextView _userID;
+    private EditText _firstName, _lastName, _password, _phoneNumber,_userID;
+
     //Clickable buttons
     //ProfPicture should open up the phones photo library and pick one to be the picture
     private Button ProfSaveBtn;
@@ -72,8 +72,8 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
     private void SaveProfileChanges() {
         String _UserID = _userID.getText().toString().trim();
-        //String _FirstName = _firstName.getText().toString().trim();
-        //String _LastName = _lastName.getText().toString().trim();
+        String _FirstName = _firstName.getText().toString().trim();
+        String _LastName = _lastName.getText().toString().trim();
         String _PhoneNum = _phoneNumber.getText().toString().trim();
         String _Password = _password.getText().toString().trim();
 
@@ -83,18 +83,42 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
         FirebaseUser user = _authetication.getCurrentUser();
         String path = user.getUid();
-        DatabaseReference Ref = _database.getReference("users/"+user.getUid()+"/_phone");
+        DatabaseReference Ref;
+
+        if(!_UserID.isEmpty()){
+            if(_UserID.length() > 16){
+                _userID.setError("Display Name must be 16 characters or less.");
+                return;
+            }
+            Ref = _database.getReference("users");
+            Ref.child(user.getUid()).setValue(_UserID);
+        }
+
+        if(!_FirstName.isEmpty()){
+            Ref = _database.getReference("users/"+user.getUid()+"/_firstname");
+            Ref.setValue(_FirstName);
+            _firstName.setText("");
+        }
+
+        if(!_LastName.isEmpty()){
+            Ref = _database.getReference("users/"+user.getUid()+"/_lastname");
+            Ref.setValue(_LastName);
+            _lastName.setText("");
+        }
+
         if(!_PhoneNum.isEmpty()){
+            Ref = _database.getReference("users/"+user.getUid()+"/_phone");
             //_database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).child("_phone").setValue(_phoneNumber);
             //_database.
             //Ref.child(user.getUid()).child("_phone").setValue(_PhoneNum);
             Ref.setValue(_PhoneNum);
+            _phoneNumber.setText("");
         }
 
         if(!_Password.isEmpty()){
-            if (_Password.length() < 8) {
+            if (_Password.length() < 6) {
 
-                _password.setError("Password must be a minimum of 8 characters");
+                _password.setError("Password must be a minimum of 6 characters");
 
                 _password.requestFocus();
                 return;
@@ -107,7 +131,6 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
             }
             user.updatePassword(_Password);
             _password.setText("");
-            _phoneNumber.setText("");
         }
     }
     public boolean HasCapitalLetters(String s){
