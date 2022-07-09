@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class User_Profile_picture extends AppCompatActivity implements View.OnClickListener {
     //Firebase stuff
@@ -36,7 +39,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         FirebaseUser user = _authetication.getCurrentUser();
         //UserID
         _userID = findViewById(R.id.UserID);
-        _userID.setText(user.getEmail());
+        _userID.setText(user.getUid());
         //EditText
         _firstName = findViewById(R.id.ProfFirstName);
         _lastName = findViewById(R.id.ProfLastName);
@@ -76,18 +79,20 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
 
 
-        //User_information info = User_information()
+        //User_information info = User_information();
 
-
-
-        if(_PhoneNum.isEmpty()){
-            _phoneNumber.setError("Please enter a valid phone number");
-            _phoneNumber.requestFocus();
-            return;
+        FirebaseUser user = _authetication.getCurrentUser();
+        String path = user.getUid();
+        DatabaseReference Ref = _database.getReference("users/"+user.getUid()+"/_phone");
+        if(!_PhoneNum.isEmpty()){
+            //_database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).child("_phone").setValue(_phoneNumber);
+            //_database.
+            //Ref.child(user.getUid()).child("_phone").setValue(_PhoneNum);
+            Ref.setValue(_PhoneNum);
         }
 
         if(!_Password.isEmpty()){
-            if (_Password.length() < 6) {
+            if (_Password.length() < 8) {
 
                 _password.setError("Password must be a minimum of 8 characters");
 
@@ -100,7 +105,9 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
                 _password.requestFocus();
                 return;
             }
-            //user.updatePassword(_Password);
+            user.updatePassword(_Password);
+            _password.setText("");
+            _phoneNumber.setText("");
         }
     }
     public boolean HasCapitalLetters(String s){
