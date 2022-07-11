@@ -1,6 +1,8 @@
 package com.evopackage.evo;
 
 
+import static com.evopackage.evo.R.layout.firebase_login_activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -24,20 +26,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class Login_screen extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    //google
+    int REQUEST_CODE = 123456;
+    GoogleSignInClient mGoogleSignInClient;
     //clickable objects
-    private TextView _forgotPass;
-    private TextView _create_User;
+    private TextView _forgotPass, _create_User;
     private Button _google_button;
+    private Button _login;
     //Firebase authentication
     private FirebaseAuth _authent;
     private FirebaseUser _userdata;
-    //google
-int REQUEST_CODE=123456;
-    GoogleSignInClient mGoogleSignInClient;
-
-
     //textObjects
     private EditText _email, _password;
 
@@ -46,8 +46,11 @@ int REQUEST_CODE=123456;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.firebase_login_activity);
+        setContentView(firebase_login_activity);
+
 
         //google
         GoogleSignInOptions _google_Signin_Option = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -58,7 +61,7 @@ int REQUEST_CODE=123456;
         _create_User = findViewById(R.id.create_an_account);
         _forgotPass = findViewById(R.id.forgota_password);
         _authent = FirebaseAuth.getInstance();
-        Button _login = findViewById(R.id.login_btn);
+        _login = findViewById(R.id.login_btn);
         progressbar_ = findViewById(R.id.login_progressBar);
         _email = findViewById(R.id.TextEmailAddress);
         _password = findViewById(R.id.TextPass);
@@ -72,26 +75,27 @@ int REQUEST_CODE=123456;
         _google_button.setOnClickListener(this);
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, _google_Signin_Option);
-    }
 
+
+    }
 
 
     public void onClick(View v) {
 
-        if (v.getId() == R.id.login_btn) {
+        if (v.getId() == _login.getId()) {
             firebase_user_credentials();
 
         }
-        if (v.getId() == R.id.create_an_account) {
+        if (v.getId() == _create_User.getId()) {
 
             startActivity(new Intent(this, Register_user.class));
         }
-        if (v.getId() == R.id.forgota_password) {
+        if (v.getId() == _forgotPass.getId()) {
             startActivity(new Intent(this, Forgot_password.class));
 
 
         }
-        if (v.getId() == R.id._googlebuton) {
+        if (v.getId() == _google_button.getId()) {
 
             signin();
 
@@ -145,18 +149,18 @@ int REQUEST_CODE=123456;
 
                 if (_userdata.isEmailVerified()) {
 
-                    startActivity(new Intent(Login_screen.this, MainWindows_Create_Join_Event.class));
+                    startActivity(new Intent(Login.this, MainWindows_Create_Join_Event.class));
 
                 } else {
                     _userdata.sendEmailVerification();
-                    Toast.makeText(Login_screen.this, "Check your email for verification", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this, "Check your email for verification", Toast.LENGTH_LONG).show();
                 }
                 progressbar_.setVisibility(View.GONE);
 
 
             } else {
 
-                Toast.makeText(Login_screen.this, "Ups something went wrong please check your credentials", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "Ups something went wrong please check your credentials", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -167,13 +171,13 @@ int REQUEST_CODE=123456;
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode ==REQUEST_CODE) {
+        if (requestCode == REQUEST_CODE) {
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if(task.isSuccessful()) {
+            if (task.isSuccessful()) {
                 try {
                     GoogleSignInAccount acct = task.getResult(ApiException.class);
-                   Firebase_google(acct.getIdToken());
+                    Firebase_google(acct.getIdToken());
 
                 } catch (ApiException ae) {
 
@@ -185,52 +189,42 @@ int REQUEST_CODE=123456;
 
     private void Firebase_google(String idToken) {
 
-        AuthCredential credential  = GoogleAuthProvider.getCredential(idToken,null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         _authent.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
 
                         UI_Update();
-
 
 
                     }
                 });
 
 
+    }
+
+    private void UI_Update() {
 
 
+        Intent intent_ = new Intent(Login.this, MainWindows_Create_Join_Event.class);
+        startActivity(intent_);
+        Login.this.finish();
+        Toast.makeText(this, "Successfully ", Toast.LENGTH_SHORT).show();
 
 
     }
 
-    private void UI_Update(){
-
-
-            Intent intent_ = new Intent(Login_screen.this,MainWindows_Create_Join_Event.class);
-            startActivity(intent_);
-Login_screen.this.finish();
-            Toast.makeText(this, "Successfully ", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-    }
-@Override
+    @Override
     public void onStart() {
-FirebaseUser current = _authent.getCurrentUser();
-if(_userdata!=null) {
-    Intent intent_ = new Intent(Login_screen.this, MainWindows_Create_Join_Event.class);
-    startActivity(intent_);
-}
-    super.onStart();
+
+        if (_userdata != null) {
+            Intent intent_ = new Intent(Login.this, MainWindows_Create_Join_Event.class);
+            startActivity(intent_);
+        }
+        super.onStart();
 
 
-
-
-
-}
+    }
 
 
 }

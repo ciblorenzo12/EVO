@@ -1,233 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
- xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainWindows_Create_Join_Event"
-    android:background="@drawable/backg"
-    >
+    android:background="@drawable/backg">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backg"
-        >
+    <ImageButton
+        android:id="@+id/messages_Main_id"
+        android:layout_width="94dp"
+        android:layout_height="76dp"
+        android:background="@drawable/mensages"
+        android:contentDescription="@string/Btn_test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/plus_Main_id"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.981"
+        tools:ignore="ImageContrastCheck,RedundantDescriptionCheck,DuplicateSpeakableTextCheck" />
 
+    <ImageButton
+        android:id="@+id/profile_picture_Main_id"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="136dp"
+        android:layout_height="104dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/profile"
+        android:contentDescription="@string/profile_Picture"
+        android:cropToPadding="true"
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="808dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="UselessParent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094"
+        tools:ignore="ImageContrastCheck" />
 
+    <ImageButton
+        android:id="@+id/plus_Main_id"
+        android:layout_width="60dp"
+        android:layout_height="65dp"
+        android:background="@drawable/plus"
+        android:contentDescription="@string/_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975"
+        tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/EVO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-
-                android:layout_alignParentBottom="false"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="246dp"
-                android:layout_marginBottom="53dp"
-                android:text="@string/evo"
-                android:textColor="@color/white"
-                android:textSize="70sp"
-                tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="80dp"
-                android:layout_height="33dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="783dp"
-                android:layout_marginEnd="381dp"
-                android:layout_marginBottom="-9dp"
-                android:text="@string/_settings" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="66dp"
-                android:layout_height="29dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="116dp"
-                android:layout_marginTop="784dp"
-                android:layout_marginEnd="302dp"
-                android:layout_marginBottom="-5dp"
-                android:text="@string/_create" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="75dp"
-                android:layout_height="25dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="315dp"
-                android:layout_marginTop="787dp"
-                android:layout_marginEnd="94dp"
-                android:layout_marginBottom="-3dp"
-                android:text="@string/messages" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="98dp"
-                android:layout_height="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="119dp"
-                android:layout_marginEnd="267dp"
-                android:layout_marginBottom="789dp"
-                android:text="@string/textview" />
-
-            <ImageButton
-                android:id="@+id/plussymbol"
-                android:layout_width="86dp"
-                android:layout_height="103dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="199dp"
-                android:layout_marginTop="678dp"
-                android:layout_marginEnd="199dp"
-                android:layout_marginBottom="27dp"
-                android:contentDescription="@string/_plus"
-                app:srcCompat="@mipmap/ps3"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/messagesymbol"
-                android:layout_width="wrap_content"
-                android:layout_height="66dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="318dp"
-                android:layout_marginTop="719dp"
-                android:layout_marginEnd="94dp"
-                android:layout_marginBottom="23dp"
-                android:contentDescription="@string/_m"
-                app:srcCompat="@mipmap/ms2"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/calendarsymbol"
-                android:layout_width="72dp"
-                android:layout_height="67dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="103dp"
-                android:layout_marginTop="718dp"
-                android:layout_marginEnd="309dp"
-                android:layout_marginBottom="23dp"
-                android:contentDescription="@string/_mp"
-                app:srcCompat="@mipmap/cs2"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/settingssymbol"
-                android:layout_width="60dp"
-                android:layout_height="67dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="717dp"
-                android:layout_marginEnd="407dp"
-                android:layout_marginBottom="24dp"
-                android:contentDescription="@string/_sp"
-                app:srcCompat="@mipmap/ss2"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/profilesymbol"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="405dp"
-                android:layout_marginTop="713dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="25dp"
-                android:contentDescription="@string/_p"
-                app:srcCompat="@mipmap/prp1"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="421dp"
-                android:layout_marginTop="787dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="1dp"
-                android:text="Profile" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="95dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="211dp"
-                android:layout_marginTop="772dp"
-                android:layout_marginEnd="178dp"
-                android:layout_marginBottom="9dp"
-                android:text="Join Event" />
-
-            <ImageButton
-                android:id="@+id/upprofile"
-                android:layout_width="106dp"
-                android:layout_height="86dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="356dp"
-                android:layout_marginTop="21dp"
-                android:layout_marginEnd="22dp"
-                android:layout_marginBottom="701dp"
-                android:contentDescription="@string/_p2"
-                app:srcCompat="@mipmap/prpr"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-        </RelativeLayout>
+    <ImageButton
+        android:id="@+id/settings_Main_Id"
+        android:layout_width="102dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/settings"
+        android:contentDescription="@string/Adress"
+        app:layout_constraintBottom_toBottomOf="parent"
 
 
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toEndOf="@+id/plus_Main_id"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.981"
+        tools:ignore="ImageContrastCheck" />
 
-</ScrollView>
+    <ImageButton
+        android:id="@+id/qr_main_id"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="115dp"
+        android:layout_height="110dp"
+        android:background="@drawable/qr"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:contentDescription="@string/Btn_test"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095"
+        app:tint="@color/teal_700"
+        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
 
 
+</androidx.constraintlayout.widget.ConstraintLayout>

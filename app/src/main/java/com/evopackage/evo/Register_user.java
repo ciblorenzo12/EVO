@@ -1,7 +1,5 @@
 package com.evopackage.evo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,25 +12,28 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.Objects;
 
-public class Register_user extends AppCompatActivity implements View.OnClickListener ,DatePickerDialog.OnDateSetListener{
+public class Register_user extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
 
+    private final FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //firebase Auth
     private FirebaseAuth _authentication;
-    private FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //information need it
-    private EditText _fullname,_lastname,_email, _password, _phone, _dob;
+    private EditText _fullname, _lastname, _email, _password, _phone, _dob;
 
     //buttons
     private Button _registerBtn;
     private ImageButton _back_Login;
     private ProgressBar _progressbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         //buttons
         _registerBtn = findViewById(R.id.register_btn);
         _back_Login = findViewById(R.id.register_back);
-         _progressbar = findViewById(R.id.reset_progressBar);
+        _progressbar = findViewById(R.id.reset_progressBar);
 
         _back_Login.setOnClickListener(this);
         _dob.setOnClickListener(this);
@@ -59,16 +60,16 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v.getId() == R.id.register_back) {
 
-            startActivity(new Intent(this, Login_screen.class));
+            startActivity(new Intent(this, Login.class));
 
         }
         if (v.getId() == R.id.register_btn) {
             RegisterUser();
 
         }
-        if(v.getId()==R.id.register_dob) {
+        if (v.getId() == R.id.register_dob) {
 
-Pick_a_Date();
+            Pick_a_Date();
 
         }
 
@@ -78,10 +79,10 @@ Pick_a_Date();
 
         DatePickerDialog _choosedate = new DatePickerDialog(
                 this,
-                       this,
-                Calendar.getInstance().get(Calendar.YEAR ),
-                        Calendar.getInstance().get(Calendar.MONTH),
-                                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
 
         );
@@ -159,37 +160,37 @@ Pick_a_Date();
 
         _authentication.createUserWithEmailAndPassword(_Email, _Password)
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
 
-    User_information users= new User_information(_FirstName,_LastName,_Dob,_Email,_Password,_Phone);
-    _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-            .getUid()).setValue(users)
-            .addOnCompleteListener
-                    (task1 -> {
-                        if(task1.isComplete()){
+                        User_information users = new User_information(_FirstName, _LastName, _Dob, _Email, _Password, _Phone);
+                        _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                                        .getUid()).setValue(users)
+                                .addOnCompleteListener
+                                        (task1 -> {
+                                            if (task1.isComplete()) {
 
-                            Toast.makeText(Register_user.this ,"Yay! You're registered!",Toast.LENGTH_LONG).show();
-                            _progressbar.setVisibility(View.GONE);
-                        }else {
+                                                Toast.makeText(Register_user.this, "Yay! You're registered!", Toast.LENGTH_LONG).show();
+                                            } else {
 
-                            Toast.makeText(Register_user.this ,"Oh no, something went wrong! Try again.",Toast.LENGTH_LONG).show();
-                            _progressbar.setVisibility(View.GONE);
+                                                Toast.makeText(Register_user.this, "Oh no, something went wrong! Try again.", Toast.LENGTH_LONG).show();
 
-                        }
-                    });
+                                            }
+                                            _progressbar.setVisibility(View.GONE);
+                                        });
 
-                    }else {
+                    } else {
 
-                        Toast.makeText(Register_user.this ,"Oh no, something went wrong! Try again.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register_user.this, "Oh no, something went wrong! Try again.", Toast.LENGTH_LONG).show();
                         _progressbar.setVisibility(View.GONE);
 
 
                     }
-                    });
+                });
     }
-    public boolean HasCapitalLetters(String s){
-        for(int i=0;i<s.length();i++){
-            if(Character.isUpperCase(s.charAt(i))){
+
+    public boolean HasCapitalLetters(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isUpperCase(s.charAt(i))) {
                 return true;
             }
         }
@@ -198,10 +199,9 @@ Pick_a_Date();
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        month = month+1;
-      String dob = month + "/" +dayOfMonth+"/"+year;
-      _dob.setText(dob);
-
+        month = month + 1;
+        String dob = month + "/" + dayOfMonth + "/" + year;
+        _dob.setText(dob);
 
 
     }

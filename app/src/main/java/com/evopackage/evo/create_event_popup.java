@@ -11,13 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
 
 
 public class create_event_popup extends AppCompatDialogFragment {
@@ -26,15 +20,15 @@ public class create_event_popup extends AppCompatDialogFragment {
     private EditText txtAddress;
     private Button btnConfirm;
     private DialogListener listener;
+
     @SuppressLint("CutPasteId")
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle saveInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle saveInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.event_dialog,null);
+        View v = inflater.inflate(R.layout.event_dialog, null);
 
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
@@ -50,19 +44,19 @@ public class create_event_popup extends AppCompatDialogFragment {
                     String evtName = txtName.getText().toString();
                     String evtDate = txtDate.getText().toString();
                     String evtAddr = txtAddress.getText().toString();
-                    listener.applyTexts(evtName,evtDate,evtAddr);
-                 //   FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-                          //  .getUid()).setValue(event);
+                    listener.applyTexts(evtName, evtDate, evtAddr);
+                    //   FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                    //  .getUid()).setValue(event);
                 });
 
-      //  EditText editName = v.findViewById(R.id.txtName);
-      //  EditText editLocation = v.findViewById(R.id.txtName);
+        //  EditText editName = v.findViewById(R.id.txtName);
+        //  EditText editLocation = v.findViewById(R.id.txtName);
 
         btnConfirm.setOnClickListener(vv -> {
 
         });
 
-           return builder.create();
+        return builder.create();
     }
 
     @Override
@@ -70,14 +64,13 @@ public class create_event_popup extends AppCompatDialogFragment {
         super.onAttach(context);
         try {
             listener = (DialogListener) context;
-        } catch (ClassCastException e){
-            throw  new ClassCastException(context +
-            "must implement DialogListener");
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context +
+                    "must implement DialogListener");
         }
     }
 
-    public interface DialogListener
-    {
+    public interface DialogListener {
         void applyTexts(String _evtName, String _evtDate, String _evtAddr);
     }
 

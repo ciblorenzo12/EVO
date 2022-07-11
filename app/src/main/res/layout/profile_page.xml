@@ -21,14 +21,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="?attr/actionModeCloseDrawable"
-        tools:ignore="ImageContrastCheck"
-        app:tint="#35A9F6" />
+        app:tint="#35A9F6"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="186dp"
         android:layout_height="179dp"
-        android:contentDescription="@string/previous"
+        android:contentDescription="@string/Adress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -47,17 +47,17 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="220dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="220dp" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Event History"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="334dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="334dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
