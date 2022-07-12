@@ -40,8 +40,8 @@
 
     <ImageButton
         android:id="@+id/settings_Main_Id"
-        android:layout_width="76dp"
-        android:layout_height="74dp"
+        android:layout_width="74dp"
+        android:layout_height="65dp"
         android:background="@drawable/settings2"
         android:contentDescription="@string/Adress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,8 +73,8 @@
 
     <ImageButton
         android:id="@+id/calendar_main_id"
-        android:layout_width="104dp"
-        android:layout_height="85dp"
+        android:layout_width="93dp"
+        android:layout_height="74dp"
         android:clickable="true"
         android:contentDescription="@string/Btn_test"
         android:focusable="true"
@@ -85,13 +85,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
         app:tint="@color/teal_700"
-        tools:background="@drawable/unknown"
+        tools:background="@drawable/calendar"
+
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/message_id"
-        android:layout_width="83dp"
-        android:layout_height="71dp"
+        android:layout_width="82dp"
+        android:layout_height="66dp"
         android:background="@drawable/mensages"
         android:clickable="true"
         android:contentDescription="@string/Btn_test"
