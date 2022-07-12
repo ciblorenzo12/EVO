@@ -11,13 +11,14 @@
         android:id="@+id/message_id3"
         android:layout_width="82dp"
         android:layout_height="66dp"
+        android:layout_marginEnd="93dp"
         android:background="@drawable/calendar"
         android:clickable="true"
         android:contentDescription="@string/Btn_test"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintEnd_toEndOf="@+id/plus_Main_id"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962"
@@ -59,10 +60,12 @@
         android:id="@+id/settings_Main_Id"
         android:layout_width="74dp"
         android:layout_height="65dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/settings2"
         android:contentDescription="@string/Adress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/message_id3"
         app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -134,36 +137,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.168"
-        tools:text="@string/_motto" />
+        tools:text="@string/_motto" /><![CDATA[
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="64dp"
-        android:layout_height="28dp"
-        android:text="@string/_settings"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994"
-        tools:text="@string/_settings" />
 
-    <TextView
 
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
-        tools:text="@string/_create" />
+
 
         android:id="@+id/textView8"
         android:layout_width="110dp"
@@ -178,19 +156,82 @@
         app:layout_constraintVertical_bias="0.989"
         tools:text="@string/Join_Event" />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="66dp"
+        android:layout_height="24dp"
+        android:text="@string/_settings"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_Main_Id"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="@string/_settings" />
+
+    <TextView
+
+        android:id="@+id/textView6"
+        android:layout_width="67dp"
+        android:layout_height="24dp"
+        android:text="@string/create"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_id3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/_create" />
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/messages"
+        android:layout_marginEnd="3dp"
 
+        android:text="@string/messages"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
+        app:layout_constraintVertical_bias="0.997"
         tools:text="@string/messages" />
 
     <TextView
@@ -201,10 +242,10 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintHorizontal_bias="0.985"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
+        app:layout_constraintVertical_bias="0.997"
         tools:text="@string/qricon" />
 
 
