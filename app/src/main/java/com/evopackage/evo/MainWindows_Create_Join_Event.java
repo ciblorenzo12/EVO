@@ -49,7 +49,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
 
-            Intent car = new Intent(this, Register_user.class);
+            Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
 
 
