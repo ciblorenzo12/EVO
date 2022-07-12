@@ -8,6 +8,24 @@
 
 
     <ImageButton
+        android:id="@+id/message_id3"
+        android:layout_width="82dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="93dp"
+        android:background="@drawable/calendar"
+        android:clickable="true"
+        android:contentDescription="@string/Btn_test"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/plus_Main_id"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962"
+        app:tint="@color/teal_700"
+        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageButton
         android:id="@+id/profile_picture_Main_id"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="145dp"
@@ -40,12 +58,14 @@
 
     <ImageButton
         android:id="@+id/settings_Main_Id"
-        android:layout_width="76dp"
-        android:layout_height="74dp"
+        android:layout_width="74dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/settings2"
         android:contentDescription="@string/Adress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/message_id3"
         app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,27 +92,10 @@
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
 
     <ImageButton
-        android:id="@+id/calendar_main_id"
-        android:layout_width="91dp"
-        android:layout_height="71dp"
-        android:background="@drawable/calendar2"
-        android:clickable="true"
-        android:contentDescription="@string/Btn_test"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.223"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.962"
-        app:tint="@color/teal_700"
-        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
-
-    <ImageButton
         android:id="@+id/message_id"
-        android:layout_width="83dp"
-        android:layout_height="71dp"
-        android:background="@drawable/messages2"
+        android:layout_width="82dp"
+        android:layout_height="66dp"
+        android:background="@drawable/mensages"
         android:clickable="true"
         android:contentDescription="@string/Btn_test"
         android:focusable="true"
@@ -118,93 +121,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043"
+        tools:ignore="TextContrastCheck"
         tools:text="@string/evo1" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/_motto"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162"
+        app:layout_constraintVertical_bias="0.168"
         tools:text="@string/_motto" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="64dp"
-        android:layout_height="28dp"
+        android:layout_width="66dp"
+        android:layout_height="24dp"
         android:text="@string/_settings"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994"
+        app:layout_constraintTop_toBottomOf="@+id/settings_Main_Id"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="@string/_settings" />
 
     <TextView
+
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create"
+        android:layout_width="67dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="160dp"
+        android:text="@string/join"
+        android:textAlignment="center"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
-        tools:text="@string/_create" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="110dp"
-        android:layout_height="28dp"
-        android:text="@string/Join_Event"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
-        tools:text="@string/Join_Event" />
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/plus_Main_id"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/messages"
+        android:layout_marginStart="1dp"
 
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="3dp"
+        android:text="@string/messages"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
+        app:layout_constraintTop_toBottomOf="@+id/message_id"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@string/messages" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="1dp"
+        android:text="@string/scan_qr"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
+        app:layout_constraintTop_toBottomOf="@+id/qr_main_id"
+        app:layout_constraintVertical_bias="0.997"
         tools:text="@string/qricon" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="75dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="94dp"
+        android:text="@string/create"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_id3"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
