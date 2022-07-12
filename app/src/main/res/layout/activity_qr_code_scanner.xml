@@ -17,6 +17,19 @@
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/Scanner_Qrcode"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_uni3"
+                android:layout_width="362dp"
+                android:layout_height="168dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/Adress"
+                android:textAlignment="textStart"
+                android:textAllCaps="true"
+                android:textColor="#FDFAFA"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </com.budiyev.android.codescanner.CodeScannerView>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
