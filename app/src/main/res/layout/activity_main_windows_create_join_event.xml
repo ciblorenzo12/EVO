@@ -138,58 +138,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.168"
-        tools:text="@string/_motto" /><![CDATA[
-
-
-
-
-
-        android:id="@+id/textView8"
-        android:layout_width="110dp"
-        android:layout_height="28dp"
-        android:text="@string/Join_Event"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989"
-        tools:text="@string/Join_Event" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
+        tools:text="@string/_motto" />
 
     <TextView
         android:id="@+id/textView4"
@@ -210,32 +159,35 @@
         android:id="@+id/textView6"
         android:layout_width="67dp"
         android:layout_height="24dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="160dp"
         android:text="@string/join"
+        android:textAlignment="center"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/plus_Main_id"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="@string/_create" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="1dp"
 
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="3dp"
         android:text="@string/messages"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_id"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@string/messages" />
 
     <TextView
@@ -255,14 +207,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="94dp"
         android:text="@string/create"
+        android:textAlignment="center"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintEnd_toStartOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_id3"
         app:layout_constraintVertical_bias="0.0" />
