@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962"
         app:tint="@color/teal_700"
-        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
+        tools:ignore="RedundantDescriptionCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <ImageButton
         android:id="@+id/profile_picture_Main_id"
@@ -121,6 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043"
+        tools:ignore="TextContrastCheck"
         tools:text="@string/evo1" />
 
     <TextView
