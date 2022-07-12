@@ -1,22 +1,20 @@
 package com.evopackage.evo;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Event
 {
-    private int _id;
     private String _name, _date, _location, _category;
+    private FirebaseUser _creator;
 
-    public Event(String name, String date, String location, String category)
+    public Event(String name, String date, String location, String category, FirebaseUser creator)
     {
-        _id = 0; // will be implemented later
         _name = name;
         _date = date;
         _location = location;
         _category = category;
-    }
-
-    public int GetId()
-    {
-        return _id;
+        _creator = creator;
     }
 
     public String GetName() { return _name; }
@@ -26,4 +24,6 @@ public class Event
     public String GetLocation() { return _location; }
 
     public String GetCategory() { return _category; }
+
+    public FirebaseUser GetCreator() { return _creator; }
 }

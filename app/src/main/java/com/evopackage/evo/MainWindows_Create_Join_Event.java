@@ -28,8 +28,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
     @Override
     public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-        Event event = new Event(_evtName,_evtDate,_evtAddr, _evtTheme);
-        FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-          .getUid()).setValue(event);
+        //Event event = new Event(_evtName,_evtDate,_evtAddr, _evtTheme);
+        //FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+        //  .getUid()).setValue(event);
     }
 }
