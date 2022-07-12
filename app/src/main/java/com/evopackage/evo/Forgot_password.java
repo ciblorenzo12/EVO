@@ -63,14 +63,5 @@ _back.setOnClickListener(this);
                Toast.makeText(Forgot_password.this, "Provide a valid email address ", Toast.LENGTH_SHORT).show();
            }
        });
-
-
-
-
-
-
-
-
-
     }
 }

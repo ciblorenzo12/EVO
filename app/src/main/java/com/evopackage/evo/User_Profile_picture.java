@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,11 +23,12 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     private FirebaseAuth _authetication;
     private FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //Changes to be made to data on firebase
-    private EditText _firstName, _lastName, _password, _phoneNumber,_userID;
+    private EditText _firstName, _lastName, _phoneNumber,_userID;
 
     //Clickable buttons
     //ProfPicture should open up the phones photo library and pick one to be the picture
     private Button ProfSaveBtn;
+    private Button _password;
     private ImageButton ProfPicture;
     private ImageButton ProfSettingsBack;
 
@@ -43,10 +45,10 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         //EditText
         _firstName = findViewById(R.id.ProfFirstName);
         _lastName = findViewById(R.id.ProfLastName);
-        _password = findViewById(R.id.ProfPassword);
         _phoneNumber = findViewById(R.id.ProfPhoneNum);
 
         //Buttons/Picture
+        _password = findViewById(R.id.ChangePassword);
         ProfSaveBtn = findViewById(R.id.ProfSave);
         ProfPicture = findViewById(R.id.ProfilePicture);
         ProfSettingsBack = findViewById(R.id.ProfileBack);
@@ -55,6 +57,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         ProfPicture.setOnClickListener(this);
         ProfSettingsBack.setOnClickListener(this);
         ProfSaveBtn.setOnClickListener(this);
+        _password.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +68,10 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         //save changes
         else if(view.getId() == R.id.ProfSave){
             SaveProfileChanges();
+        }
+
+        else if(view.getId() == R.id.ChangePassword){
+            startActivity(new Intent(this,Forgot_password.class));
         }
         //change profile pic
         //else if(view.getId() == R.id.ProfilePicture){}
@@ -114,31 +121,6 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
             Ref.setValue(_PhoneNum);
             _phoneNumber.setText("");
         }
-
-        if(!_Password.isEmpty()){
-            if (_Password.length() < 6) {
-
-                _password.setError("Password must be a minimum of 6 characters");
-
-                _password.requestFocus();
-                return;
-            }
-            if (!HasCapitalLetters(_Password)) {
-
-                _password.setError("Password must contain at least one capital letter");
-                _password.requestFocus();
-                return;
-            }
-            user.updatePassword(_Password);
-            _password.setText("");
-        }
     }
-    public boolean HasCapitalLetters(String s){
-        for(int i=0;i<s.length();i++){
-            if(Character.isUpperCase(s.charAt(i))){
-                return true;
-            }
-        }
-        return false;
-    }
+
 }
