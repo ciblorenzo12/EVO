@@ -1,6 +1,6 @@
 package com.evopackage.evo;
 
-public class User_information {
+public class   User_information {
 
     public String _firstname, _lastname, _dob, _email, _password, _phone;
 
