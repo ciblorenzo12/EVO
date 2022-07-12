@@ -18,8 +18,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private int Camera_Permission_Request =1;
-    private String[] perm_= {Manifest.permission.CAMERA};//add permitions to this array
+    private int Camera_Permission_Request = 1;
+    private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton qr;
@@ -55,11 +55,14 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         }
         if (v.getId() == qr.getId()) {
+
+
             RequestCameraPermission();
 
-        }
 
+        }
     }
+
 
     private void RequestCameraPermission() {
 
@@ -68,17 +71,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
 
-                        if (!ActivityCompat.shouldShowRequestPermissionRationale(MainWindows_Create_Join_Event.this, Manifest.permission.CAMERA)) {
 
-                            Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
-                            startActivity(car);
-                            ActivityCompat.requestPermissions(MainWindows_Create_Join_Event.this, perm_, Camera_Permission_Request);
-                        }else {
-
-                            Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
-                            startActivity(car);
-                            ActivityCompat.requestPermissions(MainWindows_Create_Join_Event.this, perm_, Camera_Permission_Request);
-                        }
+                        Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
+                        startActivity(car);
 
 
 
@@ -87,31 +82,16 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     .show();
 
 
+        }   if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
 
-
-
-
-
-}else
-
-
-
-
-
-        if(!ActivityCompat.shouldShowRequestPermissionRationale(MainWindows_Create_Join_Event.this,Manifest.permission.CAMERA)){
 
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
-            ActivityCompat.requestPermissions(this, perm_, Camera_Permission_Request);
+
+
+
         }
 
 
-
-
-
-
     }
-
-
-
 }
