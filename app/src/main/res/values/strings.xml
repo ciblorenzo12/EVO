@@ -43,6 +43,8 @@
     <string name="_p">profp</string>
     <string name="_sp">settingsp</string>
     <string name="_p2" />
+    <string name="_motto">EVENT ORGANIZING TOOL</string>
+    <string name="_myevets">My Events</string>
     <string-array name="theme">
         <item>Music</item>
         <item>Comic</item>
@@ -57,4 +59,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="EVO" />
+    <string name="evo1">EVO</string>
+    <string name="qricon">Scan QR</string>
 </resources>
