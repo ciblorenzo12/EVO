@@ -25,6 +25,23 @@
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
     <string name="previous" />
+    <string name="full_name_profile">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="events_attended">Events Attended</string>
+    <string name="change_password">Change Password</string>
+    <string name="Logout">Logout</string>
+    <string name="evo">EVO</string>
+    <string name="none">none</string>
+    <string name="_settings">Settings</string>
+    <string name="_plus">Plus</string>
+    <string name="messages">Messages</string>
+    <string name="_create">Create</string>
+    <string name="textview">TextView</string>
+    <string name="_mp">messagep</string>
+    <string name="_m">messagepicture</string>
+    <string name="_p">profp</string>
+    <string name="_sp">settingsp</string>
+    <string name="_p2" />
     <string-array name="theme">
         <item>Music</item>
         <item>Comic</item>

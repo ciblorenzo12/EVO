@@ -3,6 +3,7 @@ package com.evopackage.evo;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class create_event_popup extends AppCompatDialogFragment {
     private EditText txtDate;
     private EditText txtAddress;
     private Button btnConfirm;
-
+    private DialogListener listener;
     @SuppressLint("CutPasteId")
     @NonNull
     @Override
@@ -46,17 +47,39 @@ public class create_event_popup extends AppCompatDialogFragment {
 
                 })
                 .setPositiveButton("create", (dialog, which) -> {
-                    Event event = new Event(txtName.toString(), txtDate.toString(), txtAddress.toString(), "null category");
-                    FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-                            .getUid()).setValue(event);
+                    String evtName = txtName.getText().toString();
+                    String evtDate = txtDate.getText().toString();
+                    String evtAddr = txtAddress.getText().toString();
+                    listener.applyTexts(evtName,evtDate,evtAddr);
+                 //   FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                          //  .getUid()).setValue(event);
                 });
 
-        EditText editName = v.findViewById(R.id.txtName);
-        EditText editLocation = v.findViewById(R.id.txtName);
+      //  EditText editName = v.findViewById(R.id.txtName);
+      //  EditText editLocation = v.findViewById(R.id.txtName);
+
+        btnConfirm.setOnClickListener(vv -> {
+
+        });
 
            return builder.create();
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (DialogListener) context;
+        } catch (ClassCastException e){
+            throw  new ClassCastException(context +
+            "must implement DialogListener");
+        }
+    }
+
+    public interface DialogListener
+    {
+        void applyTexts(String _evtName, String _evtDate, String _evtAddr);
+    }
 
 }
 
