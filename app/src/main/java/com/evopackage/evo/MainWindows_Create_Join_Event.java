@@ -34,7 +34,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         setContentView(R.layout.activity_main_windows_create_join_event);
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
-        evtBtn = findViewById(R.id.plus_Main_id);
+        evtBtn = findViewById(R.id.calendar_id);
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
