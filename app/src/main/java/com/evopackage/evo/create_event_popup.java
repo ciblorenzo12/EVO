@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
     private EditText txtDate;
@@ -30,6 +29,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private Button btnConfirm;
     private Spinner spinner;
     private DialogListener listener;
+
     @SuppressLint("CutPasteId")
     @NonNull
     @Override
@@ -38,12 +38,12 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.event_dialog,null);
-
+        View v = inflater.inflate(R.layout.event_dialog, null);
+        Spinner spinner = v.findViewById(R.id.spinner);
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
-        spinner = v.findViewById(R.id.spinner);
+        btnConfirm = v.findViewById(R.id.btnConfirm);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

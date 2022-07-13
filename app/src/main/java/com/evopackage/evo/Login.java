@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(this, Register_user.class));
         }
         if (v.getId() == _forgotPass.getId()) {
-            startActivity(new Intent(this, Forgot_password.class));
+            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
 
 
         }
