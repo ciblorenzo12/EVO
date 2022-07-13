@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtDate;
     private EditText txtAddress;
 
+
     private DialogListener listener;
 
     @SuppressLint("CutPasteId")
@@ -31,12 +34,14 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.event_dialog, null);
-
+        Spinner spinner = v.findViewById(R.id.spinner);
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
-
-
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         builder.setView(v)
                 .setTitle("EventPopUp")
