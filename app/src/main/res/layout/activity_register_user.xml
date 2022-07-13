@@ -31,7 +31,7 @@
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="209dp"
         android:layout_height="53dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="11dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/example_email"
@@ -142,22 +142,22 @@
         android:id="@+id/register_firstname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="11dp"
         android:ems="10"
-        android:hint="@string/full_names"
+        android:hint="First Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.398"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture6" />
+        app:layout_constraintTop_toBottomOf="@+id/register_displayname" />
 
     <EditText
         android:id="@+id/register_lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="11dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
@@ -178,5 +178,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/register_displayname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Display Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.ProfileSettingsBack){
-            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
+            startActivity(new Intent(this, Profile_Page.class));
         }
         //save changes
         else if(view.getId() == R.id.ProfSave){

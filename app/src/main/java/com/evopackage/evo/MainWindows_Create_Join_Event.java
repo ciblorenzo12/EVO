@@ -47,11 +47,16 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     @Override
     public void onClick(View v) {
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (v.getId() == btn.getId()) {
 
-            Intent car = new Intent(this, Profile_Page.class);
-            startActivity(car);
+            if(user!=null){
+            startActivity(new Intent(this, Profile_Page.class));
 
+            }
+            else{
+                startActivity(new Intent(this, Login.class));
+            }
 
         }
         if (v.getId() == qr.getId()) {

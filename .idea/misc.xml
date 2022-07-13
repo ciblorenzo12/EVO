@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_.xml" value="0.246" />
@@ -22,7 +21,7 @@
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_forgot_password.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.22" />
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_qr_code_scanner.xml" value="0.18958333333333333" />
-        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.33" />
+        <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.22" />
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/activity_user_profile_setting.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/event_dialog.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/shaff/StudioProjects/Evo/app/src/main/res/layout/firebase_login_activity.xml" value="0.18958333333333333" />
