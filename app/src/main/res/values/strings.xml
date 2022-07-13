@@ -44,7 +44,7 @@
     <string name="_p">profp</string>
     <string name="_sp">settingsp</string>
     <string name="_p2" />
-    <string name="_motto">EVENT ORGANIZING TOOL</string>
+    <string name="_motto">AN EVENT ORGANIZING TOOL</string>
     <string name="_myevets">My Events</string>
     <string-array name="theme">
         <item>Music</item>
