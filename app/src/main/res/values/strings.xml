@@ -65,4 +65,6 @@
     <string name="scan_qr">Scan QR</string>
     <string name="Calendar">Calendar</string>
     <string name="join">Join</string>
+    <string name="messagesss" />
+    <string name="search">Search Event</string>
 </resources>
