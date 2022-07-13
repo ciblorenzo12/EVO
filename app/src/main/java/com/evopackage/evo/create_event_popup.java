@@ -7,18 +7,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 
-public class create_event_popup extends AppCompatDialogFragment {
+public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
     private EditText txtDate;
     private EditText txtAddress;
-    private Button btnConfirm;
+
     private DialogListener listener;
 
     @SuppressLint("CutPasteId")
@@ -33,7 +35,8 @@ public class create_event_popup extends AppCompatDialogFragment {
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
-        btnConfirm = v.findViewById(R.id.btnConfirm);
+
+
 
         builder.setView(v)
                 .setTitle("EventPopUp")
@@ -52,9 +55,7 @@ public class create_event_popup extends AppCompatDialogFragment {
         //  EditText editName = v.findViewById(R.id.txtName);
         //  EditText editLocation = v.findViewById(R.id.txtName);
 
-        btnConfirm.setOnClickListener(vv -> {
 
-        });
 
         return builder.create();
     }
@@ -68,6 +69,17 @@ public class create_event_popup extends AppCompatDialogFragment {
             throw new ClassCastException(context +
                     "must implement DialogListener");
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     public interface DialogListener {

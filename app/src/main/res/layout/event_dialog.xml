@@ -51,18 +51,6 @@
         android:contentDescription="@string/Sign_Google"
         android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/btnConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner"
-        android:hint="@string/create" />
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnConfirm"
-        android:hint="@string/cancel" />
 
 </RelativeLayout>

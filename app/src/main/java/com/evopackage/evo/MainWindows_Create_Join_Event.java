@@ -24,7 +24,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
     private boolean permission_granted;
     private ImageButton btn;
+    private ImageButton evtBtn;
     private ImageButton qr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         setContentView(R.layout.activity_main_windows_create_join_event);
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
+        evtBtn = findViewById(R.id.plus_Main_id);
+        evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
     }
