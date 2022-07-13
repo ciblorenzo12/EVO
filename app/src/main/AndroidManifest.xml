@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.evopackage.evo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"
+        />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,8 +19,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Evo"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
         tools:targetApi="31">
+        <activity
+
+            android:name=".Qr_code_scanner"
+            android:exported="true" />
         <activity
             android:name=".User_Profile_picture"
             android:exported="false" />
@@ -26,14 +39,16 @@
             android:name=".Register_user"
             android:exported="false" />
         <activity
-            android:name=".Login_screen"
+
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

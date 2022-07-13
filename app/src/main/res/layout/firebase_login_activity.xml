@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:ignore="MissingDefaultResource"
     android:focusable="true"
+    tools:ignore="MissingDefaultResource"
 
     >
 
@@ -80,8 +80,10 @@
 
     <TextView
         android:id="@+id/create_an_account"
-        android:layout_width="125dp"
-        android:layout_height="28dp"
+        android:layout_width="131dp"
+        android:layout_height="53dp"
+        android:clickable="true"
+        android:onClick="onClick"
         android:text="@string/create_an_account"
         android:textAlignment="center"
         android:textColorHighlight="#0C0909"
@@ -92,12 +94,12 @@
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
+        app:layout_constraintVertical_bias="0.917" />
 
     <TextView
         android:id="@+id/forgota_password"
-        android:layout_width="125dp"
-        android:layout_height="28dp"
+        android:layout_width="134dp"
+        android:layout_height="52dp"
         android:text="@string/forgot_pass"
         android:textAlignment="center"
         android:textColorHighlight="#0C0909"
@@ -105,10 +107,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.856"
+        app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
+        app:layout_constraintVertical_bias="0.916" />
 
     <ProgressBar
         android:id="@+id/login_progressBar"
@@ -122,12 +124,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/_googlebuton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="245dp"
         android:layout_height="49dp"
         android:layout_marginTop="4dp"
+        android:clickable="true"
         android:drawableLeft="@drawable/googleg_standard_color_18"
+        android:onClick="onClick"
         android:rotation="0"
         android:rotationX="0"
         android:rotationY="0"
@@ -147,5 +151,20 @@
         app:layout_constraintTop_toBottomOf="@+id/login_btn"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/login_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Logout"
+        android:textColor="#000000"
+        android:visibility="gone"
+        app:backgroundTint="#C411C8FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_googlebuton"
+        app:layout_constraintVertical_bias="0.771" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

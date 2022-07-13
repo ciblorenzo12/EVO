@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:context=".Register_user"
-    android:focusable="true">
+    android:focusable="true"
+    tools:context=".Register_user">
 
     <ImageView
         android:id="@+id/profile_picture6"
@@ -86,11 +86,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
+        android:allowClickWhenDisabled="true"
         android:autofillHints=""
         android:clickable="true"
         android:ems="10"
         android:enabled="false"
-        android:allowClickWhenDisabled="true"
         android:hint="@string/dob"
         android:minHeight="48dp"
         android:onClick="onClick"
