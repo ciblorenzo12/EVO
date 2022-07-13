@@ -12,11 +12,13 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
 
 
     private FirebaseAuth auth;
+    private FirebaseDatabase search;
     private FirebaseUser user;
     private int Camera_Permission_Request = 1;
     private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
@@ -51,7 +53,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
             Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
-
 
         }
         if (v.getId() == qr.getId()) {
