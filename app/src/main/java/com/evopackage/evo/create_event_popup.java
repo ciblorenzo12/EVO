@@ -15,15 +15,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
 
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
@@ -99,6 +96,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
     public interface DialogListener
     {
+        void applyTexts(String _evtName, String _evtDate, String _evtAdder);
+
         void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme);
     }
 

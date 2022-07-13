@@ -10,7 +10,7 @@
 
 
     <ImageButton
-        android:id="@+id/ProfileBack"
+        android:id="@+id/ProfileSettingsBack"
         android:layout_width="77dp"
         android:layout_height="66dp"
         android:background="#00FFFFFF"
@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="?attr/actionModeCloseDrawable"
         app:tint="#35A9F6"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck,UsingOnClickInXml" />
 
     <ImageButton
         android:id="@+id/ProfilePicture"

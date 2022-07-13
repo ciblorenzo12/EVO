@@ -2,6 +2,7 @@ package com.evopackage.evo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     private Button _password;
     private ImageButton ProfPicture;
     private ImageButton ProfSettingsBack;
-
+    private String[] permissions_ = {Manifest.permission.MANAGE_MEDIA};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +40,17 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
         _authetication = FirebaseAuth.getInstance();
         FirebaseUser user = _authetication.getCurrentUser();
-        //UserID
-        _userID = findViewById(R.id.UserID);
-        _userID.setText(user.getUid());
         //EditText
         _firstName = findViewById(R.id.ProfFirstName);
         _lastName = findViewById(R.id.ProfLastName);
         _phoneNumber = findViewById(R.id.ProfPhoneNum);
+        _userID = findViewById(R.id.UserID);
 
         //Buttons/Picture
         _password = findViewById(R.id.ChangePassword);
         ProfSaveBtn = findViewById(R.id.ProfSave);
         ProfPicture = findViewById(R.id.ProfilePicture);
-        ProfSettingsBack = findViewById(R.id.ProfileBack);
+        ProfSettingsBack = findViewById(R.id.ProfileSettingsBack);
 
         User_information info;
         ProfPicture.setOnClickListener(this);
@@ -62,7 +61,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.ProfileBack){
+        if(view.getId() == R.id.ProfileSettingsBack){
             startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
         }
         //save changes
@@ -74,7 +73,9 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
             startActivity(new Intent(this,Forgot_password.class));
         }
         //change profile pic
-        //else if(view.getId() == R.id.ProfilePicture){}
+        else if(view.getId() == R.id.ProfilePicture){
+
+        }
     }
 
     private void SaveProfileChanges() {
@@ -82,7 +83,6 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         String _FirstName = _firstName.getText().toString().trim();
         String _LastName = _lastName.getText().toString().trim();
         String _PhoneNum = _phoneNumber.getText().toString().trim();
-        String _Password = _password.getText().toString().trim();
 
 
 
@@ -97,8 +97,9 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
                 _userID.setError("Display Name must be 16 characters or less.");
                 return;
             }
-            Ref = _database.getReference("users");
-            Ref.child(user.getUid()).setValue(_UserID);
+            Ref = _database.getReference("users/"+user.getUid()+"/_displayName");
+            Ref.setValue(_UserID);
+            _userID.setText("");
         }
 
         if(!_FirstName.isEmpty()){
@@ -121,6 +122,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
             Ref.setValue(_PhoneNum);
             _phoneNumber.setText("");
         }
+
     }
 
 }
