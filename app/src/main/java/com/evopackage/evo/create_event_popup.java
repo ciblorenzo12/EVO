@@ -22,14 +22,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
     private EditText txtDate;
     private EditText txtAddress;
+    private Spinner spinner;
 
-
-    private DialogListener listener;
+    //private DialogListener listener;
 
     @SuppressLint("CutPasteId")
     @NonNull
@@ -39,10 +41,11 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.event_dialog, null);
-        Spinner spinner = v.findViewById(R.id.spinner);
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
+        spinner = v.findViewById(R.id.spinner);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -59,7 +62,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                             txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user);
                     String eventUid = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
-                    DatabaseReference firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid);
+                    DatabaseReference firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(Objects.requireNonNull(eventUid));
 
                     firebaseEvent.child("_name").setValue(event.GetName());
                     firebaseEvent.child("_date").setValue(event.GetDate());
@@ -68,24 +71,19 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
                 });
 
-        //  EditText editName = v.findViewById(R.id.txtName);
-        //  EditText editLocation = v.findViewById(R.id.txtName);
-
-
-
         return builder.create();
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            listener = (DialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context +
-                    "must implement DialogListener");
-        }
-    }
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        try {
+//            listener = (DialogListener) context;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(context +
+//                    "must implement DialogListener");
+//        }
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -98,9 +96,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
     }
 
-    public interface DialogListener {
-        void applyTexts(String _evtName, String _evtDate, String _evtAddr);
-    }
+//    public interface DialogListener {
+//        void applyTexts(String _evtName, String _evtDate, String _evtAddr);
+//    }
 
 }
 

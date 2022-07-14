@@ -14,8 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-
+public class MainWindows_Create_Join_Event extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth auth;
     private FirebaseDatabase search;
@@ -26,7 +25,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,58 +43,34 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-
-    }
-
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
-
             Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
-
         }
         if (v.getId() == qr.getId()) {
-
-
             RequestCameraPermission();
-
-
         }
     }
 
-
     private void RequestCameraPermission() {
-
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
-
-
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
-
-
-
-                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
-                    .create()
-                    .show();
-
-
-        }   if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-
-
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
+        }
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
-
-
-
         }
-
-
     }
 }
