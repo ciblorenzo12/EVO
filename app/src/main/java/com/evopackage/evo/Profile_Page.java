@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile_Page extends AppCompatActivity implements View.OnClickListener {
 
-    private FirebaseDatabase _database = FirebaseDatabase.getInstance();
+    private FirebaseDatabase _database;
 
     private DatabaseReference _Reference;
 
@@ -37,8 +37,11 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
     private Button EventHistory;
 
+    private static final String USER = "users";
+
     String email;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
         String userID = user.getUid();
 
-        _Reference = _database.getReference().child("users/"+userID);
+
 
         Display = findViewById(R.id.DisplayName);
         //Display.setText(Displayname);
@@ -78,14 +81,12 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         ProfileSettings.setOnClickListener(this);
         EventHistory.setOnClickListener(this);
 
-        _Reference.addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-                    if(ds.getValue().equals(userID)){
-                        FullName.setText(ds.child("_firstname").getValue(String.class));
-                    }
-                }
+                Display.setText(snapshot.child(userID).child("_displayName").getValue(String.class));
+                FullName.setText(snapshot.child(userID).child("_firstname").getValue(String.class) + " " + snapshot.child(userID).child("_lastname").getValue(String.class));
+                DOB.setText(snapshot.child(userID).child("_dob").getValue(String.class));
             }
 
             @Override
@@ -93,6 +94,26 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+
+        //_Reference.addValueEventListener(new ValueEventListener() {
+            //@Override
+            //public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //User_information userInfo = snapshot.child("_firstname").getValue(User_information.class);
+
+                //FullName.setText(userInfo.GetFullName());
+                //for(DataSnapshot ds : snapshot.getChildren()){
+                //    if(ds.getValue().equals(userID)){
+                //        FullName.setText(ds.child("_firstname").getValue(String.class));
+                //    }
+                //}
+            //}
+
+            //@Override
+            //public void onCancelled(@NonNull DatabaseError error) {
+
+            //}
+        //});
 
 
         //Query mQueryRef = _database.getReference("users/"+userID);
