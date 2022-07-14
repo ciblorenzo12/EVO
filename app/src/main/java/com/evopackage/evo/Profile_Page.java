@@ -45,9 +45,9 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.profile_page);
 
         Intent intent = getIntent();
-        email = intent.getStringExtra("_EMAIL");
+        //email =
 
-        _Reference = _database.getReference("users");
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //String display = String.valueOf(_database.getReference("users/"+user.getUid()+"/_displayname"));
         //String Displayname = null;
@@ -56,6 +56,8 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         //}
 
         String userID = user.getUid();
+
+        _Reference = _database.getReference().child("users/"+userID);
 
         Display = findViewById(R.id.DisplayName);
         //Display.setText(Displayname);
@@ -80,7 +82,7 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    if(ds.child("_email").getValue().equals(email)){
+                    if(ds.getValue().equals(userID)){
                         FullName.setText(ds.child("_firstname").getValue(String.class));
                     }
                 }

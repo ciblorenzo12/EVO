@@ -44,6 +44,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //animated Objects
     private ProgressBar progressbar_;
 
+    public String _EMAIL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -113,7 +115,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void firebase_user_credentials() {
         progressbar_.setVisibility(View.GONE);
-        String _EMAIL = _email.getText().toString().trim();
+        _EMAIL = _email.getText().toString().trim();
         String _PASSWORD = _password.getText().toString().trim();
 
         if (_EMAIL.isEmpty()) {
