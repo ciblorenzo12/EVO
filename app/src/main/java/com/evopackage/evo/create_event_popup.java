@@ -17,6 +17,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
@@ -49,12 +54,18 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
                 })
                 .setPositiveButton("create", (dialog, which) -> {
-                    String evtName = txtName.getText().toString();
-                    String evtDate = txtDate.getText().toString();
-                    String evtAddr = txtAddress.getText().toString();
-                    listener.applyTexts(evtName, evtDate, evtAddr);
-                    //   FirebaseDatabase.getInstance().getReference("events").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-                    //  .getUid()).setValue(event);
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    Event event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user);
+                    String eventUid = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
+
+                    DatabaseReference firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid);
+
+                    firebaseEvent.child("_name").setValue(event.GetName());
+                    firebaseEvent.child("_date").setValue(event.GetDate());
+                    firebaseEvent.child("_address").setValue(event.GetLocation());
+                    firebaseEvent.child("_category").setValue(event.GetCategory());
+                    firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
                 });
 
         //  EditText editName = v.findViewById(R.id.txtName);
