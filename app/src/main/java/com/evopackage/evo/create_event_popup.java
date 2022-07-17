@@ -30,6 +30,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtDate;
     private EditText txtAddress;
     private Spinner spinner;
+    private DialogListener listener;
 
     //private DialogListener listener;
 
@@ -61,12 +62,12 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     Event event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
                             txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user);
                     String eventUid = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
-
+                    listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(), txtAddress.getText().toString());
                     DatabaseReference firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(Objects.requireNonNull(eventUid));
 
                     firebaseEvent.child("_name").setValue(event.GetName());
-                    firebaseEvent.child("_date").setValue(event.GetDate());
-                    firebaseEvent.child("_address").setValue(event.GetLocation());
+                  firebaseEvent.child("_date").setValue(event.GetDate());
+                   firebaseEvent.child("_address").setValue(event.GetLocation());
                     firebaseEvent.child("_category").setValue(event.GetCategory());
                     firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
                 });
@@ -74,16 +75,16 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         return builder.create();
     }
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        try {
-//            listener = (DialogListener) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(context +
-//                    "must implement DialogListener");
-//        }
-//    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (DialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context +
+                    "must implement DialogListener");
+        }
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,9 +97,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
     }
 
-//    public interface DialogListener {
-//        void applyTexts(String _evtName, String _evtDate, String _evtAddr);
-//    }
+   public interface DialogListener {
+       void applyTexts(String _evtName, String _evtDate, String _evtAddr);
+    }
 
 }
 

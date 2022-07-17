@@ -3,21 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.246" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/evt_btn_detail.xml" value="0.1" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.246" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/ic_user_background.xml" value="0.246" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/round_btn.xml" value="0.196" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout-finger-qwerty/firebase_login_activity.xml" value="0.75" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout-v26/activity_main.xml" value="0.2390625" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.3833922261484099" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.22" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_qr_code_scanner.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_user_profile_picture.xml" value="0.1" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_user_profile_setting.xml" value="0.33" />
-        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/event_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/event_dialog.xml" value="0.25" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/event_page.xml" value="0.33" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/home_page.xml" value="0.25" />
-        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/setting_page.xml" value="0.1" />
-        <entry key="..\:/Users/panda/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_main_windows_create_join_event.xml" value="0.22" />
-        <entry key="..\:/Users/panda/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_register_user.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/panda/AndroidStudioProjects/Evo/app/src/main/res/layout/activity_user_profile_setting.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/panda/AndroidStudioProjects/Evo/app/src/main/res/layout/event_dialog.xml" value="0.1125" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/profile_page.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/setting_page.xml" value="0.18" />
       </map>
     </option>
   </component>
