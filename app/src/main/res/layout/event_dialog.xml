@@ -14,7 +14,8 @@
         android:inputType="textPersonName|text" />
 
     <EditText
-
+        android:enabled="false"
+        android:allowClickWhenDisabled="true"
         android:id="@+id/txtDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,9 +24,9 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
         android:hint="@string/Date"
+        android:importantForAutofill="no"
         android:inputType="datetime"
-        android:minHeight="48dp"
-        android:importantForAutofill="no"/>
+        android:minHeight="48dp" />
 
 
     <EditText
