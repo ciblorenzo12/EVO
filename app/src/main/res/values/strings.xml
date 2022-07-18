@@ -62,8 +62,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="EVO" />
     <string name="evo1">EVO</string>
-    <string name="qricon">Scan QR</string>
-    <string name="scan_qr">Scan QR</string>
+
+
+    <string name="scan_qr"> Check in </string>
     <string name="Calendar">Calendar</string>
     <string name="join">Join</string>
     <string name="messagesss" />
