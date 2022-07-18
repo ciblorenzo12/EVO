@@ -26,7 +26,6 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtName;
     private EditText txtDate;
     private EditText txtAddress;
-    private Button btnConfirm;
     private Spinner spinner;
     private DialogListener listener;
 
@@ -43,7 +42,6 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
-        btnConfirm = v.findViewById(R.id.btnConfirm);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,6 +65,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     firebaseEvent.child("_address").setValue(event.GetLocation());
                     firebaseEvent.child("_category").setValue(event.GetCategory());
                     firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("user-events").child(eventUid).setValue("creator");
                 });
 
            return builder.create();

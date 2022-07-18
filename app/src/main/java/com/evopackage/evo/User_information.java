@@ -1,5 +1,8 @@
 package com.evopackage.evo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class   User_information {
 
     public String _firstname, _lastname, _dob, _email, _password, _phone;
@@ -12,9 +15,5 @@ public class   User_information {
         _email = _Email;
         _password = _Password;
         _phone = _Phone;
-
-
     }
-
-
 }
