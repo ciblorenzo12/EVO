@@ -25,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
@@ -125,11 +124,10 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                             for(DataSnapshot snapsh :snapshot.getChildren()){
 
                                 _events.add(snapshot.getKey());
-               User_information user_information = new User_information(current_user.getDisplayName(), " "," ",current_user.getEmail()," ",current_user.getPhoneNumber());
-                                   firebaseUsers.child("Events").child(snapshot.getKey()).setValue("Creator");
-                                firebaseUsers.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
-                                        .getUid()).setValue(user_information);
+               User_information user_information = new User_information(current_user.getDisplayName(), " "," ",current_user.getEmail()," ",current_user.getPhoneNumber(),"Events");
 
+
+                                firebaseUsers.child("Events").child(snapshot.getKey()).setValue("Creator");
 
                             }
                         }
