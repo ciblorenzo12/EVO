@@ -19,7 +19,17 @@ public class Event_Page extends AppCompatActivity {
 
     private TextView event_name;
 
+    //fields
+    private static String mName,mAdress,mDate,mQr;
 private DatabaseReference reference_events= FirebaseDatabase.getInstance().getReference().child("events");
+
+    public Event_Page(String _mName,String _mAdress,String _mDate,String _mQr) {
+        mName = _mName;
+      mAdress= _mAdress;
+       mDate = _mDate;
+        mQr = _mQr;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +38,7 @@ private DatabaseReference reference_events= FirebaseDatabase.getInstance().getRe
 event_name = findViewById(R.id.Event_name);
 
 
-            event_name.setText(create_event_popup.GetCurrent_Event());
+            event_name.setText(mName);
             GenerateQr(create_event_popup.GetCurrent_EventID());
 
 
@@ -55,5 +65,14 @@ event_name = findViewById(R.id.Event_name);
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void Pass_Event_(String _name,String _adress,String _date,String _qr){
+
+        mName = _name;
+        mAdress = _adress;
+        mDate = _date;
+        mQr = _qr;
+
     }
 }
