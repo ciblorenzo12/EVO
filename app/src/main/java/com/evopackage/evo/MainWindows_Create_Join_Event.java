@@ -25,7 +25,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr;
+    private ImageButton qr,settings;
 
 
     @Override
@@ -34,10 +34,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         setContentView(R.layout.activity_main_windows_create_join_event);
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
+        settings= findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
+        settings.setOnClickListener(this);
     }
 
     private void openDialog() {
@@ -65,6 +67,11 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             RequestCameraPermission();
 
 
+        }
+        if(v.getId()==R.id.settings_Main_Id){
+
+            Intent car = new Intent(this, Event_Page.class);
+            startActivity(car);
         }
     }
 
