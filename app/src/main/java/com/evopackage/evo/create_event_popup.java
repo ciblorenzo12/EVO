@@ -2,6 +2,7 @@ package com.evopackage.evo;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,8 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
+public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
     private EditText txtName;
     private EditText txtDate;
     private EditText txtAddress;
@@ -50,7 +53,6 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
 
-
         super.onCreate(savedInstanceState);
 
 
@@ -68,7 +70,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
 
-
+        txtDate.setOnClickListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.select_dialog_item);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
         spinner.setAdapter(adapter);
@@ -164,6 +166,35 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==txtDate.getId()){
+
+
+            Pick_a_Date();
+
+        }
+    }
+    private void Pick_a_Date() {
+
+        DatePickerDialog _choosedate = new DatePickerDialog(this.getContext(),
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+
+        );
+        _choosedate.show();
+
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        month = month + 1;
+        String dob = month + "/" + dayOfMonth + "/" + year;
+        txtDate.setText(dob);
     }
 
     public interface DialogListener
