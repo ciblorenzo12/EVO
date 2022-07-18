@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ import java.util.Calendar;
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
     private EditText txtName;
-    private EditText txtDate;
+    private TextView txtDate;
     private EditText txtAddress;
 
     private DialogListener listener;
