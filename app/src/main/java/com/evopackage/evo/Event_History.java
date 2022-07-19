@@ -38,20 +38,38 @@ public class Event_History extends AppCompatActivity implements View.OnClickList
 
     private List<String> eventList = new ArrayList<String>();
 
+    private TextView eventTest;
+
     @Override
     public void onClick(View view) {
 
+        eventTest = findViewById(R.id.eventTest);
+
         setContentView(R.layout.event_history);
 
-        FirebaseDatabase.getInstance().getReference("users").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // For loop is to count up to the number of events the user joined or attended
 
-                Iterator eventIter = (Iterator) snapshot.getChildren();
-                while(eventIter.hasNext()){
-                    Log.i("TAG", "onDataChange: " + eventIter.next());
+                //Iterator eventIter = (Iterator) snapshot.child("users").child(_user.getUid()).child("_events").getChildren();
+                //Iterator iter = snapshot.child("users").child(_user.getUid()).child("Events").getChildren();
+                for (DataSnapshot eventKey: snapshot.child("users").child(_user.getUid()).child("Events").getChildren())
+                {
+                    //DatabaseReference event = FirebaseDatabase.getInstance().getReference("events").child(eventKey.getKey());
+                    DataSnapshot event = snapshot.child("events").child(eventKey.getKey());
+                    Log.i("~!!!!!!!!!!!!!!!", event.child("_name").getValue().toString());
+                    //eventTest.setText(event.child("_name").getValue(String.class));
+                    eventTest.setText("hi");
                 }
+
+
+//                Iterator eventIter = (Iterator) snapshot.getChildren();
+//
+//                eventTest.setText(eventIter.toString());
+//                while(eventIter.hasNext()){
+//                    Log.i("TAG", "onDataChange: " + eventIter.next());
+//                }
                 //for(int i =0 ; i < _attendedEvents; i++)
                 //eventList[i] = snapshot.child(_user.getUid()).child("Events").toString();
                 //Store all the info from fire base into the string variable to be made into an event for history display

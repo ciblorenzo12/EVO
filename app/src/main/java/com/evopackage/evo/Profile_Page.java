@@ -142,7 +142,7 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this,User_Profile_picture.class));
         }
         if(view.getId() == R.id.EventHistory){
-
+            startActivity(new Intent(this,Event_History.class));
         }
     }
 }
