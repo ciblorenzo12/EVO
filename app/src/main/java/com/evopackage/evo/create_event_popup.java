@@ -85,7 +85,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                    event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user);
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user,"");
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
@@ -127,7 +127,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                             for(DataSnapshot snapsh :snapshot.getChildren()){
 
                                 _events.add(snapshot.getKey());
-               User_information user_information = new User_information(current_user.getDisplayName(), " "," ",current_user.getEmail()," ",current_user.getPhoneNumber(),"Events");
+               User_information user_information = new User_information(current_user.getDisplayName(), " "," ",current_user.getEmail()," ","","","");
 
 
                                 firebaseUsers.child("Events").child(snapshot.getKey()).setValue("Creator");
@@ -218,6 +218,11 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
         return current_eventID;
+    }
+    public static void SetCurrentEvent(){
+
+
+
     }
 
 }
