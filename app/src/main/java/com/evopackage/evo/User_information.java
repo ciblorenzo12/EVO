@@ -5,10 +5,11 @@ import java.util.List;
 
 public class   User_information {
 
-    public String _firstname, _lastname, _dob, _email, _password, _phone,_event;
+    public String _displayName, _firstname, _lastname, _dob, _email, _password, _phone;
 
-    public User_information(String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone,String Event) {
+    public User_information(String _DisplayName, String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone) {
 
+        _displayName = _DisplayName;
         _firstname = _Firstname;
         _lastname = _Lastname;
         _dob = _Dob;
@@ -16,6 +17,7 @@ public class   User_information {
         _password = _Password;
         _phone = _Phone;
 
-_event = Event;
     }
+
+
 }
