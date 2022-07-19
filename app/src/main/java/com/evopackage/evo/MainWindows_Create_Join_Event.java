@@ -5,7 +5,13 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -26,6 +32,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr,settings;
+    private Button evt;
+    private LinearLayout linearEvt;
 
 
     @Override
@@ -40,6 +48,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
+
+        linearEvt = (LinearLayout) findViewById(R.id.Linear_Event);
     }
 
     private void openDialog() {
@@ -49,6 +59,64 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     @Override
     public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+        TextView evtName = new TextView(this);
+        TextView evtDate = new TextView(this);
+        TextView evtAdder = new TextView(this);
+        TableLayout table = new TableLayout(this);
+        TableLayout.LayoutParams pTable = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
+        // pTable.gravity = Gravity.CENTER;
+        TableRow tableRowName = new TableRow(this);
+        TableRow tableRowDate = new TableRow(this);
+        TableRow tableRowAddre = new TableRow(this);
+        tableRowName.setLayoutParams(pTable);
+        tableRowDate.setLayoutParams(pTable);
+        tableRowAddre.setLayoutParams(pTable);
+        table.addView(tableRowName);
+        table.addView(tableRowDate);
+        table.addView(tableRowAddre);
+
+
+        // TableRow.LayoutParams rTable = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        evt = new Button(this);
+        RelativeLayout relative = new RelativeLayout(this);
+        evt.getBackground().setAlpha(50);
+        evtName.setId(View.generateViewId());
+        LinearLayout.LayoutParams para = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        RelativeLayout.LayoutParams rPara = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        rPara.addRule(RelativeLayout.RIGHT_OF);
+
+
+
+        evtName.setText(_evtName);
+        evtDate.setText(_evtDate);
+        evtAdder.setText(_evtAdder);
+
+        evtName.setTextSize(35f);
+        evtDate.setTextSize(35f);
+        evtAdder.setTextSize(35f);
+        evt.setLayoutParams(rPara);
+        evtName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        evtDate.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        evtAdder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        table.setLayoutParams(rPara);
+
+        relative.setLayoutParams(para);
+
+
+        evt.setId(View.generateViewId());
+        relative.addView(table);
+        relative.addView(evt);
+        tableRowName.addView(evtName);
+        tableRowDate.addView(evtDate);
+        tableRowAddre.addView(evtAdder);
+
+        linearEvt.addView(relative);
+    }
+
+    @Override
+    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
     }
 
@@ -107,8 +175,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+   // @Override
+  //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
-    }
+   // }
 }

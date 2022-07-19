@@ -112,7 +112,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
 
-
+                    listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
+                            txtAddress.getText().toString());
                     firebaseEvent.child("_date").setValue(event.GetDate());
                     firebaseEvent.child("_address").setValue(event.GetLocation());
                     firebaseEvent.child("_category").setValue(event.GetCategory());
