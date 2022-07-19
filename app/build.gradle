@@ -29,16 +29,23 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packagingOptions{
+        pickFirst "androidsupportmultidexversion.txt"
+    }
+
 }
 
 dependencies {
 
+    //just added
+    implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.zxing:core:3.4.0'
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'androidx.navigation:navigation-fragment:2.5.0'
     implementation 'androidx.navigation:navigation-ui:2.5.0'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'

@@ -69,4 +69,7 @@
     <string name="join">Join</string>
     <string name="messagesss" />
     <string name="search">Search Event</string>
+    <string name="imageview">ImageView</string>
+    <string name="date_example">mm/dd/yyyy</string>
+    <string name="Creator_name">Creator  name</string>
 </resources>

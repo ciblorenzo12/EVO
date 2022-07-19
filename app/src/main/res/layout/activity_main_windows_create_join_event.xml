@@ -63,18 +63,6 @@
         app:layout_constraintVertical_bias="0.058"
         tools:ignore="ImageContrastCheck" />
 
-    <ImageButton
-        android:id="@+id/plus_Main_id"
-        android:layout_width="97dp"
-        android:layout_height="105dp"
-        android:background="@drawable/plus"
-        android:contentDescription="@string/_plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
-        tools:ignore="ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/settings_Main_Id"
@@ -250,6 +238,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.231" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+
+        android:layout_marginTop="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/plus_Main_id"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintVertical_bias="0.103"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <LinearLayout
+            android:id="@+id/Linear_Event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
+    <ImageButton
+        android:id="@+id/plus_Main_id"
+        android:layout_width="97dp"
+        android:layout_height="105dp"
+        android:background="@drawable/plus"
+        android:contentDescription="@string/_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964"
+        tools:ignore="ImageContrastCheck"
+        android:alpha="100
+"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
