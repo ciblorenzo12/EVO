@@ -25,6 +25,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +41,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Firebase authentication
     private FirebaseAuth _authent;
     private FirebaseUser _userdata;
+    private final FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //textObjects
     private EditText _email, _password;
 
@@ -92,7 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(this, Register_user.class));
         }
         if (v.getId() == _forgotPass.getId()) {
-            startActivity(new Intent(this, Forgot_password.class));
+            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
 
 
         }
@@ -197,8 +201,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
 
                         UI_Update();
-
-
+                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber());
+                        _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                                .getUid()).setValue(data);
                     }
                 });
 

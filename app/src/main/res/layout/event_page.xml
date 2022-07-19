@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <ImageView
+        android:id="@+id/eventName"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#00BCD4"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/Event_name"
+        android:layout_width="match_parent"
+        android:layout_height="147dp"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#090707"
+        android:textSize="48sp"
+        tools:ignore="HardcodedText" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/eventName">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#DCDFE1"
+                android:contentDescription="@string/Btn_test"
+                android:scaleType="center"
+                android:src="@android:drawable/ic_input_add"
+                app:tint="#09B120"
+                tools:ignore="ContentDescription,ImageContrastCheck,RedundantDescriptionCheck" />
+
+            <ImageView
+                android:id="@+id/EventQr"
+                android:layout_width="match_parent"
+                android:layout_height="305dp"
+                app:srcCompat="?android:attr/fingerprintAuthDrawable" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
