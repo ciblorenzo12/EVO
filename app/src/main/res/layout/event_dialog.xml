@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,7 +15,6 @@
         android:inputType="textPersonName|text" />
 
     <EditText
-
         android:id="@+id/txtDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,10 +22,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
+        android:editable="false"
         android:hint="@string/Date"
-        android:inputType="datetime"
+        android:importantForAutofill="no"
+        android:inputType="none"
         android:minHeight="48dp"
-        android:importantForAutofill="no"/>
+        android:onClick="onClick"
+        tools:ignore="Deprecated" />
 
 
     <EditText

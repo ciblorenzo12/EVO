@@ -5,9 +5,9 @@ import java.util.List;
 
 public class   User_information {
 
-    public String _firstname, _lastname, _dob, _email, _password, _phone;
+    public String _firstname, _lastname, _dob, _email, _password, _phone,_event;
 
-    public User_information(String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone) {
+    public User_information(String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone,String Event) {
 
         _firstname = _Firstname;
         _lastname = _Lastname;
@@ -15,5 +15,7 @@ public class   User_information {
         _email = _Email;
         _password = _Password;
         _phone = _Phone;
+
+_event = Event;
     }
 }

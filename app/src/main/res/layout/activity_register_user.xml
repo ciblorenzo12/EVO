@@ -83,21 +83,20 @@
 
     <EditText
         android:id="@+id/register_dob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="214dp"
+        android:layout_height="45dp"
         android:layout_marginTop="11dp"
-        android:allowClickWhenDisabled="true"
         android:autofillHints=""
-        android:clickable="true"
+
         android:ems="10"
-        android:enabled="false"
         android:hint="@string/dob"
+        android:editable="false"
         android:minHeight="48dp"
         android:onClick="onClick"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintHorizontal_bias="0.385"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_phone"
         app:layout_constraintVertical_bias="0.0" />

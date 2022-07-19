@@ -48,7 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //animated Objects
     private ProgressBar progressbar_;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
