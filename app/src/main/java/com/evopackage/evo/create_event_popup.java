@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,8 +20,11 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class create_event_popup extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText txtName;
@@ -67,6 +71,22 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
 
                     FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("user-events").child(eventUid).setValue("creator");
+
+                    FirebaseDatabase.getInstance().getReference("events").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot child: snapshot.getChildren()) {
+                                Log.i("t", child.getKey());
+                                String name = child.child("_name").getValue().toString();
+                                Log.i("t", name);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 });
 
            return builder.create();
