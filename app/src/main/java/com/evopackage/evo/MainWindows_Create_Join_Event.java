@@ -1,13 +1,34 @@
 package com.evopackage.evo;
 
+
+
+
+
+
+
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridLayout;
+
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.utils.widget.ImageFilterButton;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +46,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr,settings;
+    private ImageButton qr;
+    private Button evt;
+    private int NUM_ROW = 1;
+    private int NUM_COLS = 1;
+    private LinearLayout linearEvt;
+    //private TableLayout tEvt;
+    //private CardView cEvt;
 
 
     @Override
@@ -34,12 +61,16 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         setContentView(R.layout.activity_main_windows_create_join_event);
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
-        settings= findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
-        settings.setOnClickListener(this);
+
+
+
+        linearEvt = (LinearLayout) findViewById(R.id.Linear_Event);
+
+
     }
 
     private void openDialog() {
@@ -49,22 +80,89 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     @Override
     public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+        TextView evtName = new TextView(this);
+        TextView evtDate = new TextView(this);
+        TextView evtAdder = new TextView(this);
+        TableLayout table = new TableLayout(this);
+        TableLayout.LayoutParams pTable = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
+       // pTable.gravity = Gravity.CENTER;
+        TableRow tableRowName = new TableRow(this);
+        TableRow tableRowDate = new TableRow(this);
+        TableRow tableRowAddre = new TableRow(this);
+            tableRowName.setLayoutParams(pTable);
+        tableRowDate.setLayoutParams(pTable);
+        tableRowAddre.setLayoutParams(pTable);
+        table.addView(tableRowName);
+        table.addView(tableRowDate);
+        table.addView(tableRowAddre);
+
+
+       // TableRow.LayoutParams rTable = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        evt = new Button(this);
+        RelativeLayout relative = new RelativeLayout(this);
+        evt.getBackground().setAlpha(50);
+        evtName.setId(View.generateViewId());
+        LinearLayout.LayoutParams para = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        RelativeLayout.LayoutParams rPara = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        rPara.addRule(RelativeLayout.RIGHT_OF);
+
+
+
+        evtName.setText(_evtName);
+        evtDate.setText(_evtDate);
+        evtAdder.setText(_evtAdder);
+
+        evtName.setTextSize(35f);
+        evtDate.setTextSize(35f);
+        evtAdder.setTextSize(35f);
+        evt.setLayoutParams(rPara);
+        evtName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        evtDate.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        evtAdder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
+        table.setLayoutParams(rPara);
+
+        relative.setLayoutParams(para);
+
+
+        evt.setId(View.generateViewId());
+        relative.addView(table);
+        relative.addView(evt);
+        tableRowName.addView(evtName);
+        tableRowDate.addView(evtDate);
+        tableRowAddre.addView(evtAdder);
+
+        linearEvt.addView(relative);
+
+
+        //evt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        tEvt = (TableLayout) findViewById(R.id.tableForEvent);
+//        for (int row = 0; row < NUM_ROW; row++) {
+//            TableRow tableRow = new TableRow(this);
+//            tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT, 1.0f));
+//            tEvt.addView(tableRow);
+//            if(NUM_COLS > 2)
+//            for (int col = 0; col < NUM_COLS; col++){
+//
+//                evt.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1.0f));
+//                evt.setScaleX(100);
+//                evt.setScaleY(100);
+//                tableRow.addView(evt);
+//            }
+//        }
+
+
 
     }
 
 
     @Override
     public void onClick(View v) {
-        user = FirebaseAuth.getInstance().getCurrentUser();
         if (v.getId() == btn.getId()) {
 
-            if(user!=null){
-            startActivity(new Intent(this, Profile_Page.class));
-
-            }
-            else{
-                startActivity(new Intent(this, Login.class));
-            }
+            Intent car = new Intent(this, Profile_Page.class);
+            startActivity(car);
 
         }
         if (v.getId() == qr.getId()) {
@@ -73,11 +171,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             RequestCameraPermission();
 
 
-        }
-        if(v.getId()==R.id.settings_Main_Id){
-
-            Intent car = new Intent(this, Event_Page.class);
-            startActivity(car);
         }
     }
 
@@ -110,11 +203,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         }
 
-
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
     }
 }
