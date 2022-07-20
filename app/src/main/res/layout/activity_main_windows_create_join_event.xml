@@ -42,18 +42,6 @@
         app:layout_constraintVertical_bias="0.038"
         tools:ignore="ImageContrastCheck" />
 
-    <ImageButton
-        android:id="@+id/plus_Main_id"
-        android:layout_width="97dp"
-        android:layout_height="105dp"
-        android:background="@drawable/plus"
-        android:contentDescription="@string/_plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
-        tools:ignore="ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/settings_Main_Id"
@@ -256,6 +244,21 @@
         </LinearLayout>
 
     </ScrollView>
+    <ImageButton
+        android:id="@+id/plus_Main_id"
+        android:layout_width="97dp"
+        android:layout_height="105dp"
+        android:background="@drawable/plus"
+        android:contentDescription="@string/_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964"
+        tools:ignore="ImageContrastCheck"
+        android:alpha="100
+"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
