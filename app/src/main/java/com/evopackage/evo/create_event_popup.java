@@ -44,6 +44,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     //caleb code
    private static String current_event;
    private static String current_eventID;
+    private static String current_adress;
+    private static String current_Adress;
    private static ArrayList<String> _events = new ArrayList<>();
 
 
