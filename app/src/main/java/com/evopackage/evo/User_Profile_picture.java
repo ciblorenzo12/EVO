@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,7 +63,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.ProfileSettingsBack){
-            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
+            startActivity(new Intent(this, Profile_Page.class));
         }
         //save changes
         else if(view.getId() == R.id.ProfSave){
@@ -74,6 +75,8 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         }
         //change profile pic
         else if(view.getId() == R.id.ProfilePicture){
+            Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(openGalleryIntent,1000);
 
         }
     }

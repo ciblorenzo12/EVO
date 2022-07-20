@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false"
-        />
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -20,10 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-
         tools:targetApi="31">
         <activity
-
+            android:name=".Event_History"
+            android:exported="false"/>
+        <activity
+            android:name=".Event_Page"
+            android:exported="false" />
+        <activity
             android:name=".Qr_code_scanner"
             android:exported="true" />
         <activity
@@ -38,19 +42,22 @@
         <activity
             android:name=".Register_user"
             android:exported="false" />
-        <activity android:name=".Profile_Page"
-            android:exported="true"/>
         <activity
-
+            android:name=".Profile_Page"
+            android:exported="true" />
+        <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
