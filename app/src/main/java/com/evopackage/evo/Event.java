@@ -12,7 +12,7 @@ public class Event
         _name = name;
         _date = date;
         _location = location;
-        _category = category;
+          _category = category;
         _creator = creator;
         _uri = uri;
     }

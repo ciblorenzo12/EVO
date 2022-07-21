@@ -35,7 +35,7 @@ import com.squareup.picasso.Picasso;
 public  class Event_Page extends AppCompatActivity implements View.OnClickListener {
 
     private TextView event_name;
-
+    private ImageButton actSet;
     //fields
     private ImageButton eventpicture;
     private Uri images;
@@ -72,17 +72,23 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
 
 eventpicture = findViewById(R.id.eventPicture);
 event_name = findViewById(R.id.Event_name);
-
+actSet = findViewById(R.id.Imagebutton_33);
 eventpicture.setOnClickListener(this);
             event_name.setText(create_event_popup.GetCurrent_EventID());
             GenerateQr(create_event_popup.GetCurrent_EventID());
-
+actSet.setOnClickListener(v -> openPopUp());
 
 
 
 
     }
-//create a qr code
+
+    private void openPopUp() {
+        create_activity_popup actDialog = new create_activity_popup();
+        actDialog.show(getSupportFragmentManager(), "ActivityDialog");
+    }
+
+    //create a qr code
     private void GenerateQr(String qr) {
         QRCodeWriter writer = new QRCodeWriter();
 

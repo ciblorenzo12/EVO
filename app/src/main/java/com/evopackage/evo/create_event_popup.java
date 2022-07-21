@@ -89,9 +89,6 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
-
-
-
                     if (txtName.getText().toString().isEmpty()){
 
                          dialog.dismiss();

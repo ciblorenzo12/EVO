@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Dictionary;
+
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
 
 
@@ -34,6 +36,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private ImageButton qr,settings;
     private Button evt;
     private LinearLayout linearEvt;
+   // private Dictionary<Integer,String> evtList;
 
 
     @Override
@@ -51,6 +54,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         linearEvt = (LinearLayout) findViewById(R.id.Linear_Event);
     }
+
+
 
     private void openDialog() {
         create_event_popup evtPopUp = new create_event_popup();
@@ -78,6 +83,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         // TableRow.LayoutParams rTable = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
         evt = new Button(this);
+
         RelativeLayout relative = new RelativeLayout(this);
         evt.getBackground().setAlpha(50);
         evtName.setId(View.generateViewId());
