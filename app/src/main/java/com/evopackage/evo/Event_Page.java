@@ -74,7 +74,7 @@ eventpicture = findViewById(R.id.eventPicture);
 event_name = findViewById(R.id.Event_name);
 actSet = findViewById(R.id.Imagebutton_33);
 eventpicture.setOnClickListener(this);
-            event_name.setText(create_event_popup.GetCurrent_EventID());
+            event_name.setText(create_event_popup.GetCurrent_Event());
             GenerateQr(create_event_popup.GetCurrent_EventID());
 actSet.setOnClickListener(v -> openPopUp());
 
