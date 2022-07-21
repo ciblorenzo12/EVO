@@ -6,13 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
 
@@ -27,6 +37,17 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private ImageButton evtBtn;
     private ImageButton qr;
 
+    private RecyclerView rv;
+    private SearchView s;
+    private DatabaseReference ref;
+    private ArrayList<Event> liste;
+    private MyAdapter adapter;
+
+    private String n;
+    private String d;
+    private String c;
+    private String l;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +59,82 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
+        s = findViewById(R.id.searchView);
+        rv = findViewById(R.id.rv);
+        ref = FirebaseDatabase.getInstance().getReference().child("events");
+        liste = new ArrayList<>();
+        adapter = new MyAdapter(liste);
+
+        n  = "ghe";
+        d  = "ghr";
+        c = "gh";
+        l  = "gyh";
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists())
+                {
+                    for (DataSnapshot sn : snapshot.getChildren())
+                    {
+
+                        c = sn.child("_category").getValue().toString();
+                        d = sn.child("_date").getValue().toString();
+                        l = sn.child("_address").getValue().toString();
+                        n = sn.child("_name").getValue().toString();
+
+
+                        Event  ev = new Event( n, d, l, c, user) ;
+
+                        liste.add(ev);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        s.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String sui) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String si) {
+                find(si);
+                return true;
+            }
+        });
     }
+
+    private void find(String si) {
+        ArrayList<Event> milist = new ArrayList<>();
+
+        for (Event sn : liste)
+        {
+            if(sn.GetName().toLowerCase().contains(si.toLowerCase()))
+            {
+                milist.add(sn);
+            }
+        }
+        MyAdapter a = new MyAdapter(milist);
+        rv.setAdapter(a);
+
+
+    }
+
 
     private void openDialog() {
         create_event_popup evtPopUp = new create_event_popup();
