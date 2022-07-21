@@ -1,24 +1,30 @@
 package com.evopackage.evo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class User_Profile_picture extends AppCompatActivity implements View.OnClickListener {
     //Firebase stuff
@@ -81,12 +87,31 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            if(resultCode == Activity.RESULT_OK){
+                Uri profilePicUri = data.getData();
+                ProfPicture.setImageURI(profilePicUri);
+
+                UploadImagetoFirebase(profilePicUri);
+            }
+        }
+    }
+
+    private void UploadImagetoFirebase(Uri profilePicUri) {
+       // DatabaseReference fileRef = FirebaseDatabase.getInstance().getReference().child("users").child(_authetication.getCurrentUser().getUid()).child("_uri");
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(_authetication.getCurrentUser().getUid()+"profile.jpg");
+        fileRef.putFile(profilePicUri).addOnSuccessListener(taskSnapshot -> Toast.makeText(User_Profile_picture.this,"Image Uploaded.",Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(User_Profile_picture.this,"Upload Failed.",Toast.LENGTH_SHORT).show());
+
+    }
+
     private void SaveProfileChanges() {
         String _UserID = _userID.getText().toString().trim();
         String _FirstName = _firstName.getText().toString().trim();
         String _LastName = _lastName.getText().toString().trim();
         String _PhoneNum = _phoneNumber.getText().toString().trim();
-
 
 
         //User_information info = User_information();
