@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 public class Profile_Page extends AppCompatActivity implements View.OnClickListener {
@@ -80,13 +82,24 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
         EventHistory = findViewById(R.id.EventHistory);
 
+        StorageReference _ProfileImageRef = FirebaseStorage.getInstance().getReference().child(userID+"profile.jpg");
+        _ProfileImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(ProfilePic);
+            }
+        });{
+
+        }
+
         ProfileBack.setOnClickListener(this);
         ProfileSettings.setOnClickListener(this);
         EventHistory.setOnClickListener(this);
 
         String name = "";
 
-        StorageReference pictureReference = FirebaseStorage.getInstance().getReference().child(userID+"profile.jpg");
+        StorageReference pictureReference = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+userID+"/profile.jpg");
+
 
 
         FirebaseDatabase.getInstance().getReference("users").addValueEventListener(new ValueEventListener() {
@@ -95,7 +108,8 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
                 Display.setText(snapshot.child(userID).child("_displayName").getValue(String.class));
                 FullName.setText(snapshot.child(userID).child("_firstname").getValue(String.class) + " " + snapshot.child(userID).child("_lastname").getValue(String.class));
                 DOB.setText(snapshot.child(userID).child("_dob").getValue(String.class));
-                ProfilePic.setImageURI();
+
+
             }
 
             @Override

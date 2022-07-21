@@ -102,7 +102,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
 
     private void UploadImagetoFirebase(Uri profilePicUri) {
        // DatabaseReference fileRef = FirebaseDatabase.getInstance().getReference().child("users").child(_authetication.getCurrentUser().getUid()).child("_uri");
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(_authetication.getCurrentUser().getUid()+"profile.jpg");
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+_authetication.getCurrentUser().getUid()+"/profile.jpg");
         fileRef.putFile(profilePicUri).addOnSuccessListener(taskSnapshot -> Toast.makeText(User_Profile_picture.this,"Image Uploaded.",Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(User_Profile_picture.this,"Upload Failed.",Toast.LENGTH_SHORT).show());
 
     }
