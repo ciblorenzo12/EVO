@@ -82,8 +82,9 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
         EventHistory = findViewById(R.id.EventHistory);
 
-        StorageReference _ProfileImageRef = FirebaseStorage.getInstance().getReference().child(userID+"profile.jpg");
-        _ProfileImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+        StorageReference pictureReference = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+userID+"/profile.jpg");
+        pictureReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(ProfilePic);
@@ -98,7 +99,6 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
         String name = "";
 
-        StorageReference pictureReference = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+userID+"/profile.jpg");
 
 
 

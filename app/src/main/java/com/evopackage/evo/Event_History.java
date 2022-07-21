@@ -16,11 +16,11 @@ public class Event_History extends AppCompatActivity {
 
     RelativeLayout _relativeEventInfo;
 
-    LinearLayout.LayoutParams _linearParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+    //LinearLayout.LayoutParams _linearParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-    RelativeLayout.LayoutParams _relativeParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+    //.LayoutParams _relativeParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
-    TextView test;
+    //TextView test;
 
 
 
