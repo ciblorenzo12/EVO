@@ -61,6 +61,7 @@
         android:layout_width="74dp"
         android:layout_height="65dp"
         android:background="@drawable/settings"
+        android:clickable="true"
         android:contentDescription="@string/Adress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,12 +149,14 @@
         android:id="@+id/textView4"
         android:layout_width="66dp"
         android:layout_height="24dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
         android:text="@string/_settings"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_Main_Id"
         app:layout_constraintVertical_bias="0.0"
@@ -185,10 +188,10 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.751"
+        app:layout_constraintHorizontal_bias="0.747"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendar_id"
-        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintVertical_bias="0.25"
         tools:text="@string/_create" />
 
     <TextView
@@ -200,11 +203,10 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintHorizontal_bias="0.985"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qr_main_id"
-        app:layout_constraintVertical_bias="0.19"
-        tools:text="@string/qricon" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView"
@@ -216,10 +218,10 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_id3"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <SearchView
         android:id="@+id/searchView"

@@ -25,6 +25,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,11 +41,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Firebase authentication
     private FirebaseAuth _authent;
     private FirebaseUser _userdata;
+    private final FirebaseDatabase _database = FirebaseDatabase.getInstance();
     //textObjects
     private EditText _email, _password;
 
     //animated Objects
     private ProgressBar progressbar_;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +150,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         progressbar_.setVisibility(View.VISIBLE);
         _authent.signInWithEmailAndPassword(_EMAIL, _PASSWORD).addOnCompleteListener(task -> {
+            _userdata = FirebaseAuth.getInstance().getCurrentUser();
             if (task.isSuccessful()) {
 
                 if (_userdata.isEmailVerified()) {
@@ -195,8 +201,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
 
                         UI_Update();
-
-
+                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber());
+                        _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
+                                .getUid()).setValue(data);
                     }
                 });
 

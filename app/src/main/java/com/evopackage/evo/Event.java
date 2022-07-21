@@ -1,6 +1,5 @@
 package com.evopackage.evo;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Event
@@ -26,4 +25,7 @@ public class Event
     public String GetCategory() { return _category; }
 
     public FirebaseUser GetCreator() { return _creator; }
+
+
+
 }
