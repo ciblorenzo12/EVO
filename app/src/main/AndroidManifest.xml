@@ -13,6 +13,7 @@
         android:required="false" />
 
     <application
+        android:windowSoftInputMode="adjustPan"
         android:screenOrientation="portrait"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -35,6 +36,7 @@
             android:name=".User_Profile_picture"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:name=".MainWindows_Create_Join_Event"
             android:exported="false" />

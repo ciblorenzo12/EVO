@@ -21,11 +21,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,8 +41,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     //caleb code
    private static String current_event;
    private static String current_eventID;
-    private static String current_adress;
-    private static String current_Adress;
+    private static String current_eventDate;
+    private static String current_eventAdress;
    private static ArrayList<String> _events = new ArrayList<>();
 
 
@@ -87,7 +84,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                    event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user,"");
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(),"");
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
@@ -107,44 +104,28 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
                         firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
-                        firebaseEvent.child("_name").setValue(event.GetName());
+                        firebaseEvent.child("name").setValue(event.GetName());
                         current_event = event.GetName();
 
-                    }
+
 
 
 
                     listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
                             txtAddress.getText().toString());
-                    firebaseEvent.child("_date").setValue(event.GetDate());
-                    firebaseEvent.child("_address").setValue(event.GetLocation());
-                    firebaseEvent.child("_category").setValue(event.GetCategory());
-                    firebaseEvent.child("_creator").setValue(event.GetCreator().getUid());
-                    firebaseEvent.child("_eventid").setValue(eventUid_value);
-                    firebaseEvent.child("Users").child(current_user.getUid()).setValue("Creator");
+                    firebaseEvent.child("date").setValue(event.GetDate());
+                    firebaseEvent.child("address").setValue(event.GetLocation());
+                    firebaseEvent.child("category").setValue(event.GetCategory());
+                    firebaseEvent.child("creator").setValue(event.GetCreator());
+                    firebaseEvent.child("eventid").setValue(eventUid_value);
+                    firebaseEvent.child("assistance").child(current_user.getUid()).setValue("Creator");
                     current_eventID = eventUid_value;
-                    firebaseEvent.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    firebaseUsers.child("My_Events").child(current_eventID).setValue(current_event);
+                    }
 
-                            for(DataSnapshot snapsh :snapshot.getChildren()){
-
-                                _events.add(snapshot.getKey());
-               User_information user_information = new User_information(current_user.getDisplayName(), " "," ",current_user.getEmail()," ","","","");
-
-
-                                firebaseUsers.child("Events").child(snapshot.getKey()).setValue("Creator");
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
                     });
 
-                });
+
 
            return builder.create();
 

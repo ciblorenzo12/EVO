@@ -72,4 +72,5 @@
     <string name="imageview">ImageView</string>
     <string name="date_example">mm/dd/yyyy</string>
     <string name="Creator_name">Creator  name</string>
+    <string name="category">Category</string>
 </resources>
