@@ -65,7 +65,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                  if(snapshot.exists()){
                      for (DataSnapshot snap:snapshot.getChildren()){
 
-                         Event evt = new Event(snap.child("name").getValue().toString(), snap.child("date").getValue().toString(), "String location", "String category", "String creator","String uri");
+                         Event evt = new Event(snap.child("name").getValue().toString(), snap.child("date").getValue().toString(), snap.child("address").getValue().toString(), snap.child("category").getValue().toString(), snap.child("creator").getValue().toString(),"String uri");
                          events.add(evt);
 
                      }

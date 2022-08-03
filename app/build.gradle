@@ -29,8 +29,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    packagingOptions{
-        pickFirst "androidsupportmultidexversion.txt"
+    packagingOptions {
+        resources {
+            pickFirsts += ['androidsupportmultidexversion.txt']
+        }
     }
 
 }
