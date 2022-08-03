@@ -5,20 +5,24 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
 
@@ -28,18 +32,72 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private FirebaseUser user;
     private int Camera_Permission_Request = 1;
     private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
-    private boolean permission_granted;
+
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr,settings;
-    private Button evt;
-    private LinearLayout linearEvt;
 
-
+    //searchView
+    RecyclerView recicleviw;
+     DatabaseReference refdata;
+     ArrayList<Event> events;
+   SearchView search_bar;
+     Adapter_Recicleview adaptor;
+    LinearLayoutManager managerL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_windows_create_join_event);
+
+
+        refdata = FirebaseDatabase.getInstance().getReference().child("events");
+        recicleviw = findViewById(R.id.RecicleBar_Firebase);
+        search_bar = findViewById(R.id.searchView_Main);
+        managerL = new LinearLayoutManager(this);
+        recicleviw.setLayoutManager(managerL);
+        events = new ArrayList<>();
+        adaptor = new Adapter_Recicleview(events);
+        recicleviw.setAdapter(adaptor);
+        refdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               events.clear();
+                 if(snapshot.exists()){
+                     for (DataSnapshot snap:snapshot.getChildren()){
+
+                         Event evt = new Event(snap.child("name").getValue().toString(), snap.child("date").getValue().toString(), "String location", "String category", "String creator","String uri");
+                         events.add(evt);
+
+                     }
+
+
+
+
+                 }
+                adaptor.notifyDataSetChanged();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String Txt) {
+        Search(Txt);
+        return true;
+    }
+});
+
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
         settings= findViewById(R.id.settings_Main_Id);
@@ -49,7 +107,21 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
 
-        linearEvt = (LinearLayout) findViewById(R.id.Linear_Event);
+
+    }
+
+    private void Search(String txt) {
+        ArrayList<Event>events_search= new ArrayList<>();
+        for (Event eventObj:events){
+
+            if(eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
+                events_search.add(eventObj);
+
+            Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+            recicleviw.setAdapter(recicleview);
+            }
+
+        }
     }
 
     private void openDialog() {
@@ -57,68 +129,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-        TextView evtName = new TextView(this);
-        TextView evtDate = new TextView(this);
-        TextView evtAdder = new TextView(this);
-        TableLayout table = new TableLayout(this);
-        TableLayout.LayoutParams pTable = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
-        // pTable.gravity = Gravity.CENTER;
-        TableRow tableRowName = new TableRow(this);
-        TableRow tableRowDate = new TableRow(this);
-        TableRow tableRowAddre = new TableRow(this);
-        tableRowName.setLayoutParams(pTable);
-        tableRowDate.setLayoutParams(pTable);
-        tableRowAddre.setLayoutParams(pTable);
-        table.addView(tableRowName);
-        table.addView(tableRowDate);
-        table.addView(tableRowAddre);
 
-
-        // TableRow.LayoutParams rTable = new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        evt = new Button(this);
-        RelativeLayout relative = new RelativeLayout(this);
-        evt.getBackground().setAlpha(50);
-        evtName.setId(View.generateViewId());
-        LinearLayout.LayoutParams para = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        RelativeLayout.LayoutParams rPara = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-
-        rPara.addRule(RelativeLayout.RIGHT_OF);
-
-
-
-        evtName.setText(_evtName);
-        evtDate.setText(_evtDate);
-        evtAdder.setText(_evtAdder);
-
-        evtName.setTextSize(35f);
-        evtDate.setTextSize(35f);
-        evtAdder.setTextSize(35f);
-        evt.setLayoutParams(rPara);
-        evtName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
-        evtDate.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
-        evtAdder.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.MATCH_PARENT ));
-        table.setLayoutParams(rPara);
-
-        relative.setLayoutParams(para);
-
-
-        evt.setId(View.generateViewId());
-        relative.addView(table);
-        relative.addView(evt);
-        tableRowName.addView(evtName);
-        tableRowDate.addView(evtDate);
-        tableRowAddre.addView(evtAdder);
-
-        linearEvt.addView(relative);
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-    }
 
 
     @Override
@@ -175,7 +186,17 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     }
 
-   // @Override
+    @Override
+    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+
+    }
+
+    @Override
+    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+
+    }
+
+    // @Override
   //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
    // }

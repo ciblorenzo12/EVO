@@ -53,7 +53,7 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
     private UploadTask MuploadTask;
     private StorageReference refer_storage = storage.getReference();
     private DatabaseReference reference_events= FirebaseDatabase.getInstance().getReference().child("events");
-    private DatabaseReference reference_user_event= FirebaseDatabase.getInstance().getReference().child("users").child(user_.getUid()).child("Events");
+    private DatabaseReference reference_user_event= FirebaseDatabase.getInstance().getReference().child("users").child(user_.getUid()).child("My_Events");
     private static final int tiktok = 1287;
 
     public Event_Page(){};
@@ -74,7 +74,7 @@ eventpicture = findViewById(R.id.eventPicture);
 event_name = findViewById(R.id.Event_name);
 
 eventpicture.setOnClickListener(this);
-            event_name.setText(create_event_popup.GetCurrent_EventID());
+            event_name.setText(create_event_popup.GetCurrent_Event());
             GenerateQr(create_event_popup.GetCurrent_EventID());
 
 
@@ -168,7 +168,7 @@ if (images!= null){
         if (task.isSuccessful()){
 
             Uri downl = task.getResult();
-            reference_user_event.child(create_event_popup.GetCurrent_EventID()).child("image").setValue(downl.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            reference_events.child(create_event_popup.GetCurrent_EventID()).child("Event picture").setValue(downl.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Handler handler = new Handler();
