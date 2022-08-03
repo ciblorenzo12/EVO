@@ -1,107 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Category_events"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:hint="@string/Adress"
+    android:layout_height="wrap_content"
 
+    android:hint="@string/Adress"
     tools:ignore="SpeakableTextPresentCheck">
 
-    <ImageView
-        android:id="@+id/Evetprofile"
-        android:layout_width="100dp"
-        android:layout_height="95dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="4dp"
 
-
-        android:layout_marginEnd="312dp"
-        android:layout_marginBottom="636dp"
-        android:background="@drawable/calendar"
-        android:contentDescription="@string/imageview"
-        android:isScrollContainer="false"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/Name_Events"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="692dp"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/name"
-        android:textIsSelectable="false"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/Evetprofile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:cardCornerRadius="5dp"
+        android:elevation="5dp"
+        app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/Adress_Events"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="247dp"
-        android:layout_marginBottom="671dp"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/Adress"
-        android:textIsSelectable="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/Evetprofile"
-        app:layout_constraintTop_toBottomOf="@+id/Name_Events" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:padding="15dp">
 
-    <TextView
-        android:id="@+id/date_Events"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="214dp"
-        android:layout_marginBottom="646dp"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/date_example"
-        android:textIsSelectable="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/Evetprofile"
-        app:layout_constraintTop_toBottomOf="@+id/Name_Events" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_evt"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/ic_user_foreground"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
-    <TextView
-        android:id="@+id/creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="646dp"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/_create"
-        android:textIsSelectable="false"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/Evetprofile"
-        app:layout_constraintTop_toBottomOf="@+id/date_Events" />
+            <TextView
+                android:id="@+id/Name_evt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/profile_evt"
+                android:layout_toRightOf="@id/profile_evt"
+                android:text="This is Demo Name"
+                android:textColor="#000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/Adress_evt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Name_evt"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/profile_evt"
+                android:text="This is Course Name"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+
+            <TextView
+                android:id="@+id/Creator_evt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Adress_evt"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/profile_evt"
+                android:text="This is Email Name"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/Date_evt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Adress_evt"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="31dp"
+                android:layout_toRightOf="@id/profile_evt"
+                android:text="This is Email Name"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/Category_evt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Adress_evt"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="59dp"
+                android:layout_toRightOf="@id/profile_evt"
+                android:text="This is Email Name"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
