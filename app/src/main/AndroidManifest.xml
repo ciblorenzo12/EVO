@@ -22,8 +22,13 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".EventDescription"
+            android:exported="false"
+            android:label="@string/title_activity_event_description"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".Event_History"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Event_Page"
             android:exported="false" />

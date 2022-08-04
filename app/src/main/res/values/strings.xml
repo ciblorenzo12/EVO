@@ -69,4 +69,5 @@
     <string name="join">Join</string>
     <string name="messagesss" />
     <string name="search">Search Event</string>
+    <string name="title_activity_event_description">EventDescription</string>
 </resources>

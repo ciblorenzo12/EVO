@@ -64,7 +64,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         rv = findViewById(R.id.rv);
         ref = FirebaseDatabase.getInstance().getReference().child("events");
         liste = new ArrayList<>();
-        adapter = new MyAdapter(liste);
+        adapter = new MyAdapter(liste, new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+                movetodescription(event);
+            }
+        });
 
         n  = "ghe";
         d  = "ghr";
@@ -121,6 +126,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         settings.setOnClickListener(this);
     }
 
+    private void movetodescription(Event event) {
+        Intent i = new Intent(this, EventDescription.class);
+                i.putExtra("Event", event);
+        startActivity(i);
+
+    }
+
     private void find(String si) {
         ArrayList<Event> milist = new ArrayList<>();
 
@@ -131,7 +143,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 milist.add(sn);
             }
         }
-        MyAdapter a = new MyAdapter(milist);
+        MyAdapter a = new MyAdapter(milist, new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+
+            }
+        });
         rv.setAdapter(a);
 
 
