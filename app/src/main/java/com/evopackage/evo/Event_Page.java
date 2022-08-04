@@ -70,14 +70,14 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_page);
 
-eventpicture = findViewById(R.id.eventPicture);
-event_name = findViewById(R.id.Event_name);
+        eventpicture = findViewById(R.id.eventPicture);
+        event_name = findViewById(R.id.Event_name);
 
-eventpicture.setOnClickListener(this);
-            event_name.setText(create_event_popup.GetCurrent_Event());
-            GenerateQr(create_event_popup.GetCurrent_EventID());
+        eventpicture.setOnClickListener(this);
+        event_name.setText(create_event_popup.GetCurrent_Event());
+        GenerateQr(create_event_popup.GetCurrent_EventID());
 
-
+        Event ev = (Event) getIntent().getSerializableExtra("Event_Page");
 
 
 

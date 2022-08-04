@@ -14,10 +14,17 @@ import java.util.List;
 public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Recicleview.viewHolderEvents> {
 
     private List<Event> events;
+    final Adapter_Recicleview.OnItemClickListener l;
 
 
-    public Adapter_Recicleview(List<Event> event) {
+    public Adapter_Recicleview(List<Event> event, Adapter_Recicleview.OnItemClickListener listen) {
         events = event;
+        this.l = listen;
+    }
+
+    public interface OnItemClickListener
+    {
+        void OnItemClick(Event ev);
     }
 
     @NonNull
@@ -37,7 +44,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         holder.date.setText(events.get(position).GetDate());
         holder.category.setText(events.get(position).GetCategory());
         holder.creator.setText(events.get(position).GetCreator());
-
+        holder.bindData(events.get(position));
 
     }
 
@@ -58,6 +65,15 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
             date= itemView.findViewById(R.id.Date_evt);
             creator = itemView.findViewById(R.id.Creator_evt);
             image_ = itemView.findViewById(R.id.profile_evt);
+        }
+
+        public void bindData(Event event) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    l.OnItemClick(event);
+                }
+            });
         }
     }
 }

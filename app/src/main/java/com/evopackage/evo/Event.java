@@ -1,6 +1,8 @@
 package com.evopackage.evo;
 
-public class Event
+import java.io.Serializable;
+
+public class Event implements Serializable
 {
    public String _name, _date, _location, _category,_uri;
    public String _creator ;
