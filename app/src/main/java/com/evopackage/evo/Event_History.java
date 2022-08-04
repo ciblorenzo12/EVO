@@ -42,7 +42,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
     private TextView eventTest;
 
     DatabaseReference eventref;
-    DatabaseReference userref;
+    DatabaseReference ref;
 
     ArrayList<String> userEvents;
     ArrayList<com.evopackage.evo.Event> eventInfo;
@@ -66,25 +66,30 @@ public class Event_History extends AppCompatActivity implements create_event_pop
         eventInfo = new ArrayList<>();
         adaptor = new Adapter_Recicleview(eventInfo);
 
-        eventref = FirebaseDatabase.getInstance().getReference().child("events");
-        userref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
+        //eventref = FirebaseDatabase.getInstance().getReference().child("events");
+        ref = FirebaseDatabase.getInstance().getReference();//.child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
 
         userEvents = new ArrayList<>();
 
 
         //eventTest.setText("Hello");
 
-        userref.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userEvents.clear();
-                if (snapshot.exists()) {
-                    for (DataSnapshot snap : snapshot.getChildren()) {
+                DataSnapshot userRef = snapshot.child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
+                DataSnapshot eventsRef = snapshot.child("events");
+                if (userRef.exists()) {
+                    String eventCode;
+                    for (DataSnapshot snap : userRef.getChildren()) {
 
-                        String eventCode = snapshot.getValue().toString();
+                        eventCode = snap.getKey();
 
-                        userEvents.add(eventCode);
+                        //userEvents.add(eventCode);
+                        //Event event =
                     }
+
                 }
                 else{
                     eventTest.setText("No Events");
