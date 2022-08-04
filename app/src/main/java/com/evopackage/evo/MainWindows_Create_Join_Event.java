@@ -40,7 +40,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     //searchView
     RecyclerView recicleviw;
      DatabaseReference refdata;
-     ArrayList<Event> events;
+    DatabaseReference userefdata= FirebaseDatabase.getInstance().getReference().child("users");
+     ArrayList<Event> _events;
    SearchView search_bar;
      Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
@@ -55,28 +56,60 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         search_bar = findViewById(R.id.searchView_Main);
         managerL = new LinearLayoutManager(this);
         recicleviw.setLayoutManager(managerL);
-        events = new ArrayList<>();
-        adaptor = new Adapter_Recicleview(events);
+
+        _events = new ArrayList<>();
+
+        adaptor = new Adapter_Recicleview(_events);
+        _events.clear();
         recicleviw.setAdapter(adaptor);
+        userefdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snap_user) {
+
         refdata.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               events.clear();
-                 if(snapshot.exists()){
-                     for (DataSnapshot snap:snapshot.getChildren()){
 
-                         Event evt = new Event(snap.child("name").getValue().toString(), snap.child("date").getValue().toString(), snap.child("address").getValue().toString(), snap.child("category").getValue().toString(), snap.child("creator").getValue().toString(),"String uri");
-                         events.add(evt);
+
+                 if(snapshot.exists()){
+
+                     _events.clear();
+
+
+                     for (DataSnapshot snap:snapshot.getChildren()) {
+
+ String Creator =snap.child("creator").getValue(String.class);
+
+    Event evt = new Event(snap.child("name").getValue(String.class),
+            (snap.child("date").getValue(String.class)),
+            (snap.child("address").getValue(String.class)),
+            (snap.child("category").getValue(String.class)),
+            (snap.child("creator").getValue(String.class)),
+            "String uri");
+    _events.add(evt);
+
 
                      }
 
 
-
+                     adaptor.notifyDataSetChanged();
 
                  }
-                adaptor.notifyDataSetChanged();
 
 
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
             }
 
@@ -112,7 +145,7 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
     private void Search(String txt) {
         ArrayList<Event>events_search= new ArrayList<>();
-        for (Event eventObj:events){
+        for (Event eventObj:_events){
 
             if(eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
                 events_search.add(eventObj);
