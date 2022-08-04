@@ -18,6 +18,8 @@ List<Event> events;
         events = event;
     }
 
+
+
     @NonNull
     @Override
     public viewHolderEvents onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

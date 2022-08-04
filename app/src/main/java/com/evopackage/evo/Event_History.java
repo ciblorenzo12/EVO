@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,51 +31,64 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class Event_History extends AppCompatActivity implements View.OnClickListener{
+public class Event_History extends AppCompatActivity implements create_event_popup.DialogListener{
 
     Event _history;
 
     private String _name, _date, _location, _category, _creator;
     private FirebaseUser _user;
 
-    private List<String> eventList = new ArrayList<String>();
 
     private TextView eventTest;
 
-    @Override
-    public void onClick(View view) {
+    DatabaseReference eventref;
+    DatabaseReference userref;
 
-        eventTest = findViewById(R.id.eventTest);
+    ArrayList<String> userEvents;
+    ArrayList<com.evopackage.evo.Event> eventInfo;
+
+    RecyclerView evtHistory;
+    Adapter_Recicleview adaptor;
+    LinearLayoutManager layoutManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.event_history);
 
-        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+        evtHistory = findViewById(R.id.evtHistoryRecycler);
+
+        layoutManager = new LinearLayoutManager(this);
+        evtHistory.setLayoutManager(layoutManager);
+
+        eventInfo = new ArrayList<>();
+        adaptor = new Adapter_Recicleview(eventInfo);
+
+        eventref = FirebaseDatabase.getInstance().getReference().child("events");
+        userref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
+
+        userEvents = new ArrayList<>();
+
+
+        //eventTest.setText("Hello");
+
+        userref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // For loop is to count up to the number of events the user joined or attended
+                userEvents.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
 
-                //Iterator eventIter = (Iterator) snapshot.child("users").child(_user.getUid()).child("_events").getChildren();
-                //Iterator iter = snapshot.child("users").child(_user.getUid()).child("Events").getChildren();
-                for (DataSnapshot eventKey: snapshot.child("users").child(_user.getUid()).child("Events").getChildren())
-                {
-                    //DatabaseReference event = FirebaseDatabase.getInstance().getReference("events").child(eventKey.getKey());
-                    DataSnapshot event = snapshot.child("events").child(eventKey.getKey());
-                    Log.i("~!!!!!!!!!!!!!!!", event.child("_name").getValue().toString());
-                    //eventTest.setText(event.child("_name").getValue(String.class));
-                    eventTest.setText("hi");
+                        String eventCode = snapshot.getValue().toString();
+
+                        userEvents.add(eventCode);
+                    }
                 }
-
-
-//                Iterator eventIter = (Iterator) snapshot.getChildren();
-//
-//                eventTest.setText(eventIter.toString());
-//                while(eventIter.hasNext()){
-//                    Log.i("TAG", "onDataChange: " + eventIter.next());
-//                }
-                //for(int i =0 ; i < _attendedEvents; i++)
-                //eventList[i] = snapshot.child(_user.getUid()).child("Events").toString();
-                //Store all the info from fire base into the string variable to be made into an event for history display
-
+                else{
+                    eventTest.setText("No Events");
+                }
             }
 
             @Override
@@ -81,21 +96,16 @@ public class Event_History extends AppCompatActivity implements View.OnClickList
 
             }
         });
-            FirebaseDatabase.getInstance().getReference("events").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                    //_name = datasnapshot.child(_eventID).child("_name").toString();
-                    //_date = datasnapshot.child(_eventID).child("_date").toString();
-                    //_location = datasnapshot.child(_eventID).child("_address").toString();
-                    //_category = datasnapshot.child(_eventID).child("_category").toString();
-                    //_creator = datasnapshot.child(_eventID).child("_creator").toString();
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+    }
 
-                }
-            });
+    @Override
+    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+
+    }
+
+    @Override
+    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
     }
 }

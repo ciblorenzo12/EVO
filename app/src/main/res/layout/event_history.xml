@@ -15,21 +15,28 @@
         android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="?attr/actionModeCloseDrawable"
         app:tint="#35A9F6"
         tools:ignore="ImageContrastCheck" />
 
-    <TextView
-        android:id="@+id/eventTest"
-        android:layout_width="167dp"
-        android:layout_height="65dp"
-        android:text="TextView"
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/evtHistoryRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
