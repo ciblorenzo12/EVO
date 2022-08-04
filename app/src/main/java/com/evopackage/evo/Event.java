@@ -1,12 +1,17 @@
 package com.evopackage.evo;
 
-public class Event
-{
-   public String _name, _date, _location, _category,_uri;
-   public String _creator ;
-public Event(){};
-    public Event(String name, String date, String location, String category, String creator,String uri)
-    {
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class Event {
+    private String _name, _date, _location, _category, _uri, _creator;
+
+    public Event(String name, String date, String location, String category, String creator, String uri) {
         _name = name;
         _date = date;
         _location = location;
@@ -15,20 +20,46 @@ public Event(){};
         _uri = uri;
     }
 
-    public String GetName() { return _name; }
+    public Event(String key) {
+        FirebaseDatabase.getInstance().getReference().child("Events").child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                _name = snapshot.child("name").getValue(String.class);
+                _date = snapshot.child("date").getValue(String.class);
+                _location = snapshot.child("address").getValue(String.class);
+                _category = snapshot.child("category").getValue(String.class);
+                _creator = snapshot.child("creator").getValue(String.class);
+            }
 
-    public String GetDate() { return _date; }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-    public String GetLocation() { return _location; }
+            }
+        });
+    }
 
-    public String GetCategory() { return _category; }
+    public String GetName() {
+        return _name;
+    }
 
-    public String GetCreator() { return _creator; }
+    public String GetDate() {
+        return _date;
+    }
 
-   public  String GetUri(){
+    public String GetLocation() {
+        return _location;
+    }
 
+    public String GetCategory() {
+        return _category;
+    }
 
+    public String GetCreator() {
+        return _creator;
+    }
+
+    public String GetUri() {
         return _uri;
-   }
+    }
 
 }
