@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     //google
@@ -47,7 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     //animated Objects
     private ProgressBar progressbar_;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         progressbar_.setVisibility(View.VISIBLE);
         _authent.signInWithEmailAndPassword(_EMAIL, _PASSWORD).addOnCompleteListener(task -> {
-            _userdata = FirebaseAuth.getInstance().getCurrentUser();
             if (task.isSuccessful()) {
 
                 if (_userdata.isEmailVerified()) {
@@ -201,7 +200,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
 
                         UI_Update();
-                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber());
+                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber(),"Events"," ");
                         _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
                                 .getUid()).setValue(data);
                     }

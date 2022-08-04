@@ -1,21 +1,18 @@
 package com.evopackage.evo;
 
-import com.google.firebase.auth.FirebaseUser;
-
-import java.io.Serializable;
-
-public class Event implements Serializable
+public class Event
 {
-    private String _name, _date, _location, _category;
-    private FirebaseUser _creator;
-
-    public Event(String name, String date, String location, String category, FirebaseUser creator)
+   public String _name, _date, _location, _category,_uri;
+   public String _creator ;
+public Event(){};
+    public Event(String name, String date, String location, String category, String creator,String uri)
     {
         _name = name;
         _date = date;
         _location = location;
         _category = category;
         _creator = creator;
+        _uri = uri;
     }
 
     public String GetName() { return _name; }
@@ -26,8 +23,12 @@ public class Event implements Serializable
 
     public String GetCategory() { return _category; }
 
-    public FirebaseUser GetCreator() { return _creator; }
+    public String GetCreator() { return _creator; }
+
+   public  String GetUri(){
 
 
+        return _uri;
+   }
 
 }

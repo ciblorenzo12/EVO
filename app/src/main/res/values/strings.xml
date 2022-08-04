@@ -1,5 +1,5 @@
 <resources>
-    <string name="Date">date</string>
+    <string name="Date">Select a date</string>
     <string name="default_client_id">976479568343-jasir3a7rb0b6sjd0pd188u1q6gv70vg.apps.googleusercontent.com</string>
     <string name="app_name">Evo</string>
     <string name="Create_an_Event">Create an Event</string>
@@ -69,5 +69,8 @@
     <string name="join">Join</string>
     <string name="messagesss" />
     <string name="search">Search Event</string>
-    <string name="title_activity_event_description">EventDescription</string>
+    <string name="imageview">ImageView</string>
+    <string name="date_example">mm/dd/yyyy</string>
+    <string name="Creator_name">Creator  name</string>
+    <string name="category">Category</string>
 </resources>
