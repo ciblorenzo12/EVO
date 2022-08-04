@@ -60,7 +60,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         _events = new ArrayList<>();
 
         adaptor = new Adapter_Recicleview(_events);
-        _events.clear();
+
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override

@@ -1,15 +1,7 @@
 package com.evopackage.evo;
 
-import android.app.DownloadManager;
-import android.app.usage.NetworkStats;
-import android.content.Intent;
-import android.media.metrics.Event;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,11 +15,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -45,11 +35,13 @@ public class Event_History extends AppCompatActivity implements create_event_pop
     DatabaseReference ref;
 
     ArrayList<String> userEvents;
-    ArrayList<com.evopackage.evo.Event> eventInfo;
+    ArrayList<Event> eventInfo;
 
     RecyclerView evtHistory;
     Adapter_Recicleview adaptor;
     LinearLayoutManager layoutManager;
+
+    Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +58,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
         eventInfo = new ArrayList<>();
         adaptor = new Adapter_Recicleview(eventInfo);
 
+        evtHistory.setAdapter(adaptor);
         //eventref = FirebaseDatabase.getInstance().getReference().child("events");
         ref = FirebaseDatabase.getInstance().getReference();//.child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
 
@@ -86,10 +79,15 @@ public class Event_History extends AppCompatActivity implements create_event_pop
 
                         eventCode = snap.getKey();
 
+
                         //userEvents.add(eventCode);
-                        //Event event =
+                        //event = new Event(eventCode);
+
+                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),eventsRef.child(eventCode).child("creator").getValue().toString(), "Uri");
+                        eventInfo.add(event);
                     }
 
+                    adaptor.notifyDataSetChanged();
                 }
                 else{
                     eventTest.setText("No Events");
