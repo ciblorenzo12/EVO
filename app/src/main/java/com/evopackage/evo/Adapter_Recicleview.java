@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Recicleview.viewHolderEvents> {
-List<Event> events;
+
+    private List<Event> events;
+
 
     public Adapter_Recicleview(List<Event> event) {
         events = event;

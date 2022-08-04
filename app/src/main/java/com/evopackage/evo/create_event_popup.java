@@ -84,24 +84,25 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                    event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(),"");
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"");
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
 
 
 
-                    if (txtName.getText().toString().isEmpty()){
+                    if (txtName.getText().toString().isEmpty()||txtAddress.getText().toString().isEmpty()||txtDate.getText().toString().isEmpty()){
 
                          dialog.dismiss();
-                        Toast.makeText(v.getContext(), "Error name can't be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Error name,address or date  can't be empty", Toast.LENGTH_SHORT).show();
                         Toast.makeText(v.getContext(), "Please enter a valid name", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(v.getContext(), "don't be a dum dum", Toast.LENGTH_SHORT).show();
+
                        return;
                     }else {
 
 
-
+                        listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
+                                txtAddress.getText().toString());
 
                         firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
                         firebaseEvent.child("name").setValue(event.GetName());
@@ -111,8 +112,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
 
-                    listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString());
+
                     firebaseEvent.child("date").setValue(event.GetDate());
                     firebaseEvent.child("address").setValue(event.GetLocation());
                     firebaseEvent.child("category").setValue(event.GetCategory());
