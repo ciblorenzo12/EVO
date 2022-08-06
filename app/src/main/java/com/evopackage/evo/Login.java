@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(this, Register_user.class));
         }
         if (v.getId() == _forgotPass.getId()) {
-            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
+            startActivity(new Intent(this, Forgot_password.class));
 
 
         }
@@ -225,7 +225,7 @@ while (_userdata==null){
         Intent intent_ = new Intent(Login.this, MainWindows_Create_Join_Event.class);
         startActivity(intent_);
         Login.this.finish();
-        Toast.makeText(this, "Successfully ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Welcome back "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
     }

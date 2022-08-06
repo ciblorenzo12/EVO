@@ -12,10 +12,15 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -33,7 +38,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     private Button _registerBtn;
     private ImageButton _back_Login;
     private ProgressBar _progressbar;
-
+    private DatabaseReference ref_UserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         _password = findViewById(R.id.register_password);
         _phone = findViewById(R.id.register_phone);
         _dob = findViewById(R.id.register_dob);
-
+        ref_UserEmail= FirebaseDatabase.getInstance().getReference().child("users");
         //buttons
         _registerBtn = findViewById(R.id.register_btn);
         _back_Login = findViewById(R.id.register_back);
@@ -116,6 +121,34 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
             _email.setError("Please enter your email address");
             _email.requestFocus();
             return;
+        }else{
+
+            ref_UserEmail.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot snap:snapshot.getChildren()){
+
+
+                            if (_Email.contains( snap.child("_email").getValue(String.class))){
+                              _email.setError("Email already registered");
+                                _email.requestFocus();
+                                return;
+                            }
+
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+
         }
 
         if (_Password.isEmpty()) {
@@ -150,11 +183,12 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
             _password.requestFocus();
             return;
         }
+
         if (!HasCapitalLetters(_Password)) {
 
             _password.setError("Password must contain at least one capital letter");
             _password.requestFocus();
-
+          return;
         }
         _progressbar.setVisibility(View.VISIBLE);
 
