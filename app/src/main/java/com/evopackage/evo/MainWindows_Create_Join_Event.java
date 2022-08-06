@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,11 +49,15 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
    SearchView search_bar;
      Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
+    private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_windows_create_join_event);
+        setContentView(R.layout.setting_page);
 
+        logout = findViewById(R.id.logout);
+
+        setContentView(R.layout.activity_main_windows_create_join_event);
 
         refdata = FirebaseDatabase.getInstance().getReference().child("events");
         recicleviw = findViewById(R.id.RecicleBar_Firebase);
@@ -60,7 +68,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         _events = new ArrayList<>();
 
         adaptor = new Adapter_Recicleview(_events);
-        _events.clear();
+if(FirebaseAuth.getInstance().getCurrentUser()==null){
+
+    Intent intent = new Intent(this,Login.class);
+    startActivity(intent);
+finish();
+
+}
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,7 +98,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             (snap.child("date").getValue(String.class)),
             (snap.child("address").getValue(String.class)),
             (snap.child("category").getValue(String.class)),
-            (snap.child("creator").getValue(String.class)),
+            (snap.child("creator").getValue
+                    (String.class)),
             "String uri");
     _events.add(evt);
 
@@ -142,7 +157,7 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
     }
-
+//Search
     private void Search(String txt) {
         ArrayList<Event>events_search= new ArrayList<>();
         for (Event eventObj:_events){
@@ -180,11 +195,33 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
         }
-        if(v.getId()==R.id.settings_Main_Id){
+        if (v.getId()==settings.getId()) {
 
-            Intent car = new Intent(this, Event_Page.class);
-            startActivity(car);
+            setContentView(R.layout.setting_page);
+            logout.setOnClickListener(MainWindows_Create_Join_Event.this);
+
+
+
         }
+        if (v.getId()==logout.getId()) {
+
+            signout();
+
+        }
+    }
+
+    private void signout() {
+
+        AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
+                    finish();
+
+                }
+            }
+        });
     }
 
 
