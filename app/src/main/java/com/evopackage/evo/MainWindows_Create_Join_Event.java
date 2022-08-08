@@ -35,16 +35,17 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr,settings;
+    private ImageButton qr, settings;
 
     //searchView
     RecyclerView recicleviw;
-     DatabaseReference refdata;
-    DatabaseReference userefdata= FirebaseDatabase.getInstance().getReference().child("users");
-     ArrayList<Event> _events;
-   SearchView search_bar;
-     Adapter_Recicleview adaptor;
+    DatabaseReference refdata;
+    DatabaseReference userefdata = FirebaseDatabase.getInstance().getReference().child("users");
+    ArrayList<Event> _events;
+    SearchView search_bar;
+    Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,50 +67,44 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             @Override
             public void onDataChange(@NonNull DataSnapshot snap_user) {
 
-        refdata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                refdata.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
 
-                 if(snapshot.exists()){
+                        if (snapshot.exists()) {
 
-                     _events.clear();
-
-
-                     for (DataSnapshot snap:snapshot.getChildren()) {
-
- String Creator =snap.child("creator").getValue(String.class);
-
-    Event evt = new Event(snap.child("name").getValue(String.class),
-            (snap.child("date").getValue(String.class)),
-            (snap.child("address").getValue(String.class)),
-            (snap.child("category").getValue(String.class)),
-            (snap.child("creator").getValue(String.class)),
-            "String uri");
-    _events.add(evt);
+                            _events.clear();
 
 
-                     }
+                            for (DataSnapshot snap : snapshot.getChildren()) {
+
+                                String Creator = snap.child("creator").getValue(String.class);
+
+                                Event evt = new Event(snap.child("name").getValue(String.class),
+                                        (snap.child("date").getValue(String.class)),
+                                        (snap.child("address").getValue(String.class)),
+                                        (snap.child("category").getValue(String.class)),
+                                        (snap.child("creator").getValue(String.class)),
+                                        "String uri");
+                                _events.add(evt);
 
 
-                     adaptor.notifyDataSetChanged();
-
-                 }
+                            }
 
 
+                            adaptor.notifyDataSetChanged();
+
+                        }
 
 
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                    }
+                });
 
             }
 
@@ -118,22 +113,22 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
             }
         });
-search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
+        search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-    @Override
-    public boolean onQueryTextChange(String Txt) {
-        Search(Txt);
-        return true;
-    }
-});
+            @Override
+            public boolean onQueryTextChange(String Txt) {
+                Search(Txt);
+                return true;
+            }
+        });
 
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
-        settings= findViewById(R.id.settings_Main_Id);
+        settings = findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
@@ -144,14 +139,14 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
     }
 
     private void Search(String txt) {
-        ArrayList<Event>events_search= new ArrayList<>();
-        for (Event eventObj:_events){
+        ArrayList<Event> events_search = new ArrayList<>();
+        for (Event eventObj : _events) {
 
-            if(eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
+            if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
                 events_search.add(eventObj);
 
-            Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
-            recicleviw.setAdapter(recicleview);
+                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+                recicleviw.setAdapter(recicleview);
             }
 
         }
@@ -161,8 +156,6 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
-
-
 
 
     @Override
@@ -180,7 +173,7 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
         }
-        if(v.getId()==R.id.settings_Main_Id){
+        if (v.getId() == R.id.settings_Main_Id) {
 
             Intent car = new Intent(this, Event_Page.class);
             startActivity(car);
@@ -200,18 +193,17 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         startActivity(car);
 
 
-
                     }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
                     .create()
                     .show();
 
 
-        }   if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
+        }
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 
 
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
-
 
 
         }
@@ -230,7 +222,7 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
     }
 
     // @Override
-  //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
-   // }
+    // }
 }

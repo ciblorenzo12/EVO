@@ -1,7 +1,10 @@
 package com.evopackage.evo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,13 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Event_History extends AppCompatActivity implements create_event_popup.DialogListener{
+public class Event_History extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener{
 
     Event _history;
 
     private String _name, _date, _location, _category, _creator;
     private FirebaseUser _user;
 
+    private ImageButton backArrow;
 
     private TextView eventTest;
 
@@ -64,6 +68,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
 
         userEvents = new ArrayList<>();
 
+        backArrow = findViewById(R.id.eventhistoryback);
 
         //eventTest.setText("Hello");
 
@@ -71,11 +76,11 @@ public class Event_History extends AppCompatActivity implements create_event_pop
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userEvents.clear();
-                DataSnapshot userRef = snapshot.child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
+                DataSnapshot userRef = snapshot.child("users").child(FirebaseAuth.getInstance().getUid());
                 DataSnapshot eventsRef = snapshot.child("events");
                 if (userRef.exists()) {
                     String eventCode;
-                    for (DataSnapshot snap : userRef.getChildren()) {
+                    for (DataSnapshot snap : userRef.child("My_Events").getChildren()) {
 
                         eventCode = snap.getKey();
 
@@ -83,7 +88,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                         //userEvents.add(eventCode);
                         //event = new Event(eventCode);
 
-                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),eventsRef.child(eventCode).child("creator").getValue().toString(), "Uri");
+                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),userRef.child("_firstname").getValue().toString() + " " + userRef.child("_lastname").getValue().toString(), "Uri");
                         eventInfo.add(event);
                     }
 
@@ -110,5 +115,13 @@ public class Event_History extends AppCompatActivity implements create_event_pop
     @Override
     public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == backArrow.getId()){
+            Intent intent = new Intent(this, Profile_Page.class);
+            startActivity(intent);
+        }
     }
 }
