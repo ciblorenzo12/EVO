@@ -1,17 +1,19 @@
 package com.evopackage.evo;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Event {
-    private String _name, _date, _location, _category, _uri, _creator;
+    private String _name, _date, _location, _category,  _creator;
+    private Uri _uri;
 
-    public Event(String name, String date, String location, String category, String creator, String uri) {
+    public Event(String name, String date, String location, String category, String creator, Uri uri) {
         _name = name;
         _date = date;
         _location = location;
@@ -58,7 +60,7 @@ public class Event {
         return _creator;
     }
 
-    public String GetUri() {
+    public Uri GetUri() {
         return _uri;
     }
 

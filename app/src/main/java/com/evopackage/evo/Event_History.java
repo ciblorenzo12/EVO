@@ -2,6 +2,7 @@ package com.evopackage.evo;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
 
     DatabaseReference eventref;
     DatabaseReference ref;
+    StorageReference picRef;
 
     ArrayList<String> userEvents;
     ArrayList<Event> eventInfo;
@@ -46,6 +51,8 @@ public class Event_History extends AppCompatActivity implements create_event_pop
     LinearLayoutManager layoutManager;
 
     Event event;
+
+    Uri picUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +70,18 @@ public class Event_History extends AppCompatActivity implements create_event_pop
         adaptor = new Adapter_Recicleview(eventInfo);
 
         evtHistory.setAdapter(adaptor);
-        //eventref = FirebaseDatabase.getInstance().getReference().child("events");
+        eventref = FirebaseDatabase.getInstance().getReference().child("events");
         ref = FirebaseDatabase.getInstance().getReference();//.child("users").child(FirebaseAuth.getInstance().getUid()).child("My_Events");
 
         userEvents = new ArrayList<>();
 
         backArrow = findViewById(R.id.eventhistoryback);
 
+        picRef = FirebaseStorage.getInstance().getReference();
+
         //eventTest.setText("Hello");
+
+
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,11 +95,18 @@ public class Event_History extends AppCompatActivity implements create_event_pop
 
                         eventCode = snap.getKey();
 
+                        StorageReference imageRef = picRef.child("user_profile_pics/"+eventsRef.child(eventCode).child("creator")+"/profile.jpg");
+                        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                picUri = uri;
+                            }
+                        });
 
                         //userEvents.add(eventCode);
                         //event = new Event(eventCode);
 
-                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),userRef.child("_firstname").getValue().toString() + " " + userRef.child("_lastname").getValue().toString(), "Uri");
+                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),userRef.child(FirebaseAuth.getInstance().getCurrentUser().toString()).child("_firstname").getValue().toString() + " " + userRef.child(FirebaseAuth.getInstance().getCurrentUser().toString()).child("_lastname").getValue().toString(), picUri);
                         eventInfo.add(event);
                     }
 

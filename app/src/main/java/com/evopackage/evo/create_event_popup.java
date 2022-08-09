@@ -83,8 +83,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                 .setPositiveButton("create", (dialog, which) -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                   event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"");
+//                   event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
+//                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"");
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
@@ -105,20 +105,19 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                                 txtAddress.getText().toString());
 
                         firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
-                        firebaseEvent.child("name").setValue(event.GetName());
-                        current_event = event.GetName();
+                        firebaseEvent.child("name").setValue(txtName.getText().toString());
+                        current_event = txtName.getText().toString();
 
 
 
 
 
 
-                    firebaseEvent.child("date").setValue(event.GetDate());
-                    firebaseEvent.child("address").setValue(event.GetLocation());
-                    firebaseEvent.child("category").setValue(event.GetCategory());
-                    firebaseEvent.child("creator").setValue(event.GetCreator());
-                    firebaseEvent.child("eventid").setValue(eventUid_value);
-                    firebaseEvent.child("assistance").child(current_user.getUid()).setValue("Creator");
+                    firebaseEvent.child("date").setValue(txtDate.getText().toString());
+                    firebaseEvent.child("address").setValue(txtAddress.getText().toString());
+                    firebaseEvent.child("category").setValue(spinner.getSelectedItem().toString());
+                    firebaseEvent.child("creator").setValue(current_user.getUid());
+                    //firebaseEvent.child("eventid").setValue(eventUid_value);
                     current_eventID = eventUid_value;
                     firebaseUsers.child("My_Events").child(current_eventID).setValue(current_event);
                     }

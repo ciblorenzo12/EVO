@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,8 +67,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         adaptor = new Adapter_Recicleview(_events);
 
-        StorageReference Ref = pictureRef.child("user_profile_pics/"+user.getUid()+"/profile.jpg");
-
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,20 +83,29 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
+                                String eventCreatorCode = snap.child("creator").getValue().toString();
 
-                                Event evt = new Event(snap.child("name").getValue(String.class),
-                                        (snap.child("date").getValue(String.class)),
-                                        (snap.child("address").getValue(String.class)),
-                                        (snap.child("category").getValue(String.class)),
-                                        (snap.child("creator").getValue(String.class)),
-                                        );
-                                _events.add(evt);
+                               StorageReference Ref = pictureRef.child("user_profile_pics/"+eventCreatorCode+"/profile.jpg");
+//                                Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//                                        //imageUri = uri;
+//                                    }
+//                                });
+//                                Event evt = new Event(snap.child("name").getValue(String.class),
+//                                        (snap.child("date").getValue(String.class)),
+//                                        (snap.child("address").getValue(String.class)),
+//                                        (snap.child("category").getValue(String.class)),
+//                                        (snap.child("creator").getValue(String.class)),
+//                                        imageUri);
+//                                _events.add(evt);
 
 
                             }
 
 
-                            adaptor.notifyDataSetChanged();
+                            //adaptor.notifyDataSetChanged();
 
                         }
 
