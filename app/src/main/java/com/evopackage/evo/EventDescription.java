@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class EventDescription extends AppCompatActivity {
     private TextView txtCategory;
     private TextView txtDescription;
     private TextView txtCreator;
+    private Button setUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,14 @@ public class EventDescription extends AppCompatActivity {
         txtCategory = findViewById(R.id.category4item);
         txtDescription = findViewById(R.id.descriptionev);
         txtCreator = findViewById(R.id.eventcreatorr);
-
+        setUp = findViewById(R.id.button);
+        setUp.setOnClickListener(v -> openAct());
         populateData();
+    }
+
+    private void openAct() {
+        create_activity_popup actDialog = new create_activity_popup();
+        actDialog.show(getSupportFragmentManager(), "ActivityDialog");
     }
 
     public void populateData()

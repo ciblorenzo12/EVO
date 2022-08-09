@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/editLoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:hint="Location"
+        android:minHeight="48dp"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/editDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editLoc"
+        android:hint="Date"
+        android:minHeight="48dp"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/guest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editDate"
+        android:text="Special Guest"
+        android:textSize="24sp"
+        tools:ignore="HardcodedText" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guest">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/guestImage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+</androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/addImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/cardImage"
+        android:layout_centerInParent="true"
+        android:src="@android:drawable/ic_input_add"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
