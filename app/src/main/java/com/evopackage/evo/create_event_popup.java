@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,6 +33,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtName;
     private TextView txtDate;
     private EditText txtAddress;
+    private TextView txtDescription;
 
     //private DialogListener listener;
     private Event event;
@@ -74,9 +77,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                 .setPositiveButton("create", (dialog, which) -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
-                    event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "");
+                    String eventKey = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
+                    event = new Event(eventKey, txtName.getText().toString(), txtDate.getText().toString(),
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "");
 
                     if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() || txtDate.getText().toString().isEmpty()) {
                         dialog.dismiss();
@@ -86,9 +89,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     } else {
 //                        listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
 //                                txtAddress.getText().toString());
-                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
+                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventKey);
                         current_event = event.GetName();
-                        current_eventID = eventUid_value;
+                        current_eventID = eventKey;
 
                         firebaseEvent.child("name").setValue(event.GetName());
                         firebaseEvent.child("date").setValue(event.GetDate());

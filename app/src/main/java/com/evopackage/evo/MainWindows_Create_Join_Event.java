@@ -99,7 +99,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         snap.child("address").getValue(String.class),
                                         snap.child("category").getValue(String.class),
                                         snap.child("creator").getValue(String.class),
-                                        "String uri");
+                                        "String uri", "String description");
                                 _events.add(evt);
                             }
                             adaptor.notifyDataSetChanged();
@@ -211,6 +211,11 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         if (v.getId() == logout.getId()) {
             signout();
         }
+
+//        if (v.getId() == R.id.settings_Main_Id) {
+//            Intent car = new Intent(this, Event_Page.class);
+//            startActivity(car);
+//        } caused crash... was located in signout before??
     }
 
     private void signout() {
@@ -223,12 +228,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 }
             }
         });
-        }
-        if (v.getId() == R.id.settings_Main_Id) {
-
-            Intent car = new Intent(this, Event_Page.class);
-            startActivity(car);
-        }
     }
 
     private void RequestCameraPermission() {
