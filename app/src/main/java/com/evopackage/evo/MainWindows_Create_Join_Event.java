@@ -24,8 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-
+public class MainWindows_Create_Join_Event extends AppCompatActivity implements /*create_event_popup.DialogListener,*/ View.OnClickListener {
 
     private FirebaseAuth auth;
     private FirebaseDatabase search;
@@ -50,7 +49,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_windows_create_join_event);
-
 
         refdata = FirebaseDatabase.getInstance().getReference().child("events");
         recicleviw = findViewById(R.id.RecicleBar_Firebase);
@@ -77,32 +75,26 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-
                         if (snapshot.exists()) {
 
                             _events.clear();
-
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
 
                                 String Creator = snap.child("creator").getValue(String.class);
 
-                                Event evt = new Event(snap.child("name").getValue(String.class),
-                                        (snap.child("date").getValue(String.class)),
-                                        (snap.child("address").getValue(String.class)),
-                                        (snap.child("category").getValue(String.class)),
-                                        (snap.child("creator").getValue(String.class)),
-                                        "String uri", snap.child("description").getValue(String.class));
+                                Event evt = new Event(snap.getKey(),
+                                        snap.child("name").getValue(String.class),
+                                        snap.child("date").getValue(String.class),
+                                        snap.child("address").getValue(String.class),
+                                        snap.child("category").getValue(String.class),
+                                        snap.child("creator").getValue(String.class),
+                                        "String uri",
+                                        snap.child("description").getValue(String.class));
                                 _events.add(evt);
-
-
                             }
-
-
                             adaptor.notifyDataSetChanged();
-
                         }
-
                     }
 
                     @Override
@@ -110,7 +102,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
                     }
                 });
-
             }
 
             @Override
@@ -139,8 +130,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
-
-
     }
 
     private void movetodescription(Event ev) {
@@ -164,7 +153,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 });
                 recicleviw.setAdapter(recicleview);
             }
-
         }
     }
 
@@ -173,21 +161,14 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
-
             Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
-
         }
         if (v.getId() == qr.getId()) {
-
-
             RequestCameraPermission();
-
-
         }
         if (v.getId() == R.id.settings_Main_Id) {
 
@@ -196,49 +177,23 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
     }
 
-
     private void RequestCameraPermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
-
-
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
-
-
-                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
-                    .create()
-                    .show();
-
-
+                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
         }
         if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
-
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
-
-
         }
-
-
     }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-    }
-
-    // @Override
-    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-    // }
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 }

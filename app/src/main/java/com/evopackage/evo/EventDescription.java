@@ -4,9 +4,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.evopackage.evo.databinding.EventDescriptionBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EventDescription extends AppCompatActivity {
 
@@ -19,6 +25,7 @@ public class EventDescription extends AppCompatActivity {
     private TextView txtDescription;
     private TextView txtCreator;
     private Button setUp;
+    private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,8 @@ public class EventDescription extends AppCompatActivity {
         txtCategory = findViewById(R.id.category4item);
         txtDescription = findViewById(R.id.descriptionev);
         txtCreator = findViewById(R.id.eventcreatorr);
+        txtAttendees = findViewById(R.id.txtAttendees);
+
         setUp = findViewById(R.id.button);
         setUp.setOnClickListener(v -> openAct());
         populateData();
@@ -52,5 +61,16 @@ public class EventDescription extends AppCompatActivity {
         txtCategory.setText(ev.GetCategory());
         txtDescription.setText(ev.GetDescription());
         txtCreator.setText(ev.GetCreator());
+        FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("assistance").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txtAttendees.setText(snapshot.getChildrenCount() + " Attendees");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

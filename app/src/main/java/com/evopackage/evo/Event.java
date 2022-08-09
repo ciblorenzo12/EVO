@@ -2,16 +2,13 @@ package com.evopackage.evo;
 
 import java.io.Serializable;
 
-public class Event implements Serializable
-{
-   public String _name, _date, _location, _category,_uri, _description;
-   public String _creator ;
-public Event(){};
+public class Event implements Serializable {
+    private String _key, _name, _date, _location, _category, _uri, _description, _creator;
 
+    public Event() {};
 
-
-    public Event(String name, String date, String location, String category, String creator, String uri, String description)
-    {
+    public Event(String key, String name, String date, String location, String category, String creator, String uri, String description) {
+        _key = key;
         _name = name;
         _date = date;
         _location = location;
@@ -21,21 +18,31 @@ public Event(){};
         _description = description;
     }
 
-    public String GetName() { return _name; }
+    public String GetKey() {
+        return _key;
+    }
 
-    public String GetDate() { return _date; }
+    public String GetName() {
+        return _name;
+    }
 
-    public String GetLocation() { return _location; }
+    public String GetDate() {
+        return _date;
+    }
 
-    public String GetCategory() { return _category; }
+    public String GetLocation() {
+        return _location;
+    }
 
-    public String GetCreator() { return _creator; }
+    public String GetCategory() {
+        return _category;
+    }
 
-   public  String GetUri(){
+    public String GetCreator() {
+        return _creator;
+    }
 
-
-        return _uri;
-   }
+    public String GetUri() { return _uri; }
 
     public String GetDescription() {
         return _description;

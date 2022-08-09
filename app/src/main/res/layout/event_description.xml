@@ -97,7 +97,7 @@
             tools:text="@string/scan" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtAttendees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
@@ -192,9 +192,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.233"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5">
+            app:layout_constraintTop_toBottomOf="@+id/txtAttendees">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAttendees"
                 android:layout_width="280dp"
                 android:layout_height="189dp"
                 android:layout_marginLeft="10dp"
