@@ -61,7 +61,8 @@ public class create_activity_popup extends AppCompatDialogFragment {
         txtLoc = vr.findViewById(R.id.editLoc);
         txtDate = vr.findViewById(R.id.editDate);
         addImage = vr.findViewById(R.id.addImage);
-
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
         addImage.setOnClickListener(v -> openGallary());
         builder.setView(vr)
                 .setTitle("Creating Activity")
@@ -75,6 +76,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
     }
 
     private void openGallary() {
+        imageView = new ImageView(getActivity());
         Intent _intent = new Intent();
         _intent.setType("image/*");
         _intent.setAction(Intent.ACTION_PICK);
@@ -111,6 +113,8 @@ public class create_activity_popup extends AppCompatDialogFragment {
                 // Log the exception
                 e.printStackTrace();
             }
+
+            uploadImage();
         }
     }
     // UploadImage method
@@ -133,57 +137,41 @@ public class create_activity_popup extends AppCompatDialogFragment {
 
             // adding listeners on upload
             // or failure of image
+            // Progress Listener for loading
+// percentage on the dialog box
             ref.putFile(filePath)
                     .addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            taskSnapshot -> {
 
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
-
-                                    // Image uploaded successfully
-                                    // Dismiss dialog
-                                    progressDialog.dismiss();
-                                    Toast
-                                            .makeText(getContext(),
-                                                    "Image Uploaded!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                }
+                                // Image uploaded successfully
+                                // Dismiss dialog
+                                progressDialog.dismiss();
+                                Toast
+                                        .makeText(getContext(),
+                                                "Image Uploaded!!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
                             })
 
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
+                    .addOnFailureListener(e -> {
 
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(getContext(),
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
+                        // Error, Image not uploaded
+                        progressDialog.dismiss();
+                        Toast
+                                .makeText(getContext(),
+                                        "Failed " + e.getMessage(),
+                                        Toast.LENGTH_SHORT)
+                                .show();
                     })
                     .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int)progress + "%");
-                                }
+                            taskSnapshot -> {
+                                double progress
+                                        = (100.0
+                                        * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage(
+                                        "Uploaded "
+                                                + (int)progress + "%");
                             });
         }
     }
