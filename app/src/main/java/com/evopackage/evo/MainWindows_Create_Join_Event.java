@@ -28,8 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-
+public class MainWindows_Create_Join_Event extends AppCompatActivity implements /*create_event_popup.DialogListener,*/ View.OnClickListener {
 
     private FirebaseAuth auth;
     private FirebaseDatabase search;
@@ -39,17 +38,18 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr,settings;
+    private ImageButton qr, settings;
 
     //searchView
     RecyclerView recicleviw;
-     DatabaseReference refdata;
-    DatabaseReference userefdata= FirebaseDatabase.getInstance().getReference().child("users");
-     ArrayList<Event> _events;
-   SearchView search_bar;
-     Adapter_Recicleview adaptor;
+    DatabaseReference refdata;
+    DatabaseReference userefdata = FirebaseDatabase.getInstance().getReference().child("users");
+    ArrayList<Event> _events;
+    SearchView search_bar;
+    Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
     private Button logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,60 +64,46 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         search_bar = findViewById(R.id.searchView_Main);
         managerL = new LinearLayoutManager(this);
         recicleviw.setLayoutManager(managerL);
-
         _events = new ArrayList<>();
 
         adaptor = new Adapter_Recicleview(_events);
-if(FirebaseAuth.getInstance().getCurrentUser()==null){
-
-    Intent intent = new Intent(this,Login.class);
-    startActivity(intent);
-finish();
-
-}
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+        }
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snap_user) {
 
-        refdata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                refdata.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                        if (snapshot.exists()) {
+                            _events.clear();
 
-                 if(snapshot.exists()){
+                            for (DataSnapshot snap : snapshot.getChildren()) {
+                                String Creator = snap.child("creator").getValue(String.class);
 
-                     _events.clear();
+                                Event evt = new Event(snap.child("name").getValue(String.class),
+                                        snap.child("date").getValue(String.class),
+                                        snap.child("address").getValue(String.class),
+                                        snap.child("category").getValue(String.class),
+                                        snap.child("creator").getValue(String.class),
+                                        "String uri");
+                                _events.add(evt);
+                            }
+                            adaptor.notifyDataSetChanged();
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                     for (DataSnapshot snap:snapshot.getChildren()) {
-
- String Creator =snap.child("creator").getValue(String.class);
-
-    Event evt = new Event(snap.child("name").getValue(String.class),
-            (snap.child("date").getValue(String.class)),
-            (snap.child("address").getValue(String.class)),
-            (snap.child("category").getValue(String.class)),
-            (snap.child("creator").getValue
-                    (String.class)),
-            "String uri");
-    _events.add(evt);
-
-
-                     }
-
-
-                     adaptor.notifyDataSetChanged();
-
-                 }
-
-
-
-
-
-
-
-
+                    }
+                });
             }
 
             @Override
@@ -126,49 +112,40 @@ finish();
             }
         });
 
+        search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public boolean onQueryTextChange(String Txt) {
+                Search(Txt);
+                return true;
             }
         });
-search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String Txt) {
-        Search(Txt);
-        return true;
-    }
-});
 
         qr = findViewById(R.id.qr_main_id);
         btn = findViewById(R.id.profile_picture_Main_id);
-        settings= findViewById(R.id.settings_Main_Id);
+        settings = findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
         evtBtn.setOnClickListener(v -> openDialog());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
-
-
     }
-//Search
-    private void Search(String txt) {
-        ArrayList<Event>events_search= new ArrayList<>();
-        for (Event eventObj:_events){
 
-            if(eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
+    //Search
+    private void Search(String txt) {
+        ArrayList<Event> events_search = new ArrayList<>();
+        for (Event eventObj : _events) {
+
+            if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
                 events_search.add(eventObj);
 
-            Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
-            recicleviw.setAdapter(recicleview);
+                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+                recicleviw.setAdapter(recicleview);
             }
-
         }
     }
 
@@ -177,97 +154,62 @@ search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-
-
-
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
-
             Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
-
         }
         if (v.getId() == qr.getId()) {
-
-
             RequestCameraPermission();
-
-
         }
-        if (v.getId()==settings.getId()) {
-
+        if (v.getId() == settings.getId()) {
             setContentView(R.layout.setting_page);
             logout.setOnClickListener(MainWindows_Create_Join_Event.this);
-
-
-
         }
-        if (v.getId()==logout.getId()) {
-
+        if (v.getId() == logout.getId()) {
             signout();
-
         }
     }
 
     private void signout() {
-
         AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
                     finish();
-
                 }
             }
         });
     }
 
-
     private void RequestCameraPermission() {
-
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
-
-
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
-
-
-
-                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
-                    .create()
-                    .show();
-
-
-        }   if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-
-
+                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
+        }
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
-
-
-
         }
-
-
     }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-    }
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
+//
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 
     // @Override
-  //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
-   // }
+    // }
 }
