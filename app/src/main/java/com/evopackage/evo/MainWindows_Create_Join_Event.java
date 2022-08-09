@@ -35,7 +35,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private FirebaseUser user;
     private int Camera_Permission_Request = 1;
     private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
-
+    private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr, settings;
@@ -66,12 +66,18 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         recicleviw.setLayoutManager(managerL);
         _events = new ArrayList<>();
 
-        adaptor = new Adapter_Recicleview(_events);
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-        }
+//        adaptor = new Adapter_Recicleview(_events);
+//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+//            Intent intent = new Intent(this, Login.class);
+//            startActivity(intent);
+//            finish();
+//        } ?? Merge conflict
+        adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Event ev) {
+                movetodescription(ev);
+            }
+        });
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,7 +93,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                             for (DataSnapshot snap : snapshot.getChildren()) {
                                 String Creator = snap.child("creator").getValue(String.class);
 
-                                Event evt = new Event(snap.child("name").getValue(String.class),
+                                Event evt = new Event(snap.getKey(),
+                                        snap.child("name").getValue(String.class),
                                         snap.child("date").getValue(String.class),
                                         snap.child("address").getValue(String.class),
                                         snap.child("category").getValue(String.class),
@@ -136,6 +143,25 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
     //Search
+//    private void Search(String txt) {
+//        ArrayList<Event> events_search = new ArrayList<>();
+//        for (Event eventObj : _events) {
+//
+//            if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
+//                events_search.add(eventObj);
+//
+//                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+//                recicleviw.setAdapter(recicleview);
+//            }
+//        }
+//    } ?? merge conflicts
+
+    private void movetodescription(Event ev) {
+        Intent i = new Intent(this, EventDescription.class);
+        i.putExtra("Event", ev);
+        startActivity(i);
+    }
+
     private void Search(String txt) {
         ArrayList<Event> events_search = new ArrayList<>();
         for (Event eventObj : _events) {
@@ -143,7 +169,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
                 events_search.add(eventObj);
 
-                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search, new Adapter_Recicleview.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(Event ev) {
+
+                    }
+                });
                 recicleviw.setAdapter(recicleview);
             }
         }
@@ -154,13 +185,23 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
+
+
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
+
             Intent car = new Intent(this, Profile_Page.class);
             startActivity(car);
+
         }
         if (v.getId() == qr.getId()) {
+
+
             RequestCameraPermission();
         }
         if (v.getId() == settings.getId()) {
@@ -182,6 +223,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 }
             }
         });
+        }
+        if (v.getId() == R.id.settings_Main_Id) {
+
+            Intent car = new Intent(this, Event_Page.class);
+            startActivity(car);
+        }
     }
 
     private void RequestCameraPermission() {
@@ -211,5 +258,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     // @Override
     //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
-    // }
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 }

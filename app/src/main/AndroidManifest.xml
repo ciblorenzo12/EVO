@@ -46,6 +46,8 @@
         <activity
             android:name=".Register_user"
             android:exported="false" />
+        <activity android:name=".EventDescription"
+            android:exported="false"/>
         <activity
             android:name=".Profile_Page"
             android:exported="true" />

@@ -34,7 +34,6 @@ android {
             pickFirsts += ['androidsupportmultidexversion.txt']
         }
     }
-
 }
 
 dependencies {

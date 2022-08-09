@@ -59,6 +59,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
+        txtDescription = v.findViewById(R.id.description);
 
         txtDate.setOnClickListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.select_dialog_item);
