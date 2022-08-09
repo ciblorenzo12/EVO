@@ -103,18 +103,6 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    public static void Pass_Event_(String _name,String _adress,String _date,String _qr,String _Uri){
-
-        mName = _name;
-        mAdress = _adress;
-        mDate = _date;
-        mQr = _qr;
-        mUri = _Uri;
-    }
-
-
-
-
 
     private void uploadpicture() {
         if(images==null) {

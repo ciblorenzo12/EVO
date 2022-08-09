@@ -31,6 +31,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtName;
     private TextView txtDate;
     private EditText txtAddress;
+    private EditText txtDesription;
 
     private DialogListener listener;
    private  Event event;
@@ -69,6 +70,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
+        txtDesription = v.findViewById(R.id.description);
 
         txtDate.setOnClickListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.select_dialog_item);
@@ -84,14 +86,14 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                    event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"");
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"",  txtDesription.getText().toString());
                     String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
 
 
 
 
 
-                    if (txtName.getText().toString().isEmpty()||txtAddress.getText().toString().isEmpty()||txtDate.getText().toString().isEmpty()){
+                    if (txtName.getText().toString().isEmpty()||txtAddress.getText().toString().isEmpty()||txtDate.getText().toString().isEmpty()||txtDesription.getText().toString().isEmpty()){
 
                          dialog.dismiss();
                         Toast.makeText(v.getContext(), "Error name,address or date  can't be empty", Toast.LENGTH_SHORT).show();
@@ -102,7 +104,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
 
                         listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
-                                txtAddress.getText().toString());
+                                txtAddress.getText().toString(), txtDesription.getText().toString());
 
                         firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
                         firebaseEvent.child("name").setValue(event.GetName());
@@ -117,6 +119,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                     firebaseEvent.child("address").setValue(event.GetLocation());
                     firebaseEvent.child("category").setValue(event.GetCategory());
                     firebaseEvent.child("creator").setValue(event.GetCreator());
+                    firebaseEvent.child("description").setValue(event.GetDescription());
                     firebaseEvent.child("eventid").setValue(eventUid_value);
                     firebaseEvent.child("assistance").child(current_user.getUid()).setValue("Creator");
                     current_eventID = eventUid_value;

@@ -14,6 +14,9 @@ public class EventDescription extends AppCompatActivity {
     private TextView txtName;
     private TextView txtAddress;
     private TextView txtDate;
+    private TextView txtCategory;
+    private TextView txtDescription;
+    private TextView txtCreator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class EventDescription extends AppCompatActivity {
         txtName = findViewById(R.id.txtEventName);
         txtAddress = findViewById(R.id.txtEventAddress);
         txtDate = findViewById(R.id.txtEventDate);
+        txtCategory = findViewById(R.id.category4item);
+        txtDescription = findViewById(R.id.descriptionev);
+        txtCreator = findViewById(R.id.eventcreatorr);
 
         populateData();
     }
@@ -34,6 +40,9 @@ public class EventDescription extends AppCompatActivity {
     {
         txtName.setText(ev.GetName());
         txtAddress.setText(ev.GetLocation());
-        txtDate.setText(ev.GetLocation());
+        txtDate.setText(ev.GetDate());
+        txtCategory.setText(ev.GetCategory());
+        txtDescription.setText(ev.GetDescription());
+        txtCreator.setText(ev.GetCreator());
     }
 }
