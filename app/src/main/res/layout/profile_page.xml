@@ -27,9 +27,8 @@
 
     <ImageView
         android:id="@+id/profilepicture"
-        android:layout_width="195dp"
-        android:layout_height="179dp"
-        android:background="@drawable/roundimage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toTopOf="@id/DisplayName"
         app:layout_constraintCircleRadius="10dp"
         app:layout_constraintEnd_toStartOf="@+id/EditProfile"

@@ -3,6 +3,7 @@ package com.evopackage.evo;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr, settings;
+    Uri imageUri;
 
     //searchView
     RecyclerView recicleviw;
@@ -45,6 +48,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     SearchView search_bar;
     Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
+    StorageReference pictureRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         _events = new ArrayList<>();
 
         adaptor = new Adapter_Recicleview(_events);
+
+        StorageReference Ref = pictureRef.child("user_profile_pics/"+user.getUid()+"/profile.jpg");
 
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
@@ -79,14 +85,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
 
-                                String Creator = snap.child("creator").getValue(String.class);
-
                                 Event evt = new Event(snap.child("name").getValue(String.class),
                                         (snap.child("date").getValue(String.class)),
                                         (snap.child("address").getValue(String.class)),
                                         (snap.child("category").getValue(String.class)),
                                         (snap.child("creator").getValue(String.class)),
-                                        "String uri");
+                                        );
                                 _events.add(evt);
 
 

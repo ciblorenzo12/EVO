@@ -9,12 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Recicleview.viewHolderEvents> {
 
     private List<Event> events;
 
+
+    ImageView image_;
 
     public Adapter_Recicleview(List<Event> event) {
         events = event;
@@ -39,7 +43,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         holder.date.setText(events.get(position).GetDate());
         holder.category.setText(events.get(position).GetCategory());
         holder.creator.setText(events.get(position).GetCreator());
-
+        Picasso.get().load(events.get(position).GetUri()).into(image_);
 
     }
 
@@ -49,8 +53,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
     }
 
     public class viewHolderEvents extends RecyclerView.ViewHolder {
- TextView name,address,category,date,creator;
- ImageView image_;
+        TextView name,address,category,date,creator;
 
         public viewHolderEvents(@NonNull View itemView) {
             super(itemView);

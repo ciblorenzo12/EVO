@@ -20,9 +20,10 @@
 
 
         android:alpha="80"
+        android:clickable="true"
         android:rotation="0"
-        android:rotationX="0"
 
+        android:rotationX="0"
         android:rotationY="0"
         app:cardBackgroundColor="#C411C8FF"
         app:cardCornerRadius="30dp"
@@ -37,10 +38,13 @@
             android:scrollbarStyle="outsideOverlay"
             tools:visibility="visible">
 
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_evt"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="119dp"
                 android:src="@mipmap/ic_user_foreground"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp" />
@@ -49,9 +53,7 @@
                 android:id="@+id/Name_evt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/profile_evt"
+                android:layout_marginLeft="0dp"
                 android:layout_toRightOf="@id/profile_evt"
                 android:text="This is Demo Name"
                 android:textColor="#000"
@@ -63,20 +65,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Name_evt"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
                 android:layout_toRightOf="@id/profile_evt"
                 android:text="This is Course Name"
                 android:textColor="#000"
                 android:textSize="25sp" />
-
 
             <TextView
                 android:id="@+id/Creator_evt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Adress_evt"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
                 android:layout_toRightOf="@id/profile_evt"
                 android:text="This is Email Name"
                 android:textColor="#000"
@@ -87,8 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Creator_evt"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
                 android:layout_toRightOf="@id/profile_evt"
                 android:text="This is Email Name"
                 android:textColor="#000"
@@ -96,11 +98,11 @@
 
             <TextView
                 android:id="@+id/Category_evt"
-                android:layout_width="295dp"
-                android:layout_height="53dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/Date_evt"
-                android:layout_marginLeft="9dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
                 android:layout_toRightOf="@id/profile_evt"
                 android:text="This is Email Name"
                 android:textColor="#000"
