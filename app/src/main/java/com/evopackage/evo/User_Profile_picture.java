@@ -106,7 +106,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     }
 
     private void uploadImageToFirebase(Uri image) {
-        StorageReference fileRef = storageRef.child("user_profile_pics").child(user.getUid()).child("Profile.jpg");
+        StorageReference fileRef = storageRef.child("user_profile_pics").child(user.getUid()).child("profile.jpg");
         fileRef.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
