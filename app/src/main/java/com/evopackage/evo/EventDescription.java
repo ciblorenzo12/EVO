@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class EventDescription extends AppCompatActivity {
     private List<Activity> list;
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
+    private Button setUp;
    // private EventActivitiesAdapter.OnItemClickListener listener;
 
     @Override
@@ -43,63 +45,15 @@ public class EventDescription extends AppCompatActivity {
         txtCreator = findViewById(R.id.eventcreatorr);
         txtAttendees = findViewById(R.id.txtAttendees);
 
+        setUp = findViewById(R.id.button);
+        setUp.setOnClickListener(v -> openAct());
         populateData();
-
-//
-//
-//        refdata = FirebaseDatabase.getInstance().getReference().child("events");
-//        rv = findViewById(R.id.RecicleBar_Firebase);
-//
-//        rv.setLayoutManager(managerL);
-//
-//        adapter = new EventActivitiesAdapter(list, listener) {
-//
-//            public void OnItemClick(Activity ev) {
-//                movetodescription(ev);
-//            }
-//        };
-//
-//        rv.setAdapter(adapter);
-//
-//        refdata.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                if (snapshot.exists()) {
-//
-//                    list.clear();
-//
-//                    for (DataSnapshot snap : snapshot.getChildren()) {
-//
-//                        String Creator = snap.child("creator").getValue(String.class);
-//
-//                        Activity evt = new Activity(snap.getKey(),
-//                                snap.child("name").getValue(String.class),
-//                                snap.child("date").getValue(String.class),
-//                                snap.child("address").getValue(String.class),
-//                                snap.child("category").getValue(String.class),
-//                                snap.child("creator").getValue(String.class),
-//                                "String uri",
-//                                snap.child("description").getValue(String.class));
-//                        list.add(evt);
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
     }
 
-//    private void movetodescription(Activity ev) {
-//        Intent i = new Intent(this, EventDescription.class);
-//        i.putExtra("Activity", ev);
-//        startActivity(i);
-//    }
+    private void openAct() {
+        create_activity_popup actDialog = new create_activity_popup();
+        actDialog.show(getSupportFragmentManager(), "ActivityDialog");
+    }
 
     public void populateData()
     {
@@ -109,7 +63,6 @@ public class EventDescription extends AppCompatActivity {
         txtCategory.setText(ev.GetCategory());
         txtDescription.setText(ev.GetDescription());
         txtCreator.setText(ev.GetCreator());
-
         FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("assistance").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
