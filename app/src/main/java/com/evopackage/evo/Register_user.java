@@ -12,15 +12,10 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -32,26 +27,27 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     //firebase Auth
     private FirebaseAuth _authentication;
     //information need it
-    private EditText _fullname, _lastname, _email, _password, _phone, _dob;
+    private EditText _displayname, _fullname, _lastname, _email, _password, _phone, _dob;
 
     //buttons
     private Button _registerBtn;
     private ImageButton _back_Login;
     private ProgressBar _progressbar;
-    private DatabaseReference ref_UserEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
         _authentication = FirebaseAuth.getInstance();
+        _displayname = findViewById(R.id.register_displayname);
         _fullname = findViewById(R.id.register_firstname);
         _lastname = findViewById(R.id.register_lastname);
         _email = findViewById(R.id.register_email);
         _password = findViewById(R.id.register_password);
         _phone = findViewById(R.id.register_phone);
         _dob = findViewById(R.id.register_dob);
-        ref_UserEmail= FirebaseDatabase.getInstance().getReference().child("users");
+
         //buttons
         _registerBtn = findViewById(R.id.register_btn);
         _back_Login = findViewById(R.id.register_back);
@@ -96,6 +92,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     }
 
     private void RegisterUser() {
+        String _DisplayName = _displayname.getText().toString().trim();
         String _FirstName = _fullname.getText().toString().trim();
         String _LastName = _lastname.getText().toString().trim();
         String _Email = _email.getText().toString().trim();
@@ -103,6 +100,23 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         String _Phone = _phone.getText().toString().trim();
         String _Dob = _dob.getText().toString().trim();
 
+        if(_DisplayName.isEmpty()){
+            _displayname.setError("Please enter a display name");
+            _displayname.requestFocus();
+            return;
+        }
+
+        //if (_DisplayName.length() < 10){
+          //  _displayname.setError("Display name must be at least 10 characters");
+          //  _displayname.requestFocus();
+         //   return;
+       // }
+
+       // if(_DisplayName.length() > 24){
+       //     _displayname.setError("Display name must be 24 characters or less");
+       //     _displayname.requestFocus();
+       //     return;
+        //}
 
         if (_FirstName.isEmpty()) {
             _fullname.setError("Please enter your first name");
@@ -121,34 +135,6 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
             _email.setError("Please enter your email address");
             _email.requestFocus();
             return;
-        }else{
-
-            ref_UserEmail.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot snap:snapshot.getChildren()){
-
-
-                            if (_Email.contains( snap.child("_email").getValue(String.class))){
-                              _email.setError("Email already registered");
-                                _email.requestFocus();
-                                return;
-                            }
-
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-
-
-
         }
 
         if (_Password.isEmpty()) {
@@ -183,12 +169,11 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
             _password.requestFocus();
             return;
         }
-
         if (!HasCapitalLetters(_Password)) {
 
             _password.setError("Password must contain at least one capital letter");
             _password.requestFocus();
-          return;
+
         }
         _progressbar.setVisibility(View.VISIBLE);
 
@@ -196,7 +181,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
-                        User_information users = new User_information(_FirstName, _LastName, _Dob, _Email, _Password, _Phone,"Events"," ");
+                        User_information users = new User_information(_DisplayName,_FirstName, _LastName, _Dob, _Email, _Password, _Phone,"Events"," ");
                         _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
                                         .getUid()).setValue(users)
                                 .addOnCompleteListener
