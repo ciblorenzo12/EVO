@@ -38,24 +38,14 @@
 
 
             <TextView
-                android:id="@+id/actdate"
-                android:layout_width="127dp"
-                android:layout_height="14dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="59dp"
-                android:layout_marginEnd="254dp"
-                android:textColor="#000"
-                android:textSize="14sp" />
-
-            <TextView
                 android:id="@+id/peoplename"
-                android:layout_width="362dp"
-                android:layout_height="19dp"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="106dp"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -65,9 +55,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="34dp"
+                android:layout_marginStart="183dp"
+                android:layout_marginTop="49dp"
+                android:textAlignment="center"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/peoplepicture"
+                android:layout_width="70dp"
+                android:layout_height="75dp"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/profile" />
 
 
         </RelativeLayout>

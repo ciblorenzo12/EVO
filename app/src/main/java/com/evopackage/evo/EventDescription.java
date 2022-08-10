@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.evopackage.evo.databinding.EventDescriptionBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +18,6 @@ import java.util.List;
 
 public class EventDescription extends AppCompatActivity {
 
-    private EventDescriptionBinding binding;
     private Event ev;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
@@ -115,7 +113,7 @@ public class EventDescription extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("assistance").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                txtAttendees.setText(snapshot.getChildrenCount() + " Attendees");
+                txtAttendees.setText(" Attendees (" + snapshot.getChildrenCount() + " have already joined the Event)");
             }
 
             @Override
