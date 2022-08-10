@@ -67,7 +67,12 @@ public class Event_History extends AppCompatActivity implements create_event_pop
         evtHistory.setLayoutManager(layoutManager);
 
         eventInfo = new ArrayList<>();
-        adaptor = new Adapter_Recicleview(eventInfo);
+        adaptor = new Adapter_Recicleview(eventInfo, new Adapter_Recicleview.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Event ev) {
+
+            }
+        });
 
         evtHistory.setAdapter(adaptor);
         eventref = FirebaseDatabase.getInstance().getReference().child("events");
@@ -91,22 +96,22 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                 DataSnapshot eventsRef = snapshot.child("events");
                 if (userRef.exists()) {
                     String eventCode;
-                    for (DataSnapshot snap : userRef.child("My_Events").getChildren()) {
+                    for (DataSnapshot snap : userRef.child("user-events").getChildren()) {
 
-                        eventCode = snap.getKey();
 
-                        StorageReference imageRef = picRef.child("user_profile_pics/"+eventsRef.child(eventCode).child("creator")+"/profile.jpg");
-                        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                picUri = uri;
-                            }
-                        });
+
+//                        StorageReference imageRef = picRef.child("user_profile_pics/"+eventsRef.child(snap.getKey()).child("creator")+"/profile.jpg");
+//                        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                            @Override
+//                            public void onSuccess(Uri uri) {
+//                                picUri = uri;
+//                            }
+//                        });
 
                         //userEvents.add(eventCode);
                         //event = new Event(eventCode);
 
-                        event = new Event(eventsRef.child(eventCode).child("name").getValue().toString(),eventsRef.child(eventCode).child("date").getValue().toString(),eventsRef.child(eventCode).child("address").getValue().toString(),eventsRef.child(eventCode).child("category").getValue().toString(),userRef.child(FirebaseAuth.getInstance().getCurrentUser().toString()).child("_firstname").getValue().toString() + " " + userRef.child(FirebaseAuth.getInstance().getCurrentUser().toString()).child("_lastname").getValue().toString(), picUri);
+                        event = new Event(snap.getKey());
                         eventInfo.add(event);
                     }
 
@@ -122,16 +127,6 @@ public class Event_History extends AppCompatActivity implements create_event_pop
 
             }
         });
-
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-
-    }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
     }
 

@@ -15,7 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.auth.AuthUI;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,13 +93,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                             for (DataSnapshot snap : snapshot.getChildren()) {
                                 String Creator = snap.child("creator").getValue(String.class);
 
-                                Event evt = new Event(snap.getKey(),
-                                        snap.child("name").getValue(String.class),
-                                        snap.child("date").getValue(String.class),
-                                        snap.child("address").getValue(String.class),
-                                        snap.child("category").getValue(String.class),
-                                        snap.child("creator").getValue(String.class),
-                                        "String uri", "String description");
+                                Event evt = new Event(snap.getKey());//,
+//                                        snap.child("name").getValue(String.class),
+//                                        snap.child("date").getValue(String.class),
+//                                        snap.child("address").getValue(String.class),
+//                                        snap.child("category").getValue(String.class),
+//                                        snap.child("creator").getValue(String.class),
+//                                        "String uri", "String description");
                                 _events.add(evt);
                             }
                             adaptor.notifyDataSetChanged();
@@ -209,7 +209,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             logout.setOnClickListener(MainWindows_Create_Join_Event.this);
         }
         if (v.getId() == logout.getId()) {
-            signout();
+            //signout();
         }
 
 //        if (v.getId() == R.id.settings_Main_Id) {
@@ -218,17 +218,17 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 //        } caused crash... was located in signout before??
     }
 
-    private void signout() {
-        AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
-                    finish();
-                }
-            }
-        });
-    }
+//    private void signout() {
+//        AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
+//                    finish();
+//                }
+//            }
+//        });
+//    }
 
     private void RequestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {

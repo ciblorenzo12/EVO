@@ -165,6 +165,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         return current_eventID;
     }
 
+    public interface DialogListener {
+    }
+
 //    public static void SetCurrentEvent() {
 //
 //

@@ -38,16 +38,7 @@ android {
 }
 
 dependencies {
-<<<<<<<<< Temporary merge branch 1
 
-
-    implementation 'com.google.zxing:core:3.4.0'
-
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation 'androidx.navigation:navigation-fragment:2.5.0'
-    implementation 'androidx.navigation:navigation-ui:2.5.0'
-=========
->>>>>>>>> Temporary merge branch 2
 
     //just added
     implementation 'com.squareup.picasso:picasso:2.71828'
