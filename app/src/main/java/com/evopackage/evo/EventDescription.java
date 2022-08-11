@@ -15,19 +15,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class EventDescription extends AppCompatActivity {
 
     private Event ev;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
-    //private EventActivitiesAdapter adapter;
-    private List<Activity> list;
+    private EventActivitiesAdapter adapter;
+    private ArrayList<Activity> list;
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
     private Button setUp;
-   // private EventActivitiesAdapter.OnItemClickListener listener;
+
+    private RecyclerView rv2;
+    private ArrayList<Profile_Page> list2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,48 @@ public class EventDescription extends AppCompatActivity {
         setUp = findViewById(R.id.button);
         setUp.setOnClickListener(v -> openAct());
         populateData();
+
+        managerL = new LinearLayoutManager(this);
+        refdata = FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("activities");
+        rv = findViewById(R.id.rvact);
+        rv.setLayoutManager(managerL);
+
+        list = new ArrayList<Activity>();
+
+        adapter = new EventActivitiesAdapter(list);
+
+        rv.setAdapter(adapter);
+
+        refdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    list.clear();
+
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+
+                        Activity act = new Activity(
+                                snap.getKey(),
+                                snap.child("time").getValue(String.class),
+                                snap.child("location").getValue(String.class));
+
+                        list.add(act);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
     }
 
     private void openAct() {
@@ -64,6 +108,7 @@ public class EventDescription extends AppCompatActivity {
         txtCategory.setText(ev.GetCategory());
         txtDescription.setText(ev.GetDescription());
         txtCreator.setText(ev.GetCreator());
+
         FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("assistance").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
