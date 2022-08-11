@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,8 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-
-
 
 
     //searchView
@@ -38,7 +40,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     LinearLayoutManager managerL;
 
 
-    private ImageButton qr, settings,evtBtn, btn,messenges_btn,back_settings,join;
+    private ImageButton qr, settings, evtBtn, btn, messenges_btn, back_settings, join;
     private Button logout;
 
     @Override
@@ -47,7 +49,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         setContentView(R.layout.setting_page);
 
         logout = findViewById(R.id.logout);
-        back_settings =  findViewById(R.id.SettingsBack);
+        back_settings = findViewById(R.id.SettingsBack);
         setContentView(R.layout.activity_main_windows_create_join_event);
         messenges_btn = findViewById(R.id.messages_btn);
 
@@ -131,6 +133,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     }
 
+    private void joinPopUp() {
+    }
+
+    private void movetodescription(Event ev) {
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+    }
+
     //Search
     private void Search(String txt) {
         ArrayList<Event> events_search = new ArrayList<>();
@@ -157,8 +166,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
 
-
-
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
@@ -183,7 +190,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
             setContentView(R.layout.setting_page);
             logout.setOnClickListener(MainWindows_Create_Join_Event.this);
-           back_settings.setOnClickListener(MainWindows_Create_Join_Event.this);
+            back_settings.setOnClickListener(MainWindows_Create_Join_Event.this);
 
         }
         if (v.getId() == logout.getId()) {
@@ -191,21 +198,21 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             signout();
 
         }
-        if(v.getId()==back_settings.getId() ){
+        if (v.getId() == back_settings.getId()) {
 
-            Intent _intent = new Intent(this,MainWindows_Create_Join_Event.class);
+            Intent _intent = new Intent(this, MainWindows_Create_Join_Event.class);
             startActivity(_intent);
-             finish();
+            finish();
         }
-        if(v.getId()==messenges_btn.getId()){
+        if (v.getId() == messenges_btn.getId()) {
 
-            Intent _intent = new Intent(this,main_messenges.class);
+            Intent _intent = new Intent(this, main_messenges.class);
             startActivity(_intent);
 
 
         }
     }
-
+    
     private void signout() {
 
         AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -223,17 +230,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             }
         });
     }
-
-
     private void RequestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
-                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
-        }
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 
 
                     }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
@@ -252,20 +254,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
 
 
-    }
 
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
 
     }
-
-    @Override
-    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-    }
-
-    // @Override
-  //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-   // }
 }
