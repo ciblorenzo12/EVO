@@ -20,13 +20,15 @@ import java.util.List;
 public class EventDescription extends AppCompatActivity {
 
     private Event ev;
+
+    private Button setUp;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
     //private EventActivitiesAdapter adapter;
     private List<Activity> list;
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
-    private Button setUp;
+
    // private EventActivitiesAdapter.OnItemClickListener listener;
 
     @Override

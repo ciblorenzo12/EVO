@@ -15,11 +15,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +32,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.zip.Inflater;
 
 import javax.xml.transform.Result;
 
@@ -40,10 +43,13 @@ public class create_activity_popup extends AppCompatDialogFragment {
     private EditText txtDate;
     private ImageView imageView;
     private ImageButton addImage;
+    LinearLayout cardIm;
     private Uri filePath;
     private static final int GET_FROM_GALLERY = 3;
     FirebaseStorage storage;
     StorageReference storageReference;
+    LinearLayout.LayoutParams viewParamsCenter = new LinearLayout.LayoutParams(
+            300  , LinearLayout.LayoutParams.MATCH_PARENT);
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +62,16 @@ public class create_activity_popup extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
+        LayoutInflater cardIn = requireActivity().getLayoutInflater();
         View vr = inflater.inflate(R.layout.activity_dialog, null);
+        cardIm = (LinearLayout) vr.findViewById(R.id.linerImage);
         txtName = vr.findViewById(R.id.editName);
         txtLoc = vr.findViewById(R.id.editLoc);
         txtDate = vr.findViewById(R.id.editDate);
         addImage = vr.findViewById(R.id.addImage);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+
         addImage.setOnClickListener(v -> openGallary());
         builder.setView(vr)
                 .setTitle("Creating Activity")
@@ -106,6 +115,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
                         .getBitmap(
                                 getContext().getContentResolver(),
                                 filePath);
+                
                 imageView.setImageBitmap(bitmap);
             }
 
@@ -113,6 +123,10 @@ public class create_activity_popup extends AppCompatDialogFragment {
                 // Log the exception
                 e.printStackTrace();
             }
+
+            imageView.setLayoutParams(viewParamsCenter);
+            cardIm.addView(imageView);
+
 
             uploadImage();
         }
