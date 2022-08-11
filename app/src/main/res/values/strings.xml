@@ -73,4 +73,6 @@
     <string name="date_example">mm/dd/yyyy</string>
     <string name="Creator_name">Creator  name</string>
     <string name="category">Category</string>
+    <string name="text" />
+    <string name="say_hi">Say hi</string>
 </resources>

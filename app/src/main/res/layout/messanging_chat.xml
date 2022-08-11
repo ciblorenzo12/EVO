@@ -15,8 +15,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
 
         android:alpha="80"
@@ -31,19 +31,11 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="199dp"
+            android:layout_height="wrap_content"
             android:alpha="500"
             android:animateLayoutChanges="true"
             android:scrollbarStyle="outsideOverlay"
             tools:visibility="visible">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_evt"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/ic_user_foreground"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
 
             <TextView
                 android:id="@+id/Name_msg"
@@ -63,48 +55,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Name_msg"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="29dp"
                 android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Course Name"
+                android:text="Message"
                 android:textColor="#000"
                 android:textSize="25sp" />
 
-
             <TextView
-                android:id="@+id/Creator_evt"
+                android:id="@+id/message_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/messange_msg"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="2dp"
+                android:layout_below="@id/Name_msg"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="110dp"
                 android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Email Name"
+                android:text="XX/XX/XX"
                 android:textColor="#000"
                 android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/Date_evt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Creator_evt"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="1dp"
-                android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Email Name"
-                android:textColor="#000"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/Category_evt"
-                android:layout_width="295dp"
-                android:layout_height="53dp"
-                android:layout_below="@+id/Date_evt"
-                android:layout_marginLeft="9dp"
-                android:layout_marginTop="9dp"
-                android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Email Name"
-                android:textColor="#000"
-                android:textSize="25sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_evt"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/ic_user_foreground"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
 
         </RelativeLayout>

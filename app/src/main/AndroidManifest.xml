@@ -8,25 +8,27 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
-
         android:name="android.hardware.camera"
         android:required="false" />
 
     <application
-        android:windowSoftInputMode="adjustPan"
-        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:targetApi="31"
-        tools:ignore="Instantiatable">
+        android:windowSoftInputMode="adjustPan"
+        tools:ignore="Instantiatable"
+        tools:targetApi="31">
         <activity
-
+            android:name=".main_messenges"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".Event_Page"
             android:exported="false" />
         <activity
@@ -36,10 +38,10 @@
             android:name=".User_Profile_picture"
             android:exported="false" />
         <activity
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
             android:name=".MainWindows_Create_Join_Event"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Forgot_password"
             android:exported="false" />

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/textView5"
+        android:layout_width="312dp"
+        android:layout_height="59dp"
+        app:boxBackgroundMode="outline"
+        app:boxBackgroundColor="@android:color/black"
+
+
+        android:layout_marginStart="10dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:ellipsize="none"
+        android:fitsSystemWindows="true"
+
+        android:hint="@string/say_hi"
+        android:inputType="textLongMessage|textAutoCorrect"
+        android:textAlignment="textStart"
+        android:textSize="24sp"
+        app:circularflow_defaultRadius="@dimen/cardview_default_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="415dp"
+        android:layout_height="621dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="409dp"
+                android:layout_height="570dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+
+
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/ic_baseline_send_24"
+        android:backgroundTint="#C411C8FF"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_marginBaseline="10dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

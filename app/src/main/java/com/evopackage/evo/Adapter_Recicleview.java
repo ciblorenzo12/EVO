@@ -52,8 +52,8 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
 
         public viewHolderEvents(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.Name_evt);
-            address= itemView.findViewById(R.id.Adress_evt);
+            name = itemView.findViewById(R.id.Name_msg);
+            address= itemView.findViewById(R.id.messange_msg);
             category=itemView.findViewById(R.id.Category_evt);
             date= itemView.findViewById(R.id.Date_evt);
             creator = itemView.findViewById(R.id.Creator_evt);
