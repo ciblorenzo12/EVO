@@ -99,9 +99,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                         firebaseEvent.child("category").setValue(event.GetCategory());
                         firebaseEvent.child("creator").setValue(event.GetCreator());
                         firebaseEvent.child("description").setValue(event.GetDescription());
-                        firebaseEvent.child("eventid").setValue(eventUid);
-                        firebaseEvent.child("assistance").child(current_user.getUid()).setValue("Creator");
-                        firebaseUsers.child("My_Events").child(current_eventID).setValue(current_event);
+                        //firebaseEvent.child("eventid").setValue(eventUid);
+                        firebaseEvent.child("people").child(current_user.getUid()).setValue("Creator");
+                        firebaseUsers.child("user-events").child(current_eventID).setValue(current_event);
                         current_eventID = eventUid;
                     }
                 });
