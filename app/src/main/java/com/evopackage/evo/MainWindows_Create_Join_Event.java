@@ -134,6 +134,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
     private void joinPopUp() {
+        create_event_popup evtPopUp = new create_event_popup();
+        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
     }
 
     private void movetodescription(Event ev) {
