@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -42,6 +44,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
     private ImageButton addImage;
     private Uri filePath;
     private static final int GET_FROM_GALLERY = 3;
+    private String eventKey;
     FirebaseStorage storage;
     StorageReference storageReference;
     @Override
@@ -70,7 +73,9 @@ public class create_activity_popup extends AppCompatDialogFragment {
 
                 })
                 .setPositiveButton("Create", (dialog, which) -> {
-
+                    DatabaseReference firebaseActivity = FirebaseDatabase.getInstance().getReference().child("events").child(eventKey).child("activities").child(txtName.getText().toString());
+                    firebaseActivity.child("location").setValue(txtLoc.getText().toString());
+                    firebaseActivity.child("time").setValue(txtDate.getText().toString());
                 });
         return builder.create();
     }
@@ -174,5 +179,10 @@ public class create_activity_popup extends AppCompatDialogFragment {
                                                 + (int)progress + "%");
                             });
         }
+    }
+
+    public void setEventKey(String key)
+    {
+        eventKey = key;
     }
 }

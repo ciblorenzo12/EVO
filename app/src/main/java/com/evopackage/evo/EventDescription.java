@@ -53,6 +53,7 @@ public class EventDescription extends AppCompatActivity {
     private void openAct() {
         create_activity_popup actDialog = new create_activity_popup();
         actDialog.show(getSupportFragmentManager(), "ActivityDialog");
+        actDialog.setEventKey(ev.GetKey());
     }
 
     public void populateData()
