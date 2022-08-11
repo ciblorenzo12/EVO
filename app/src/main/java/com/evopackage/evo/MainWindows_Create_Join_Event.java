@@ -15,10 +15,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
+
+
 
 
     //searchView
@@ -40,7 +38,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     LinearLayoutManager managerL;
 
 
-    private ImageButton qr, settings,evtBtn, btn,messenges_btn,back_settings;
+    private ImageButton qr, settings,evtBtn, btn,messenges_btn,back_settings,join;
     private Button logout;
 
     @Override
@@ -52,22 +50,20 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         back_settings =  findViewById(R.id.SettingsBack);
         setContentView(R.layout.activity_main_windows_create_join_event);
         messenges_btn = findViewById(R.id.messages_btn);
+
         refdata = FirebaseDatabase.getInstance().getReference().child("events");
         recicleviw = findViewById(R.id.RecicleBar_Firebase);
         search_bar = findViewById(R.id.searchView_Main);
         managerL = new LinearLayoutManager(this);
         recicleviw.setLayoutManager(managerL);
-
         _events = new ArrayList<>();
 
-        adaptor = new Adapter_Recicleview(_events);
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-
-        }
+        adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Event ev) {
+                movetodescription(ev);
+            }
+        });
         recicleviw.setAdapter(adaptor);
         userefdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,34 +73,22 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-
                         if (snapshot.exists()) {
-
                             _events.clear();
-
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
 
-                                String Creator = snap.child("creator").getValue(String.class);
-
-                                Event evt = new Event(snap.child("name").getValue(String.class),
-                                        (snap.child("date").getValue(String.class)),
-                                        (snap.child("address").getValue(String.class)),
-                                        (snap.child("category").getValue(String.class)),
-                                        (snap.child("creator").getValue
-                                                (String.class)),
-                                        "String uri");
+                                Event evt = new Event(snap.getKey(),
+                                        snap.child("name").getValue(String.class),
+                                        snap.child("date").getValue(String.class),
+                                        snap.child("address").getValue(String.class),
+                                        snap.child("category").getValue(String.class),
+                                        snap.child("creator").getValue(String.class),
+                                        "String uri", "String description");
                                 _events.add(evt);
-
-
                             }
-
-
                             adaptor.notifyDataSetChanged();
-
                         }
-
-
                     }
 
                     @Override
@@ -112,7 +96,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
                     }
                 });
-
             }
 
             @Override
@@ -120,6 +103,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
             }
         });
+
         search_bar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -137,7 +121,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         btn = findViewById(R.id.profile_picture_Main_id);
         settings = findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
+        join = findViewById(R.id.plus_Main_id);
         evtBtn.setOnClickListener(v -> openDialog());
+        join.setOnClickListener(view -> joinPopUp());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
@@ -153,7 +139,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
                 events_search.add(eventObj);
 
-                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search, new Adapter_Recicleview.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(Event ev) {
+
+                    }
+                });
                 recicleviw.setAdapter(recicleview);
             }
 
@@ -164,6 +155,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
+
+
 
 
     @Override
@@ -178,8 +171,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
             RequestCameraPermission();
-
-
+        }
+        if (v.getId() == settings.getId()) {
+            setContentView(R.layout.setting_page);
+            logout.setOnClickListener(MainWindows_Create_Join_Event.this);
+        }
+        if (v.getId() == logout.getId()) {
+            //signout();
         }
         if (v.getId() == settings.getId()) {
 
@@ -217,6 +215,10 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
                     finish();
 
+//        if (v.getId() == R.id.settings_Main_Id) {
+//            Intent car = new Intent(this, Event_Page.class);
+//            startActivity(car);
+//        } caused crash... was located in signout before??
                 }
             }
         });
@@ -224,15 +226,14 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
     private void RequestCameraPermission() {
-
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
                     .setPositiveButton("Allow", (dialog, which) -> {
-
-
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
+                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
+        }
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 
 
                     }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
@@ -264,7 +265,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
     // @Override
-    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+  //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
 
-    // }
+   // }
 }

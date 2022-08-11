@@ -32,37 +32,38 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.squareup.picasso.Picasso;
 
-public  class Event_Page extends AppCompatActivity implements View.OnClickListener {
+public class Event_Page extends AppCompatActivity implements View.OnClickListener {
 
     private TextView event_name;
 
     //fields
     private ImageButton eventpicture;
     private Uri images;
-    private static String mName="",
-                          mAdress="",
-                          mDate="",
-                          mQr="",
-                          mUri="";
+    private static String mName = "",
+            mAdress = "",
+            mDate = "",
+            mQr = "",
+            mUri = "";
 
-
-    private FirebaseStorage storage=FirebaseStorage.getInstance();
-
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseUser user_ = FirebaseAuth.getInstance().getCurrentUser();
     private UploadTask MuploadTask;
     private StorageReference refer_storage = storage.getReference();
-    private DatabaseReference reference_events= FirebaseDatabase.getInstance().getReference().child("events");
-    private DatabaseReference reference_user_event= FirebaseDatabase.getInstance().getReference().child("users").child(user_.getUid()).child("My_Events");
+    private DatabaseReference reference_events = FirebaseDatabase.getInstance().getReference().child("events");
+    private DatabaseReference reference_user_event = FirebaseDatabase.getInstance().getReference().child("users").child(user_.getUid()).child("My_Events");
     private static final int tiktok = 1287;
 
-    public Event_Page(){};
-    public Event_Page(String _mName,String _mAdress,String _mDate,String _mQr,String _mUri) {
+    public Event_Page() {
+    }
+
+    ;
+
+    public Event_Page(String _mName, String _mAdress, String _mDate, String _mQr, String _mUri) {
         mName = _mName;
-      mAdress= _mAdress;
-       mDate = _mDate;
+        mAdress = _mAdress;
+        mDate = _mDate;
         mQr = _mQr;
-        mUri=_mUri;
+        mUri = _mUri;
     }
 
     @Override
@@ -70,19 +71,17 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_page);
 
-eventpicture = findViewById(R.id.eventPicture);
-event_name = findViewById(R.id.Event_name);
+        eventpicture = findViewById(R.id.eventPicture);
+        event_name = findViewById(R.id.Event_name);
 
-eventpicture.setOnClickListener(this);
-            event_name.setText(create_event_popup.GetCurrent_Event());
-            GenerateQr(create_event_popup.GetCurrent_EventID());
+        eventpicture.setOnClickListener(this);
+        event_name.setText(create_event_popup.GetCurrent_Event());
+        GenerateQr(create_event_popup.GetCurrent_EventID());
 
-
-
-
-
+        Event ev = (Event) getIntent().getSerializableExtra("Event_Page");
     }
-//create a qr code
+
+    //create a qr code
     private void GenerateQr(String qr) {
         QRCodeWriter writer = new QRCodeWriter();
 
@@ -103,21 +102,9 @@ eventpicture.setOnClickListener(this);
         }
     }
 
-    public static void Pass_Event_(String _name,String _adress,String _date,String _qr,String _Uri){
-
-        mName = _name;
-        mAdress = _adress;
-        mDate = _date;
-        mQr = _qr;
-        mUri = _Uri;
-    }
-
-
-
-
 
     private void uploadpicture() {
-        if(images==null) {
+        if (images == null) {
 
             Intent _intent = new Intent();
             _intent.setType("image/*");
@@ -130,64 +117,62 @@ eventpicture.setOnClickListener(this);
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-  try {
-      if(requestCode==tiktok|| resultCode== RESULT_OK||data!=null||data.getData()!=null){
-          images = data.getData();
-          update();
-          Picasso.get().load(images).into(eventpicture);
+        try {
+            if (requestCode == tiktok || resultCode == RESULT_OK || data != null || data.getData() != null) {
+                images = data.getData();
+                update();
+                Picasso.get().load(images).into(eventpicture);
 
-          Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
-}
-  }catch (Exception e){
-      Toast.makeText(this, "Select a file please"+e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
             }
-
+        } catch (Exception e) {
+            Toast.makeText(this, "Select a file please" + e, Toast.LENGTH_SHORT).show();
         }
 
-      public String Getext(Uri uri_pic){
+    }
 
-          ContentResolver cont = getContentResolver();
-          MimeTypeMap mmap = MimeTypeMap.getSingleton();
-return mmap.getExtensionFromMimeType(cont.getType(uri_pic));
-      }
-private void update(){
-if (images!= null){
+    public String Getext(Uri uri_pic) {
 
-    StorageReference ref = refer_storage.child("images").child(create_event_popup.GetCurrent_EventID())
-                                                         .child("profile"+"."+Getext(images));
-    String  code = ref.toString();
-    Toast.makeText(this, code, Toast.LENGTH_SHORT).show();
-    ref.delete();
-    MuploadTask = ref.putFile(images);
-    Task<Uri> urltask = MuploadTask.continueWithTask(task -> {
-        if (!task.isSuccessful()){
-            throw  task.getException();
-        }
-        return ref.getDownloadUrl();
-    }).addOnCompleteListener(task -> {
-        if (task.isSuccessful()){
+        ContentResolver cont = getContentResolver();
+        MimeTypeMap mmap = MimeTypeMap.getSingleton();
+        return mmap.getExtensionFromMimeType(cont.getType(uri_pic));
+    }
 
-            Uri downl = task.getResult();
-            reference_events.child(create_event_popup.GetCurrent_EventID()).child("Event picture").setValue(downl.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
+    private void update() {
+        if (images != null) {
+
+            StorageReference ref = refer_storage.child("images").child(create_event_popup.GetCurrent_EventID())
+                    .child("profile" + "." + Getext(images));
+            String code = ref.toString();
+            Toast.makeText(this, code, Toast.LENGTH_SHORT).show();
+            ref.delete();
+            MuploadTask = ref.putFile(images);
+            Task<Uri> urltask = MuploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return ref.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+
+                    Uri downl = task.getResult();
+                    reference_events.child(create_event_popup.GetCurrent_EventID()).child("Event picture").setValue(downl.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void run() {
+                        public void onSuccess(Void unused) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
 
+                                }
+                            }, 100);
                         }
-                    },100);
+                    });
+
                 }
             });
-
         }
-    });
-}
-
-
-}
-
+    }
 
     @Override
     public void onClick(View v) {

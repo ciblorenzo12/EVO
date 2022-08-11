@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,32 +33,23 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtName;
     private TextView txtDate;
     private EditText txtAddress;
+    private TextView txtDescription;
 
-    private DialogListener listener;
-   private  Event event;
-   private  DatabaseReference firebaseEvent ;
+    //private DialogListener listener;
+    private Event event;
+    private DatabaseReference firebaseEvent;
     private FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-    private  DatabaseReference firebaseUsers= FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-    //caleb code
-   private static String current_event;
-   private static String current_eventID;
-    private static String current_eventDate;
-    private static String current_eventAdress;
-   private static ArrayList<String> _events = new ArrayList<>();
+    private static String current_event;
+    private static String current_eventID;
+    private static ArrayList<String> _events = new ArrayList<>();
 
-
-   @Override
-   public void onCreate(Bundle savedInstanceState) {
-
-
-
-
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-
-}
     @SuppressLint("CutPasteId")
     @NonNull
     @Override
@@ -69,6 +62,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
+        txtDescription = v.findViewById(R.id.description);
 
         txtDate.setOnClickListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.select_dialog_item);
@@ -83,63 +77,43 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                 .setPositiveButton("create", (dialog, which) -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                   event = new Event(txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(),"");
-                    String eventUid_value = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
+                    String eventKey = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
+                    event = new Event(eventKey, txtName.getText().toString(), txtDate.getText().toString(),
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "");
 
-
-
-
-
-                    if (txtName.getText().toString().isEmpty()||txtAddress.getText().toString().isEmpty()||txtDate.getText().toString().isEmpty()){
-
-                         dialog.dismiss();
-                        Toast.makeText(v.getContext(), "Error name,address or date  can't be empty", Toast.LENGTH_SHORT).show();
+                    if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() || txtDate.getText().toString().isEmpty()) {
+                        dialog.dismiss();
+                        Toast.makeText(v.getContext(), "Error name, address or date  can't be empty", Toast.LENGTH_SHORT).show();
                         Toast.makeText(v.getContext(), "Please enter a valid name", Toast.LENGTH_SHORT).show();
-
-                       return;
-                    }else {
-
-
-                        listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
-                                txtAddress.getText().toString());
-
-                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid_value);
-                        firebaseEvent.child("name").setValue(event.GetName());
+                        return;
+                    } else {
+//                        listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
+//                                txtAddress.getText().toString());
+                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventKey);
                         current_event = event.GetName();
+                        current_eventID = eventKey;
 
-
-
-
-
-
-                    firebaseEvent.child("date").setValue(event.GetDate());
-                    firebaseEvent.child("address").setValue(event.GetLocation());
-                    firebaseEvent.child("category").setValue(event.GetCategory());
-                    firebaseEvent.child("creator").setValue(event.GetCreator());
-                    firebaseEvent.child("eventid").setValue(eventUid_value);
-                    firebaseEvent.child("assistance").child(current_user.getUid()).setValue("Creator");
-                    current_eventID = eventUid_value;
-                    firebaseUsers.child("My_Events").child(current_eventID).setValue(current_event);
+                        firebaseEvent.child("name").setValue(event.GetName());
+                        firebaseEvent.child("date").setValue(event.GetDate());
+                        firebaseEvent.child("address").setValue(event.GetLocation());
+                        firebaseEvent.child("category").setValue(event.GetCategory());
+                        firebaseEvent.child("creator").setValue(event.GetCreator());
+                        firebaseEvent.child("people").child(current_user.getUid()).setValue("Creator");
+                        firebaseUsers.child("user-events").child(current_eventID).setValue(current_event);
                     }
-
-                    });
-
-
-
-           return builder.create();
-
+                });
+        return builder.create();
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try {
-            listener = (DialogListener) context;
-        } catch (ClassCastException e){
-            throw  new ClassCastException(context +
-            "must implement DialogListener");
-        }
+//        try {
+//            listener = (DialogListener) context;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(context +
+//                    "must implement DialogListener");
+//        }
     }
 
     @Override
@@ -155,26 +129,21 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==txtDate.getId()){
-
-
+        if (v.getId() == txtDate.getId()) {
             Pick_a_Date();
-
         }
     }
-    private void Pick_a_Date() {
 
+    private void Pick_a_Date() {
         DatePickerDialog _choosedate = new DatePickerDialog(this.getContext(),
                 this,
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-
-
         );
         _choosedate.show();
-
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month = month + 1;
@@ -182,32 +151,27 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtDate.setText(dob);
     }
 
-    public interface DialogListener
-    {
-        void applyTexts(String _evtName, String _evtDate, String _evtAdder);
+//    public interface DialogListener {
+//        void applyTexts(String _evtName, String _evtDate, String _evtAdder);
+//
+//        void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme);
+//    }
 
-        void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme);
+    public static String GetCurrent_Event() {
+        return current_event;
     }
 
-    public static String GetCurrent_Event(){
-
-
-
-
-      return current_event;
-    }
-    public static String GetCurrent_EventID(){
-
-
-
-
+    public static String GetCurrent_EventID() {
         return current_eventID;
     }
-    public static void SetCurrentEvent(){
 
-
-
+    public interface DialogListener {
     }
+
+//    public static void SetCurrentEvent() {
+//
+//
+//    }
 
 }
 

@@ -73,6 +73,14 @@
     <string name="date_example">mm/dd/yyyy</string>
     <string name="Creator_name">Creator  name</string>
     <string name="category">Category</string>
+    <string name="description">Event Description</string>
+    <string name="addres">Address</string>
+    <string name="descr">Event Description</string>
+    <string name="scan">Scan QR code to Access Event</string>
+    <string name="creator">Organizer</string>
+    <string name="atendees">Atendees</string>
+    <string name="attendees">Attendees</string>
+    <string name="Eventactivities">Activities Scheduled</string>
     <string name="text" />
     <string name="say_hi">Say hi</string>
 </resources>

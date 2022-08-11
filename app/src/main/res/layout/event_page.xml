@@ -23,7 +23,7 @@
                 android:layout_height="137dp"
                 android:background="#00BCD4"
 
-                android:onClick= "onClick"
+                android:onClick="onClick"
                 tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
             <TextView
