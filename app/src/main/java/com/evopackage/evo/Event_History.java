@@ -70,7 +70,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
         adaptor = new Adapter_Recicleview(eventInfo, new Adapter_Recicleview.OnItemClickListener() {
             @Override
             public void OnItemClick(Event ev) {
-
+                movetodescription(ev);
             }
         });
 
@@ -92,11 +92,11 @@ public class Event_History extends AppCompatActivity implements create_event_pop
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userEvents.clear();
-                DataSnapshot userRef = snapshot.child("users").child(FirebaseAuth.getInstance().getUid());
+                DataSnapshot userRef = snapshot.child("users");
                 DataSnapshot eventsRef = snapshot.child("events");
                 if (userRef.exists()) {
                     String eventCode;
-                    for (DataSnapshot snap : userRef.child("user-events").getChildren()) {
+                    for (DataSnapshot snap : userRef.child(FirebaseAuth.getInstance().getUid()).child("user-events").getChildren()) {
 
 
 
@@ -111,7 +111,13 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                         //userEvents.add(eventCode);
                         //event = new Event(eventCode);
 
-                        event = new Event(snap.getKey());
+                        event = new Event(snap.getKey(),
+                                eventsRef.child(snap.getKey()).child("name").getValue(String.class),
+                                eventsRef.child(snap.getKey()).child("date").getValue(String.class),
+                                eventsRef.child(snap.getKey()).child("address").getValue(String.class),
+                                eventsRef.child(snap.getKey()).child("category").getValue(String.class),
+                                userRef.child(eventsRef.child(snap.getKey()).child("creator").getValue(String.class)).child("_firstname").getValue().toString()+" "+userRef.child(eventsRef.child(snap.getKey()).child("creator").getValue(String.class)).child("_lastname").getValue().toString(),
+                                "String uri", "String description");
                         eventInfo.add(event);
                     }
 
@@ -136,5 +142,11 @@ public class Event_History extends AppCompatActivity implements create_event_pop
             Intent intent = new Intent(this, Profile_Page.class);
             startActivity(intent);
         }
+    }
+
+    private void movetodescription(Event ev) {
+        Intent i = new Intent(this, EventDescription.class);
+        i.putExtra("Event", ev);
+        startActivity(i);
     }
 }

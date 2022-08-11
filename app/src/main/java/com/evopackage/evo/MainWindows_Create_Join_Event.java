@@ -38,7 +38,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr, settings;
+    private ImageButton qr, settings, join;
 
     //searchView
     RecyclerView recicleviw;
@@ -91,15 +91,14 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                             _events.clear();
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
-                                String Creator = snap.child("creator").getValue(String.class);
 
-                                Event evt = new Event(snap.getKey());//,
-//                                        snap.child("name").getValue(String.class),
-//                                        snap.child("date").getValue(String.class),
-//                                        snap.child("address").getValue(String.class),
-//                                        snap.child("category").getValue(String.class),
-//                                        snap.child("creator").getValue(String.class),
-//                                        "String uri", "String description");
+                                Event evt = new Event(snap.getKey(),
+                                        snap.child("name").getValue(String.class),
+                                        snap.child("date").getValue(String.class),
+                                        snap.child("address").getValue(String.class),
+                                        snap.child("category").getValue(String.class),
+                                        snap.child("creator").getValue(String.class),
+                                        "String uri", "String description");
                                 _events.add(evt);
                             }
                             adaptor.notifyDataSetChanged();
@@ -136,10 +135,17 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         btn = findViewById(R.id.profile_picture_Main_id);
         settings = findViewById(R.id.settings_Main_Id);
         evtBtn = findViewById(R.id.calendar_id);
+        join = findViewById(R.id.plus_Main_id);
         evtBtn.setOnClickListener(v -> openDialog());
+        join.setOnClickListener(view -> joinPopUp());
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
+    }
+
+    private void joinPopUp() {
+        create_event_popup evtPopUp = new create_event_popup();
+        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
     }
 
     //Search
