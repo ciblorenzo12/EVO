@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -139,7 +138,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
     private void movetodescription(Event ev) {
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, EventDescription.class);
+        i.putExtra("Event", ev);
+        startActivity(i);
     }
 
     //Search
@@ -224,10 +225,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
                     finish();
 
-//        if (v.getId() == R.id.settings_Main_Id) {
-//            Intent car = new Intent(this, Event_Page.class);
-//            startActivity(car);
-//        } caused crash... was located in signout before??
+//
                 }
             }
         });

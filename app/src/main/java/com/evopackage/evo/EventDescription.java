@@ -33,7 +33,7 @@ public class EventDescription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.event_description);
+     setContentView(R.layout.event_description);
 
         ev = (Event) getIntent().getSerializableExtra("Event");
 
