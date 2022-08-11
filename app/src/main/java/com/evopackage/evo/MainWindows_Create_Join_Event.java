@@ -93,13 +93,13 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                             for (DataSnapshot snap : snapshot.getChildren()) {
                                 String Creator = snap.child("creator").getValue(String.class);
 
-                                Event evt = new Event(snap.getKey());//,
-//                                        snap.child("name").getValue(String.class),
-//                                        snap.child("date").getValue(String.class),
-//                                        snap.child("address").getValue(String.class),
-//                                        snap.child("category").getValue(String.class),
-//                                        snap.child("creator").getValue(String.class),
-//                                        "String uri", "String description");
+                                Event evt = new Event(snap.getKey(),
+                                        snap.child("name").getValue(String.class),
+                                        snap.child("date").getValue(String.class),
+                                        snap.child("address").getValue(String.class),
+                                        snap.child("category").getValue(String.class),
+                                        snap.child("creator").getValue(String.class),
+                                        "String uri", "String description");
                                 _events.add(evt);
                             }
                             adaptor.notifyDataSetChanged();

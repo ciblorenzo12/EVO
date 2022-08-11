@@ -111,7 +111,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                         //userEvents.add(eventCode);
                         //event = new Event(eventCode);
 
-                        event = new Event(snap.getKey());
+                        //event = new Event(snap.getKey());
                         eventInfo.add(event);
                     }
 
