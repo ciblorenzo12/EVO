@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +30,13 @@ import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
 
-
+     //messanging
+    Adapter_Messangers adaptor_m;
+    RecyclerView reciclemsg;
+    ArrayList<main_messenges>messenges_array;
+    TextInputEditText mess;
+    FloatingActionButton send_btn;
+    DatabaseReference refMessanging;
     //searchView
     RecyclerView recicleviw;
     DatabaseReference refdata;
@@ -43,9 +51,31 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private Button logout;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_messenges_);
+        send_btn= findViewById(R.id.sent_input);
+        refMessanging = FirebaseDatabase.getInstance().getReference().child("events");
+       mess = findViewById(R.id.messange_input);
+       send_btn.setOnClickListener(new View.OnClickListener() {
+
+           @Override
+           public void onClick(View v) {
+
+           }
+       });
+
+
         setContentView(R.layout.setting_page);
+        //messanging
+
+
+
 
         logout = findViewById(R.id.logout);
         back_settings = findViewById(R.id.SettingsBack);

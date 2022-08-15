@@ -8,7 +8,6 @@
     tools:context=".User_Profile_picture">
 
 
-
     <ImageButton
         android:id="@+id/ProfileSettingsBack"
         android:layout_width="77dp"
@@ -109,8 +108,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
