@@ -75,7 +75,7 @@
             tools:text="@string/description" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/EventQRGen"
             android:layout_width="295dp"
             android:layout_height="227dp"
             android:layout_marginTop="48dp"
