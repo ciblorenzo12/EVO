@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
+import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -33,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.zip.Inflater;
 
@@ -46,13 +48,15 @@ public class create_activity_popup extends AppCompatDialogFragment {
     private ImageView imageView;
     private ImageButton addImage;
     LinearLayout cardIm;
-    private Uri filePath;
+    private Uri fileImage;
+    private Thread thread;
+    private ArrayList<Uri> filePath = new ArrayList<>();
     private static final int GET_FROM_GALLERY = 3;
     private String eventKey;
     FirebaseStorage storage;
     StorageReference storageReference;
     LinearLayout.LayoutParams viewParamsCenter = new LinearLayout.LayoutParams(
-            300  , LinearLayout.LayoutParams.MATCH_PARENT);
+            200  , LinearLayout.LayoutParams.MATCH_PARENT);
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +74,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
         cardIm = (LinearLayout) vr.findViewById(R.id.linerImage);
         txtName = vr.findViewById(R.id.editName);
         txtLoc = vr.findViewById(R.id.editLoc);
+
         txtDate = vr.findViewById(R.id.editDate);
         addImage = vr.findViewById(R.id.addImage);
         storage = FirebaseStorage.getInstance();
@@ -85,6 +90,9 @@ public class create_activity_popup extends AppCompatDialogFragment {
                     DatabaseReference firebaseActivity = FirebaseDatabase.getInstance().getReference().child("events").child(eventKey).child("activities").child(txtName.getText().toString());
                     firebaseActivity.child("location").setValue(txtLoc.getText().toString());
                     firebaseActivity.child("time").setValue(txtDate.getText().toString());
+                    // psuedo
+                    // store in the storage path "events/eventKey/txtName.getText().toString()"
+                    uploadImage();
                 });
         return builder.create();
     }
@@ -110,7 +118,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
                 && data.getData() != null) {
 
             // Get the Uri of data
-            filePath = data.getData();
+            fileImage = data.getData();
             try {
 
                 // Setting image on image view using Bitmap
@@ -119,7 +127,7 @@ public class create_activity_popup extends AppCompatDialogFragment {
                         .Media
                         .getBitmap(
                                 getContext().getContentResolver(),
-                                filePath);
+                                fileImage);
                 
                 imageView.setImageBitmap(bitmap);
             }
@@ -132,15 +140,15 @@ public class create_activity_popup extends AppCompatDialogFragment {
             imageView.setLayoutParams(viewParamsCenter);
             cardIm.addView(imageView);
 
+            filePath.add(fileImage);
 
-            uploadImage();
         }
     }
     // UploadImage method
-    private void uploadImage()
-    {
-        if (filePath != null) {
+    private void uploadImage()  {
 
+        if (filePath != null) {
+            for (int i = 0; i < filePath.size(); i++) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
                     = new ProgressDialog(getContext());
@@ -150,49 +158,58 @@ public class create_activity_popup extends AppCompatDialogFragment {
             // Defining the child of storageReference
             StorageReference ref
                     = storageReference
-                    .child(
-                            "images/"
-                                    + UUID.randomUUID().toString());
+                    .child("images").child(eventKey).child(txtName.getText().toString()).child(UUID.randomUUID().toString());
 
             // adding listeners on upload
             // or failure of image
             // Progress Listener for loading
 // percentage on the dialog box
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            taskSnapshot -> {
 
-                                // Image uploaded successfully
-                                // Dismiss dialog
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getContext(),
-                                                "Image Uploaded!!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                            })
-
-                    .addOnFailureListener(e -> {
-
-                        // Error, Image not uploaded
-                        progressDialog.dismiss();
-                        Toast
-                                .makeText(getContext(),
-                                        "Failed " + e.getMessage(),
-                                        Toast.LENGTH_SHORT)
-                                .show();
-                    })
-                    .addOnProgressListener(
-                            taskSnapshot -> {
-                                double progress
-                                        = (100.0
-                                        * taskSnapshot.getBytesTransferred()
-                                        / taskSnapshot.getTotalByteCount());
-                                progressDialog.setMessage(
-                                        "Uploaded "
-                                                + (int)progress + "%");
-                            });
+                UploadTink(ref, filePath.get(i), progressDialog);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+
+    private void UploadTink(StorageReference _ref,  Uri _filePath, ProgressDialog _progress) {
+        _ref.putFile(_filePath)
+                .addOnSuccessListener(
+                        taskSnapshot -> {
+
+                            // Image uploaded successfully
+                            // Dismiss dialog
+                            _progress.dismiss();
+                            Toast
+                                    .makeText(getContext(),
+                                            "Image Uploaded!!",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        })
+
+                .addOnFailureListener(e -> {
+
+                    // Error, Image not uploaded
+                    _progress.dismiss();
+                    Toast
+                            .makeText(getContext(),
+                                    "Failed " + e.getMessage(),
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                })
+                .addOnProgressListener(
+                        taskSnapshot -> {
+                            double progress
+                                    = (100.0
+                                    * taskSnapshot.getBytesTransferred()
+                                    / taskSnapshot.getTotalByteCount());
+                            _progress.setMessage(
+                                    "Uploaded "
+                                            + (int) progress + "%");
+                        });
     }
 
     public void setEventKey(String key)

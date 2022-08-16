@@ -75,7 +75,7 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
 
         eventpicture.setOnClickListener(this);
         event_name.setText(create_event_popup.GetCurrent_Event());
-        GenerateQr(create_event_popup.GetCurrent_EventID());
+        GenerateQr(EventDescription.GetClickedEvent());
 
         Event ev = (Event) getIntent().getSerializableExtra("Event_Page");
 
@@ -96,7 +96,7 @@ public  class Event_Page extends AppCompatActivity implements View.OnClickListen
                     bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
-            ((ImageView) findViewById(R.id.EventQr)).setImageBitmap(bmp);
+            ((ImageView) findViewById(R.id.qrvt)).setImageBitmap(bmp);
 
         } catch (WriterException e) {
             e.printStackTrace();

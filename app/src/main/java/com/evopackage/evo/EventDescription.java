@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,10 +23,11 @@ import java.util.List;
 public class EventDescription extends AppCompatActivity {
 
     private Event ev;
-
+   private static String ClickedEvent;
     private Button setUp;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
+    private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     //private EventActivitiesAdapter adapter;
     private List<Activity> list;
     private LinearLayoutManager managerL;
@@ -46,8 +50,12 @@ public class EventDescription extends AppCompatActivity {
         txtDescription = findViewById(R.id.descriptionev);
         txtCreator = findViewById(R.id.eventcreatorr);
         txtAttendees = findViewById(R.id.txtAttendees);
+        ClickedEvent = ev.GetKey();
 
-        setUp = findViewById(R.id.button);
+            setUp = findViewById(R.id.button);
+            if(!firebaseUsers.getKey().equals(ev.GetCreator())) {
+                setUp.setVisibility(View.GONE);
+        }
         setUp.setOnClickListener(v -> openAct());
         populateData();
     }
@@ -77,5 +85,9 @@ public class EventDescription extends AppCompatActivity {
 
             }
         });
+    }
+    public static String  GetClickedEvent(){
+
+        return ClickedEvent;
     }
 }
