@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -71,6 +74,22 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         ProfSettingsBack.setOnClickListener(this);
         ProfSaveBtn.setOnClickListener(this);
         _password.setOnClickListener(this);
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snap) {
+                _firstName.setText(snap.child("_firstname").getValue(String.class));
+                _lastName.setText(snap.child("_lastname").getValue(String.class));
+                _phoneNumber.setText(snap.child("_phone").getValue(String.class));
+                if (snap.child("_displayName").exists() && snap.child("_displayName").getValue(String.class) != "")
+                    _userID.setText(snap.child("_displayName").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
