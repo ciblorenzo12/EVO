@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="searchView_Main" type="id" />
+
     <item name="RecicleBar_Firebase" type="id" />
+
+
+    <item name="Mensage_id" type="id">
+
+
+
+    </item>
 </resources>

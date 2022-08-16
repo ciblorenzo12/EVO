@@ -4,6 +4,7 @@ public class main_messenges  {
 
 private String sender,date,messenger;
     public main_messenges(){};
+
     public main_messenges(String sender, String date, String messenger) {
         this.sender = sender;
         this.date = date;

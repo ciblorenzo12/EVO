@@ -61,12 +61,12 @@
         android:background="@color/cardview_shadow_end_color"
         android:clickable="false"
 
+        android:editable="true"
         android:ellipsize="none"
-        android:fitsSystemWindows="true"
 
+        android:fitsSystemWindows="true"
         android:gravity="center"
         android:hint="@string/say_hi"
-        android:inputType="text"
         android:lineSpacingExtra="10sp"
         android:textAlignment="textStart"
         android:textColorHint="#150B0B"
@@ -76,9 +76,9 @@
         android:verticalScrollbarPosition="defaultPosition"
         app:boxBackgroundColor="@android:color/black"
         app:boxBackgroundMode="outline"
+
         app:boxStrokeColor="#00FFFFFF"
         app:circularflow_defaultRadius="@dimen/cardview_default_radius"
-
         app:helperText="@string/say_hi"
         app:helperTextEnabled="true"
         app:hintAnimationEnabled="false"

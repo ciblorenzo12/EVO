@@ -1,8 +1,10 @@
 package com.evopackage.evo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
@@ -28,14 +31,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
     //messanging
     Adapter_Messangers adaptor_m;
     RecyclerView reciclemsg;
     ArrayList<main_messenges> messenges_array;
-    public EditText mess;
+    private EditText mess;
     FloatingActionButton send_btn;
 
     //firebase
@@ -69,6 +76,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         send_btn = findViewById(R.id.sent_input);
         refMessanging =  FirebaseDatabase.getInstance().getReference();
         mess = findViewById(R.id.Mensage_in);
+
         setContentView(R.layout.setting_page);
         //messanging
 
@@ -212,6 +220,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
 
+    @SuppressLint("NewApi")
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
@@ -251,28 +260,33 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             finish();
         }
         if (v.getId() == messenges_btn.getId()) {
+
             setContentView(R.layout.main_messenges_);
             send_btn.setOnClickListener(MainWindows_Create_Join_Event.this);
 
 
         }
         if (v.getId() == send_btn.getId()) {
+
             Test();
 
         }
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void Test() {
 
-
-
+        mess = findViewById(R.id.Mensage_in);
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm a ");
+        Date currentTime = Calendar.getInstance().getTime();
         String Name = user.getDisplayName();
-        String Date = "12:00pm";
-        main_messenges mensage = new main_messenges(Name, Date,mess.getText().toString().trim());
+        String Date = df.format(System.currentTimeMillis());
+        main_messenges mensage = new main_messenges(Name, Date,mess.getText().toString());
 
         refMessanging.child("events").child("-N9Zrr8wPPsWmL_eQGgK").child("Message").push().setValue(mensage);
-
+      mess.setText("");
+      mess.setHint(" ");
     }
     
     private void signout() {
