@@ -5,40 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputEditText
-
-        android:id="@+id/messange_input"
-        android:layout_width="312dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="10dp"
-        android:background="@color/cardview_shadow_end_color"
-
-
-        android:ellipsize="none"
-        android:fitsSystemWindows="true"
-        android:hint="@string/say_hi"
-        android:inputType="textLongMessage|textAutoCorrect"
-
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:boxBackgroundColor="@android:color/black"
-        app:boxBackgroundMode="outline"
-        app:circularflow_defaultRadius="@dimen/cardview_default_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="415dp"
         android:layout_height="621dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/messange_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,37 +21,75 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recicle_mesg"
-                android:layout_width="409dp"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="599dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sent_input"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
 
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="44dp"
         android:adjustViewBounds="false"
-        android:backgroundTint="#C411C8FF"
 
+        android:clickable="false"
         android:fitsSystemWindows="true"
+        android:onClick="onClick"
         android:src="@drawable/ic_baseline_send_24"
         app:backgroundTint="#B82929"
         app:backgroundTintMode="multiply"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/messange_input"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_marginBaseline="10dp"
         tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <EditText
+        android:id="@+id/Mensage_in"
+        android:layout_width="286dp"
+        android:layout_height="88dp"
+
+
+        android:layout_marginStart="10dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:clickable="false"
+
+        android:ellipsize="none"
+        android:fitsSystemWindows="true"
+
+        android:gravity="center"
+        android:hint="@string/say_hi"
+        android:inputType="text"
+        android:lineSpacingExtra="10sp"
+        android:textAlignment="textStart"
+        android:textColorHint="#150B0B"
+        android:textDirection="locale"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:verticalScrollbarPosition="defaultPosition"
+        app:boxBackgroundColor="@android:color/black"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#00FFFFFF"
+        app:circularflow_defaultRadius="@dimen/cardview_default_radius"
+
+        app:helperText="@string/say_hi"
+        app:helperTextEnabled="true"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sent_input"
+        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95">
+
+    </EditText>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

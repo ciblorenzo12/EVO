@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,8 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,14 +31,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-
-     //messanging
+    //messanging
     Adapter_Messangers adaptor_m;
     RecyclerView reciclemsg;
-    ArrayList<main_messenges>messenges_array;
-    TextInputEditText mess;
+    ArrayList<main_messenges> messenges_array;
+    public EditText mess;
     FloatingActionButton send_btn;
-    DatabaseReference refMessanging;
+
+    //firebase
+    FirebaseUser user;
+    FirebaseAuth Auth_;
+    private DatabaseReference   refMessanging;
     //searchView
     RecyclerView recicleviw;
     DatabaseReference refdata;
@@ -59,18 +64,11 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_messenges_);
-        send_btn= findViewById(R.id.sent_input);
-        refMessanging = FirebaseDatabase.getInstance().getReference().child("events");
-       mess = findViewById(R.id.messange_input);
-       send_btn.setOnClickListener(new View.OnClickListener() {
-
-           @Override
-           public void onClick(View v) {
-
-           }
-       });
-
-
+        Auth_ = FirebaseAuth.getInstance();
+        user = Auth_.getCurrentUser();
+        send_btn = findViewById(R.id.sent_input);
+        refMessanging =  FirebaseDatabase.getInstance().getReference();
+        mess = findViewById(R.id.Mensage_in);
         setContentView(R.layout.setting_page);
         //messanging
 
@@ -162,6 +160,21 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void joinPopUp() {
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
@@ -238,12 +251,28 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             finish();
         }
         if (v.getId() == messenges_btn.getId()) {
-
-            Intent _intent = new Intent(this, main_messenges.class);
-            startActivity(_intent);
+            setContentView(R.layout.main_messenges_);
+            send_btn.setOnClickListener(MainWindows_Create_Join_Event.this);
 
 
         }
+        if (v.getId() == send_btn.getId()) {
+            Test();
+
+        }
+
+    }
+
+    private void Test() {
+
+
+
+        String Name = user.getDisplayName();
+        String Date = "12:00pm";
+        main_messenges mensage = new main_messenges(Name, Date,mess.getText().toString().trim());
+
+        refMessanging.child("events").child("-N9Zrr8wPPsWmL_eQGgK").child("Message").push().setValue(mensage);
+
     }
     
     private void signout() {

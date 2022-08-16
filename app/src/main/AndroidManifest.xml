@@ -27,7 +27,7 @@
         <activity
             android:name=".main_messenges"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Event_Page"
             android:exported="false" />
