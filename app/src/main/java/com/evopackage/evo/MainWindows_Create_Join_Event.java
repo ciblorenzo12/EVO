@@ -15,9 +15,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -143,10 +140,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         settings.setOnClickListener(this);
     }
 
-    private void joinPopUp() {
-        create_event_popup evtPopUp = new create_event_popup();
-        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
-    }
+
 
     //Search
 //    private void Search(String txt) {
@@ -189,6 +183,11 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private void openDialog() {
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
+    }
+
+    private void joinPopUp() {
+        Join_Event evtPopUp = new Join_Event();
+        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
     }
 
 //    @Override

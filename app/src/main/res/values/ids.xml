@@ -2,4 +2,8 @@
 <resources>
     <item name="searchView_Main" type="id" />
     <item name="RecicleBar_Firebase" type="id" />
+    <item name="EnterCode" type="id" />
+    <item name="editTextTextPersonName2" type="id" />
+    <item name="JoinQR" type="id" />
+    <item name="JoinCode" type="id" />
 </resources>
