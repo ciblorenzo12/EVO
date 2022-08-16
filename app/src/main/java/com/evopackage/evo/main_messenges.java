@@ -1,10 +1,6 @@
 package com.evopackage.evo;
 
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-public class main_messenges extends AppCompatActivity {
+public class main_messenges  {
 
 private String sender,date,messenger;
     public main_messenges(){};
@@ -15,11 +11,7 @@ private String sender,date,messenger;
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_messenges_);
-    }
+
 
     public  String getSender() {
         return sender;
