@@ -175,7 +175,7 @@ while (_userdata==null){
 
             } else {
 
-                Toast.makeText(Login.this, "Ups something went wrong please check your credentials", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "Something went wrong, please check your credentials", Toast.LENGTH_LONG).show();
 
             }
         });
