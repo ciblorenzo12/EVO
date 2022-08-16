@@ -78,7 +78,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
                     String eventUid = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
                     event = new Event(eventUid, txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getDisplayName(), "", txtDescription.getText().toString());
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), firebaseUsers.getKey(), "", txtDescription.getText().toString());
 
                     if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() ||
                             txtDate.getText().toString().isEmpty() || txtDescription.getText().toString().isEmpty()) {
@@ -101,7 +101,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                         firebaseEvent.child("description").setValue(event.GetDescription());
                         //firebaseEvent.child("eventid").setValue(eventUid);
                         firebaseEvent.child("people").child(current_user.getUid()).setValue("Creator");
-                        firebaseUsers.child("user-events").child(current_eventID).setValue(current_event);
+
                         current_eventID = eventUid;
                     }
                 });

@@ -31,6 +31,7 @@
         android:hint="Date"
         android:minHeight="48dp"
         tools:ignore="HardcodedText" />
+
     <TextView
         android:id="@+id/guest"
         android:layout_width="match_parent"
@@ -39,28 +40,27 @@
         android:text="Special Guest"
         android:textSize="24sp"
         tools:ignore="HardcodedText" />
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardImage"
+    <RelativeLayout
+        android:id="@+id/relaImage"
+        android:layout_below="@+id/guest"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/guest">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/guestImage"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:id="@+id/linerImage"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
 
-</androidx.cardview.widget.CardView>
-
+        </LinearLayout>
+    </RelativeLayout>
     <ImageButton
         android:id="@+id/addImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/cardImage"
+        android:layout_below="@+id/relaImage"
         android:layout_centerInParent="true"
         android:src="@android:drawable/ic_input_add"
         tools:ignore="ContentDescription" />
