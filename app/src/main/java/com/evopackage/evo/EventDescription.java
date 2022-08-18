@@ -33,10 +33,10 @@ public class EventDescription extends AppCompatActivity {
     private ArrayList<Activity> list;
     private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     //private EventActivitiesAdapter adapter;
-    private List<Activity> list;
+    //private List<Activity> list;
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
-    private Button setUp;
+    //private Button setUp;
 
     private RecyclerView rv2;
     private ArrayList<Profile_Page> list2;
