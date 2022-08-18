@@ -39,12 +39,13 @@ public class EventDescription extends AppCompatActivity {
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
 
+
     ArrayList<Activity> _activity;
     EventActivitiesAdapter adaptor;
     private RecyclerView rv2;
     private ArrayList<Profile_Page> list2;
 
-    //private EventActivitiesAdapter.OnItemClickListener listener;
+   // private EventActivitiesAdapter.OnItemClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
