@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class EventHelper {
     // compares 2 string dates
@@ -44,6 +45,15 @@ public class EventHelper {
                     a.set(j + 1, temp);
                 }
         return a;
+    }
+
+    // checks if event's date is today or in the future
+    public static boolean isFutureEvent(Event e) {
+        Calendar c = Calendar.getInstance();
+        String currentDate = (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
+        if (compareDates(e.GetDate(), currentDate) > 0)
+            return true;
+        return false;
     }
 
     private static boolean eventGreater(Event a, Event b) {
