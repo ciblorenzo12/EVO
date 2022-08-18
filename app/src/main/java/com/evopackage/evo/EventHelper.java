@@ -38,18 +38,10 @@ public class EventHelper {
         int n = a.size();
         for (int i = 0; i < n - 1; i++)
             for (int j = 0; j < n - i - 1; j++)
-                if (!reversed) {
-                    if (eventGreater(a.get(j), a.get(j + 1))) {
-                        Event temp = a.get(j);
-                        a.set(j, a.get(j + 1));
-                        a.set(j + 1, temp);
-                    }
-                } else {
-                    if (!eventGreater(a.get(j), a.get(j + 1))) {
-                        Event temp = a.get(j);
-                        a.set(j, a.get(j + 1));
-                        a.set(j + 1, temp);
-                    }
+                if (eventGreater(a.get(j), a.get(j + 1)) ^ reversed) {
+                    Event temp = a.get(j);
+                    a.set(j, a.get(j + 1));
+                    a.set(j + 1, temp);
                 }
         return a;
     }
