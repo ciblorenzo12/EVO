@@ -25,6 +25,8 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
     public interface OnItemClickListener
     {
         void OnItemClick(Event ev);
+
+
     }
 
     @NonNull

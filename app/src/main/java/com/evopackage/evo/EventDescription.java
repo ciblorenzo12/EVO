@@ -1,5 +1,7 @@
 package com.evopackage.evo;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View;
@@ -29,15 +31,17 @@ public class EventDescription extends AppCompatActivity {
     private Button setUp;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
-    private EventActivitiesAdapter adapter;
+   // private EventActivitiesAdapter adapter;
     private ArrayList<Activity> list;
     private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     //private EventActivitiesAdapter adapter;
-    //private List<Activity> list;
+
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
-    //private Button setUp;
 
+
+    ArrayList<Activity> _activity;
+    EventActivitiesAdapter adaptor;
     private RecyclerView rv2;
     private ArrayList<Profile_Page> list2;
 
@@ -59,11 +63,13 @@ public class EventDescription extends AppCompatActivity {
         txtCreator = findViewById(R.id.eventcreatorr);
         txtAttendees = findViewById(R.id.txtAttendees);
         ClickedEvent = ev.GetKey();
+        _activity = new ArrayList<>();
 
             setUp = findViewById(R.id.button);
             if(!firebaseUsers.getKey().equals(ev.GetCreator())) {
                 setUp.setVisibility(View.GONE);
         }
+
         setUp.setOnClickListener(v -> openAct());
         populateData();
 
@@ -71,19 +77,26 @@ public class EventDescription extends AppCompatActivity {
         refdata = FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("activities");
         rv = findViewById(R.id.rvact);
         rv.setLayoutManager(managerL);
+        adaptor = new EventActivitiesAdapter(_activity, new EventActivitiesAdapter.OnItemClickListener() {
 
-        list = new ArrayList<Activity>();
+            @Override
+            public void OnItemClick(Activity ac) {
+                movetodescription(ac);
+            }
+        });
+       // list = new ArrayList<>();
 
-        adapter = new EventActivitiesAdapter(list);
+       // adapter = new EventActivitiesAdapter(list);
 
-        rv.setAdapter(adapter);
+        rv.setAdapter(adaptor);
 
         refdata.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
 
-                    list.clear();
+                    _activity.clear();
 
                     for (DataSnapshot snap : snapshot.getChildren()) {
 
@@ -92,9 +105,9 @@ public class EventDescription extends AppCompatActivity {
                                 snap.child("time").getValue(String.class),
                                 snap.child("location").getValue(String.class));
 
-                        list.add(act);
+                        _activity.add(act);
                     }
-                    adapter.notifyDataSetChanged();
+                    adaptor.notifyDataSetChanged();
                 }
             }
 
@@ -108,6 +121,11 @@ public class EventDescription extends AppCompatActivity {
 
 
 
+    }
+
+    private void movetodescription(Activity ac) {
+        ActivityDescription description = new ActivityDescription(ac);
+        description.show(getSupportFragmentManager(), "ActivityDescription");
     }
 
     private void openAct() {
