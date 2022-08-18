@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +39,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr, settings, join;
+    private ImageButton qr, settings, join,back_settings;
+    private ImageButton messenges_btn ;
 
     //searchView
     RecyclerView recicleviw;
@@ -77,12 +79,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         recicleviw.setLayoutManager(managerL);
         _events = new ArrayList<>();
 
-//        adaptor = new Adapter_Recicleview(_events);
-//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            finish();
-//        } ?? Merge conflict
+
         adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
             @Override
             public void OnItemClick(Event ev) {
@@ -209,10 +206,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-    private void joinPopUp() {
-        Join_Event evtPopUp = new Join_Event();
-        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
-    }
+
 
 //    @Override
 //    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
