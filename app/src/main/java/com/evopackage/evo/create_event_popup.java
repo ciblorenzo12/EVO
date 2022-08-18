@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,7 +33,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private EditText txtName;
     private TextView txtDate;
     private EditText txtAddress;
-    private EditText txtDescription;
+    private TextView txtDescription;
 
     //private DialogListener listener;
     private Event event;
@@ -42,7 +44,6 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private static String current_event;
     private static String current_eventID;
     private static ArrayList<String> _events = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,33 +77,29 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                 .setPositiveButton("create", (dialog, which) -> {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    String eventUid = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
-                    event = new Event(eventUid, txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), firebaseUsers.getKey(), "", txtDescription.getText().toString());
+                    String eventKey = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
+                    event = new Event(eventKey, txtName.getText().toString(), txtDate.getText().toString(),
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "");
 
-                    if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() ||
-                            txtDate.getText().toString().isEmpty() || txtDescription.getText().toString().isEmpty()) {
+                    if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() || txtDate.getText().toString().isEmpty()) {
                         dialog.dismiss();
-                        Toast.makeText(v.getContext(), "Error name,address or date  can't be empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Error name, address or date  can't be empty", Toast.LENGTH_SHORT).show();
                         Toast.makeText(v.getContext(), "Please enter a valid name", Toast.LENGTH_SHORT).show();
                         return;
                     } else {
 //                        listener.applyTexts(txtName.getText().toString(), txtDate.getText().toString(),
-//                                txtAddress.getText().toString(), txtDescription.getText().toString());
-
-                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventUid);
-                        firebaseEvent.child("name").setValue(event.GetName());
+//                                txtAddress.getText().toString());
+                        firebaseEvent = FirebaseDatabase.getInstance().getReference().child("events").child(eventKey);
                         current_event = event.GetName();
+                        current_eventID = eventKey;
 
+                        firebaseEvent.child("name").setValue(event.GetName());
                         firebaseEvent.child("date").setValue(event.GetDate());
                         firebaseEvent.child("address").setValue(event.GetLocation());
                         firebaseEvent.child("category").setValue(event.GetCategory());
                         firebaseEvent.child("creator").setValue(event.GetCreator());
-                        firebaseEvent.child("description").setValue(event.GetDescription());
-                        //firebaseEvent.child("eventid").setValue(eventUid);
                         firebaseEvent.child("people").child(current_user.getUid()).setValue("Creator");
-
-                        current_eventID = eventUid;
+                        firebaseUsers.child("user-events").child(current_eventID).setValue(current_event);
                     }
                 });
         return builder.create();
@@ -155,6 +152,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     }
 
 //    public interface DialogListener {
+//        void applyTexts(String _evtName, String _evtDate, String _evtAdder);
+//
 //        void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme);
 //    }
 
@@ -165,5 +164,14 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     public static String GetCurrent_EventID() {
         return current_eventID;
     }
+
+    public interface DialogListener {
+    }
+
+//    public static void SetCurrentEvent() {
+//
+//
+//    }
+
 }
 

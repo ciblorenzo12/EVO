@@ -142,7 +142,7 @@ public class EventDescription extends AppCompatActivity {
         txtDescription.setText(ev.GetDescription());
         txtCreator.setText(ev.GetCreator());
 
-        FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("assistance").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("people").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txtAttendees.setText(" Attendees (" + snapshot.getChildrenCount() + " have already joined the Event)");

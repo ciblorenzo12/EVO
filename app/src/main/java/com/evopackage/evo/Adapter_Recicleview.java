@@ -39,13 +39,10 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
 
     @Override
     public void onBindViewHolder(@NonNull viewHolderEvents holder, int position) {
-
-
         holder.name.setText(events.get(position).GetName());
         holder.date.setText(events.get(position).GetDate());
         holder.category.setText(events.get(position).GetCategory());
         holder.bindData(events.get(position));
-
     }
 
     @Override

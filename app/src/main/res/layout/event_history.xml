@@ -5,28 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="230dp"
-        android:layout_height="58dp"
-        android:background="#80B9FF"
-        android:clickable="false"
-        android:drawableStart="@drawable/common_full_open_on_phone"
-        android:duplicateParentState="false"
-        android:editable="false"
-        android:onClick="onClick"
-        android:shadowColor="#000000"
-        android:text="@string/Logout"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
-
     <ImageButton
-        android:id="@+id/profileSettingsBack"
+        android:id="@+id/eventhistoryback"
         android:layout_width="77dp"
         android:layout_height="66dp"
         android:background="#00FFFFFF"
@@ -41,5 +21,22 @@
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="?attr/actionModeCloseDrawable"
         app:tint="#35A9F6"
-        tools:ignore="ImageContrastCheck,UsingOnClickInXml" />
+        tools:ignore="ImageContrastCheck" />
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/evtHistoryRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,10 @@
             android:name=".Event_Page"
             android:exported="false" />
         <activity
+            android:name=".Event_History"
+            android:exported="true"/>
+
+        <activity
             android:name=".Qr_code_scanner"
             android:exported="true" />
         <activity

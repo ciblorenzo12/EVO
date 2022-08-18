@@ -31,6 +31,8 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
     private String name2;
     private DatabaseReference _Reference;
 
+    StorageReference pictureReference;
+
     private TextView Display, FullName, DOB;
 
     private ImageView ProfilePic;
@@ -54,6 +56,15 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        pictureReference = FirebaseStorage.getInstance().getReference();
+
+        StorageReference profileRef = pictureReference.child("user_profile_pics/"+user.getUid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(ProfilePic);
+            }
+        });
         //String display = String.valueOf(_database.getReference("users/"+user.getUid()+"/_displayname"));
         //String Displayname = null;
         //if (user != null) {
@@ -79,24 +90,9 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
 
         EventHistory = findViewById(R.id.EventHistory);
 
-
-        StorageReference pictureReference = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+userID+"/profile.jpg");
-        pictureReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(ProfilePic);
-            }
-        });{
-
-        }
-
         ProfileBack.setOnClickListener(this);
         ProfileSettings.setOnClickListener(this);
         EventHistory.setOnClickListener(this);
-
-        String name = "";
-
-
 
 
         FirebaseDatabase.getInstance().getReference("users").addValueEventListener(new ValueEventListener() {
@@ -105,8 +101,6 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
                 Display.setText(snapshot.child(userID).child("_displayName").getValue(String.class));
                 FullName.setText(snapshot.child(userID).child("_firstname").getValue(String.class) + " " + snapshot.child(userID).child("_lastname").getValue(String.class));
                 DOB.setText(snapshot.child(userID).child("_dob").getValue(String.class));
-
-
             }
 
             @Override
