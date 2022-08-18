@@ -9,35 +9,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bak4"
+
         android:padding="40dp"
-        tools:context=".EventDescription">
+        tools:context=".ActivityDescription">
 
 
-        <TextView
-            android:id="@+id/category4item"
-            android:layout_width="114dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="22dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEventName" />
 
-        <TextView
-            android:id="@+id/txtEventName"
-            android:layout_width="304dp"
-            android:layout_height="46dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="37dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <TextView
             android:id="@+id/textView16"
@@ -48,20 +27,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEventDate"
-            tools:text="@string/Adress" />
 
-        <TextView
-            android:id="@+id/txtEventDate"
-            android:layout_width="96dp"
-            android:layout_height="22dp"
-            android:layout_marginTop="20dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/category4item" />
+            tools:text="Name"
+            tools:ignore="MissingConstraints" />
+
+
 
         <TextView
             android:id="@+id/textView20"
@@ -73,29 +43,11 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            tools:text="@string/description" />
+            tools:text="Description" />
 
-        <ImageView
-            android:id="@+id/qrvt"
-            android:layout_width="295dp"
-            android:layout_height="227dp"
-            android:layout_marginTop="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21"
-            app:srcCompat="@drawable/qr" />
 
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="@string/scan"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4"
-            tools:text="@string/scan" />
+
+
 
         <TextView
             android:id="@+id/txtAttendees"
@@ -119,7 +71,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView3"
-            tools:text="@string/creator" />
+            tools:text="Date" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -134,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
             <TextView
-                android:id="@+id/eventcreatorr"
+                android:id="@+id/txtActivityDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -154,7 +106,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
             <TextView
-                android:id="@+id/txtEventAddress"
+                android:id="@+id/txtActivityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -174,7 +126,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView20">
 
             <TextView
-                android:id="@+id/descriptionev"
+                android:id="@+id/txtActivityDes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -216,12 +168,12 @@
             app:layout_constraintHorizontal_bias="0.011"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
-            tools:text="@string/Eventactivities" />
+            tools:text="Special Guest" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
             android:layout_width="307dp"
-            android:layout_height="212dp"
+            android:layout_height="85dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -231,26 +183,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvact"
-                android:overScrollMode="never"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
         </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/cardView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.787"
-            app:layout_constraintStart_toEndOf="@+id/textView13" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-</ScrollView>
+    </ScrollView>

@@ -15,8 +15,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="401dp"
-        android:layout_height="273dp"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
 
 
         android:alpha="80"
@@ -30,82 +30,65 @@
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="199dp"
+            android:layout_width="411dp"
+            android:layout_height="151dp"
             android:alpha="500"
             android:animateLayoutChanges="true"
+            android:background="@color/white"
             android:scrollbarStyle="outsideOverlay"
             tools:visibility="visible">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_evt"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/ic_user_foreground"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
-
             <TextView
-                android:id="@+id/Name_msg"
-                android:layout_width="wrap_content"
+                android:id="@+id/Name_evt"
+                android:layout_width="267dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/profile_evt"
-                android:layout_toRightOf="@id/profile_evt"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="120dp"
                 android:text="This is Demo Name"
-                android:textColor="#000"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/messange_msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Name_msg"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Course Name"
-                android:textColor="#000"
-                android:textSize="25sp" />
-
-
-            <TextView
-                android:id="@+id/Creator_evt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/messange_msg"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/profile_evt"
-                android:text="This is Email Name"
                 android:textColor="#000"
                 android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/Date_evt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Creator_evt"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="1dp"
-                android:layout_toRightOf="@id/profile_evt"
+                android:layout_width="238dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/Category_evt"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="147dp"
+                android:layout_marginBottom="31dp"
                 android:text="This is Email Name"
                 android:textColor="#000"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/Category_evt"
-                android:layout_width="302dp"
-                android:layout_height="53dp"
-                android:layout_below="@+id/Date_evt"
+                android:layout_width="243dp"
+                android:layout_height="23dp"
+                android:layout_below="@+id/Name_evt"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="-3dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="143dp"
                 android:text="This is Email Name"
                 android:textColor="#000"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="65dp"
+                android:layout_height="66dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="69dp"
+                app:tint="#00E2FF"
+                app:srcCompat="@drawable/iiiiiiiiiiiiiiiiiii" />
 
 
         </RelativeLayout>

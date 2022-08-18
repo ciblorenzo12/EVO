@@ -1,7 +1,6 @@
 package com.evopackage.evo;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.auth.AuthUI;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,15 +28,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
-    //messanging
+public class MainWindows_Create_Join_Event extends AppCompatActivity implements /*create_event_popup.DialogListener,*/ View.OnClickListener {
 
-
-
-
-    //firebase
-    FirebaseUser user;
-    FirebaseAuth Auth_;
+    private FirebaseAuth auth;
+    private FirebaseDatabase search;
+    private FirebaseUser user;
+    private int Camera_Permission_Request = 1;
+    private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
+    private boolean permission_granted;
+    private ImageButton btn;
+    private ImageButton evtBtn;
+    private ImageButton qr, settings, join;
 
     //searchView
     RecyclerView recicleviw;
@@ -47,20 +48,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     SearchView search_bar;
     Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
-
-
-    private ImageButton qr, settings, evtBtn, btn, messenges_btn, back_settings, join;
     private Button logout;
-
-    @Override
-    protected void onStart() {
-
-
-
-        super.onStart();
-
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +77,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         recicleviw.setLayoutManager(managerL);
         _events = new ArrayList<>();
 
+//        adaptor = new Adapter_Recicleview(_events);
+//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+//            Intent intent = new Intent(this, Login.class);
+//            startActivity(intent);
+//            finish();
+//        } ?? Merge conflict
         adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
             @Override
             public void OnItemClick(Event ev) {
@@ -118,6 +112,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         "String uri", "String description");
                                 _events.add(evt);
                             }
+                            _events = EventHelper.sortEventsByDate(_events, true);
                             adaptor.notifyDataSetChanged();
                         }
                     }
@@ -169,6 +164,20 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
     }
 
+    //Search
+//    private void Search(String txt) {
+//        ArrayList<Event> events_search = new ArrayList<>();
+//        for (Event eventObj : _events) {
+//
+//            if (eventObj.GetName().toLowerCase().contains(txt.toLowerCase())) {
+//                events_search.add(eventObj);
+//
+//                Adapter_Recicleview recicleview = new Adapter_Recicleview(events_search);
+//                recicleviw.setAdapter(recicleview);
+//            }
+//        }
+//    } ?? merge conflicts
+
     private void movetodescription(Event ev) {
         Intent i = new Intent(this, EventDescription.class);
         i.putExtra("Event", ev);
@@ -200,6 +209,15 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
+    private void joinPopUp() {
+        Join_Event evtPopUp = new Join_Event();
+        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
+    }
+
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
 
     @SuppressLint("NewApi")
     @Override
@@ -249,7 +267,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     }
 
 
-    
+
     private void signout() {
 
         AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -279,13 +297,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     .setPositiveButton("Allow", (dialog, which) -> {
                         Intent car = new Intent(MainWindows_Create_Join_Event.this, Qr_code_scanner.class);
                         startActivity(car);
-
-
-                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
-                    .create()
-                    .show();
-
-
+                    }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
         }
         if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 
@@ -295,9 +307,23 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
         }
-
-
-
-
     }
+
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
+//
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
+
+    // @Override
+    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 }

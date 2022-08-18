@@ -1,7 +1,5 @@
 package com.evopackage.evo;
 
-import android.app.DownloadManager;
-import android.app.usage.NetworkStats;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -31,7 +28,7 @@ import com.squareup.picasso.Picasso;
 public class Profile_Page extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseDatabase _database;
-
+    private String name2;
     private DatabaseReference _Reference;
 
     StorageReference pictureReference;
