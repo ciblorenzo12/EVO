@@ -38,10 +38,8 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
     @Override
     public void onBindViewHolder(@NonNull viewHolderEvents holder, int position) {
         holder.name.setText(events.get(position).GetName());
-        holder.address.setText(events.get(position).GetLocation());
         holder.date.setText(events.get(position).GetDate());
         holder.category.setText(events.get(position).GetCategory());
-        holder.creator.setText(events.get(position).GetCreator());
         holder.bindData(events.get(position));
     }
 
@@ -57,11 +55,8 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         public viewHolderEvents(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.Name_evt);
-            address= itemView.findViewById(R.id.Adress_evt);
             category=itemView.findViewById(R.id.Category_evt);
             date= itemView.findViewById(R.id.Date_evt);
-            creator = itemView.findViewById(R.id.Creator_evt);
-            image_ = itemView.findViewById(R.id.profile_evt);
         }
 
         public void bindData(Event event) {

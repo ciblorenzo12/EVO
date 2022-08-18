@@ -81,4 +81,5 @@
     <string name="atendees">Atendees</string>
     <string name="attendees">Attendees</string>
     <string name="Eventactivities">Activities Scheduled</string>
+    <string name="Attending">· Attending</string>
 </resources>

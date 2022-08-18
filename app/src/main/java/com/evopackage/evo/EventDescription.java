@@ -1,6 +1,9 @@
 package com.evopackage.evo;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -8,25 +11,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.evopackage.evo.databinding.EventDescriptionBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDescription extends AppCompatActivity {
 
-    private EventDescriptionBinding binding;
     private Event ev;
+   private static String ClickedEvent;
+    private Button setUp;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
+    private EventActivitiesAdapter adapter;
+    private ArrayList<Activity> list;
+    private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     //private EventActivitiesAdapter adapter;
     private List<Activity> list;
     private LinearLayoutManager managerL;
     private DatabaseReference refdata;
+    private Button setUp;
+
+    private RecyclerView rv2;
+    private ArrayList<Profile_Page> list2;
+
    // private EventActivitiesAdapter.OnItemClickListener listener;
 
     @Override
@@ -44,64 +58,63 @@ public class EventDescription extends AppCompatActivity {
         txtDescription = findViewById(R.id.descriptionev);
         txtCreator = findViewById(R.id.eventcreatorr);
         txtAttendees = findViewById(R.id.txtAttendees);
+        ClickedEvent = ev.GetKey();
 
+            setUp = findViewById(R.id.button);
+            if(!firebaseUsers.getKey().equals(ev.GetCreator())) {
+                setUp.setVisibility(View.GONE);
+        }
+        setUp.setOnClickListener(v -> openAct());
         populateData();
 
-//
-//
-//        refdata = FirebaseDatabase.getInstance().getReference().child("events");
-//        rv = findViewById(R.id.RecicleBar_Firebase);
-//
-//        rv.setLayoutManager(managerL);
-//
-//        adapter = new EventActivitiesAdapter(list, listener) {
-//
-//            public void OnItemClick(Activity ev) {
-//                movetodescription(ev);
-//            }
-//        };
-//
-//        rv.setAdapter(adapter);
-//
-//        refdata.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                if (snapshot.exists()) {
-//
-//                    list.clear();
-//
-//                    for (DataSnapshot snap : snapshot.getChildren()) {
-//
-//                        String Creator = snap.child("creator").getValue(String.class);
-//
-//                        Activity evt = new Activity(snap.getKey(),
-//                                snap.child("name").getValue(String.class),
-//                                snap.child("date").getValue(String.class),
-//                                snap.child("address").getValue(String.class),
-//                                snap.child("category").getValue(String.class),
-//                                snap.child("creator").getValue(String.class),
-//                                "String uri",
-//                                snap.child("description").getValue(String.class));
-//                        list.add(evt);
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
+        managerL = new LinearLayoutManager(this);
+        refdata = FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("activities");
+        rv = findViewById(R.id.rvact);
+        rv.setLayoutManager(managerL);
+
+        list = new ArrayList<Activity>();
+
+        adapter = new EventActivitiesAdapter(list);
+
+        rv.setAdapter(adapter);
+
+        refdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    list.clear();
+
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+
+                        Activity act = new Activity(
+                                snap.getKey(),
+                                snap.child("time").getValue(String.class),
+                                snap.child("location").getValue(String.class));
+
+                        list.add(act);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
     }
 
-//    private void movetodescription(Activity ev) {
-//        Intent i = new Intent(this, EventDescription.class);
-//        i.putExtra("Activity", ev);
-//        startActivity(i);
-//    }
+    private void openAct() {
+        create_activity_popup actDialog = new create_activity_popup();
+        actDialog.show(getSupportFragmentManager(), "ActivityDialog");
+        actDialog.setEventKey(ev.GetKey());
+    }
 
     public void populateData()
     {
@@ -115,7 +128,7 @@ public class EventDescription extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("people").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                txtAttendees.setText(snapshot.getChildrenCount() + " Attendees");
+                txtAttendees.setText(" Attendees (" + snapshot.getChildrenCount() + " have already joined the Event)");
             }
 
             @Override
@@ -123,5 +136,9 @@ public class EventDescription extends AppCompatActivity {
 
             }
         });
+    }
+    public static String  GetClickedEvent(){
+
+        return ClickedEvent;
     }
 }
