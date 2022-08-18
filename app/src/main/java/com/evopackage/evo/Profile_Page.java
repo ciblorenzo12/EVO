@@ -54,7 +54,6 @@ public class Profile_Page extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         //email =
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         pictureReference = FirebaseStorage.getInstance().getReference();
 

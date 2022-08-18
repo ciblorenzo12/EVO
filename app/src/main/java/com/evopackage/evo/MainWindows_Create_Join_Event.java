@@ -1,6 +1,7 @@
 package com.evopackage.evo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +39,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private boolean permission_granted;
     private ImageButton btn;
     private ImageButton evtBtn;
-    private ImageButton qr, settings, join;
+    private ImageButton qr, settings, join,back_settings;
+    private ImageButton messenges_btn ;
 
     //searchView
     RecyclerView recicleviw;
@@ -50,11 +55,22 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
         setContentView(R.layout.setting_page);
+        //messanging
+
+
+
 
         logout = findViewById(R.id.logout);
-
+        back_settings = findViewById(R.id.SettingsBack);
         setContentView(R.layout.activity_main_windows_create_join_event);
+        messenges_btn = findViewById(R.id.messages_btn);
 
         refdata = FirebaseDatabase.getInstance().getReference().child("events");
         recicleviw = findViewById(R.id.RecicleBar_Firebase);
@@ -63,12 +79,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         recicleviw.setLayoutManager(managerL);
         _events = new ArrayList<>();
 
-//        adaptor = new Adapter_Recicleview(_events);
-//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            finish();
-//        } ?? Merge conflict
+
         adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
             @Override
             public void OnItemClick(Event ev) {
@@ -139,9 +150,16 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         qr.setOnClickListener(this);
         btn.setOnClickListener(this);
         settings.setOnClickListener(this);
+
+
     }
 
 
+
+    private void joinPopUp() {
+        create_event_popup evtPopUp = new create_event_popup();
+        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
+    }
 
     //Search
 //    private void Search(String txt) {
@@ -163,6 +181,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         startActivity(i);
     }
 
+    //Search
     private void Search(String txt) {
         ArrayList<Event> events_search = new ArrayList<>();
         for (Event eventObj : _events) {
@@ -178,6 +197,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 });
                 recicleviw.setAdapter(recicleview);
             }
+
         }
     }
 
@@ -186,23 +206,20 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         evtPopUp.show(getSupportFragmentManager(), "EventDialog");
     }
 
-    private void joinPopUp() {
-        Join_Event evtPopUp = new Join_Event();
-        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
-    }
+
 
 //    @Override
 //    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
 //
 //    }
 
-
+    @SuppressLint("NewApi")
     @Override
     public void onClick(View v) {
         if (v.getId() == btn.getId()) {
 
-            Intent car = new Intent(this, Profile_Page.class);
-            startActivity(car);
+            Intent _intent = new Intent(this, Profile_Page.class);
+            startActivity(_intent);
 
         }
         if (v.getId() == qr.getId()) {
@@ -214,28 +231,60 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             setContentView(R.layout.setting_page);
             logout.setOnClickListener(MainWindows_Create_Join_Event.this);
         }
+
+        if (v.getId() == settings.getId()) {
+
+            setContentView(R.layout.setting_page);
+            logout.setOnClickListener(MainWindows_Create_Join_Event.this);
+            back_settings.setOnClickListener(MainWindows_Create_Join_Event.this);
+
+        }
         if (v.getId() == logout.getId()) {
-            //signout();
+
+            signout();
+
+        }
+        if (v.getId() == back_settings.getId()) {
+
+            Intent _intent = new Intent(this, MainWindows_Create_Join_Event.class);
+            startActivity(_intent);
+            finish();
+        }
+        if (v.getId() == messenges_btn.getId()) {
+
+        startActivity(new Intent(this,main_messages.class));
+
+
+
         }
 
-//        if (v.getId() == R.id.settings_Main_Id) {
-//            Intent car = new Intent(this, Event_Page.class);
-//            startActivity(car);
-//        } caused crash... was located in signout before??
     }
 
-//    private void signout() {
-//        AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful()) {
-//                    startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
-//                    finish();
-//                }
-//            }
-//        });
-//    }
 
+
+    private void signout() {
+
+        AuthUI.getInstance().signOut(MainWindows_Create_Join_Event.this).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    startActivity(new Intent(MainWindows_Create_Join_Event.this, Login.class));
+                    finish();
+
+//
+                }
+            }
+        });
+
+    }
+
+    private void Messanges_toDisp(){
+
+
+
+
+
+    }
     private void RequestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")
@@ -245,8 +294,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                     }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel()).create().show();
         }
         if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+
+
             Intent car = new Intent(this, Qr_code_scanner.class);
             startActivity(car);
+
+
         }
     }
 
