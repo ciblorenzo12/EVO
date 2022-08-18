@@ -11,10 +11,13 @@
 
     android:alpha="20"
     android:hint="@string/Adress"
-    tools:ignore="SpeakableTextPresentCheck">
+    tools:ignore="SpeakableTextPresentCheck"
+    android:layout_gravity="end">
 
 
     <androidx.cardview.widget.CardView
+
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

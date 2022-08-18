@@ -4,15 +4,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
@@ -22,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,24 +27,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements create_event_popup.DialogListener, View.OnClickListener {
     //messanging
-    Adapter_Messangers adaptor_m;
-    RecyclerView reciclemsg;
-    ArrayList<main_messenges> messenges_array;
-    private EditText mess;
-    FloatingActionButton send_btn;
+
+
+
 
     //firebase
     FirebaseUser user;
     FirebaseAuth Auth_;
-    private DatabaseReference   refMessanging;
+
     //searchView
     RecyclerView recicleviw;
     DatabaseReference refdata;
@@ -64,18 +54,22 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     @Override
     protected void onStart() {
+
+
+
         super.onStart();
+
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_messenges_);
-        Auth_ = FirebaseAuth.getInstance();
-        user = Auth_.getCurrentUser();
-        send_btn = findViewById(R.id.sent_input);
-        refMessanging =  FirebaseDatabase.getInstance().getReference();
-        mess = findViewById(R.id.Mensage_in);
+
+
+
+
+
 
         setContentView(R.layout.setting_page);
         //messanging
@@ -170,19 +164,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void joinPopUp() {
         create_event_popup evtPopUp = new create_event_popup();
         evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
@@ -238,9 +219,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             setContentView(R.layout.setting_page);
             logout.setOnClickListener(MainWindows_Create_Join_Event.this);
         }
-        if (v.getId() == logout.getId()) {
-            //signout();
-        }
+
         if (v.getId() == settings.getId()) {
 
             setContentView(R.layout.setting_page);
@@ -261,33 +240,15 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
         if (v.getId() == messenges_btn.getId()) {
 
-            setContentView(R.layout.main_messenges_);
-            send_btn.setOnClickListener(MainWindows_Create_Join_Event.this);
+        startActivity(new Intent(this,main_messages.class));
 
 
-        }
-        if (v.getId() == send_btn.getId()) {
-
-            Test();
 
         }
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void Test() {
 
-        mess = findViewById(R.id.Mensage_in);
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm a ");
-        Date currentTime = Calendar.getInstance().getTime();
-        String Name = user.getDisplayName();
-        String Date = df.format(System.currentTimeMillis());
-        main_messenges mensage = new main_messenges(Name, Date,mess.getText().toString());
-
-        refMessanging.child("events").child("-N9Zrr8wPPsWmL_eQGgK").child("Message").push().setValue(mensage);
-      mess.setText("");
-      mess.setHint(" ");
-    }
     
     private void signout() {
 
@@ -302,6 +263,15 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                 }
             }
         });
+
+    }
+
+    private void Messanges_toDisp(){
+
+
+
+
+
     }
     private void RequestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {

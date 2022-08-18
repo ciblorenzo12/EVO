@@ -1,11 +1,11 @@
 package com.evopackage.evo;
 
-public class main_messenges  {
+public class Messenges {
 
 private String sender,date,messenger;
-    public main_messenges(){};
+    public Messenges(){};
 
-    public main_messenges(String sender, String date, String messenger) {
+    public Messenges(String sender, String date, String messenger) {
         this.sender = sender;
         this.date = date;
         this.messenger = messenger;
