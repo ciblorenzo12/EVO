@@ -93,7 +93,7 @@ sv = findViewById(R.id.scrollView2);
                     messenges_List.add(messenges);
 
                 }
-                reciclemsg.scrollToPosition(messenges_List.size());
+                reciclemsg.scrollToPosition(messenges_List.size()-1);
                 adaptor_m.notifyDataSetChanged();
             }
 
