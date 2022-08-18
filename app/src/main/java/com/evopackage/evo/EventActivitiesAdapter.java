@@ -13,8 +13,17 @@ import java.util.ArrayList;
 public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivitiesAdapter.viewH>{
 
     private ArrayList<Activity> list2;
-    public EventActivitiesAdapter(ArrayList<Activity> l){
+    final EventActivitiesAdapter.OnItemClickListener ac;
+
+    public EventActivitiesAdapter(ArrayList<Activity> l, EventActivitiesAdapter.OnItemClickListener listen){
         list2 = l;
+        this.ac = listen;
+    }
+
+    public interface OnItemClickListener
+    {
+        void OnItemClick(Activity ac);
+
 
     }
 
@@ -33,6 +42,7 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
         holder.loc.setText(list2.get(position).GetAddress());
         holder.name.setText(list2.get(position).GetName());
         holder.date.setText(list2.get(position).GetTime());
+        holder.bindData(list2.get(position));
 
     }
 
@@ -53,7 +63,14 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
             date = itemView.findViewById(R.id.actdate);
             loc = itemView.findViewById(R.id.actlocation);
         }
-
+        public void bindData(Activity activity) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ac.OnItemClick(activity);
+                }
+            });
+        }
 
     }
 }
