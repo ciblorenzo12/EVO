@@ -64,10 +64,12 @@ sv = findViewById(R.id.scrollView2);
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm a ");
 
         String Name = user.getDisplayName();
+
+
         String Date = df.format(System.currentTimeMillis());
         Messenges mensage = new Messenges(Name, Date,mess.getText().toString());
 
-        refMessanging.child("events").child("-N9Zrr8wPPsWmL_eQGgK").child("Message").push().setValue(mensage);
+        refMessanging.child("events").child(EventDescription.GetClickedEvent()).child("Message").push().setValue(mensage);
         mess.setText("");
         mess.setHint(" ");
     }
@@ -76,12 +78,12 @@ sv = findViewById(R.id.scrollView2);
     @Override
     protected void onStart() {
         super.onStart();
-        Messanges_toDisp();
+        Messanges_toDisp(EventDescription.GetClickedEvent());
     }
 
-    private void Messanges_toDisp() {
+    private void Messanges_toDisp(String event) {
 
-        refMessanging.child("events").child("-N9Zrr8wPPsWmL_eQGgK").child("Message").addValueEventListener(new ValueEventListener() {
+        refMessanging.child("events").child(event).child("Message").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messenges_List.clear();
