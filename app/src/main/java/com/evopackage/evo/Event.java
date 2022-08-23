@@ -109,8 +109,7 @@ public class Event implements Serializable {
     private static boolean eventGreater(Event a, Event b) {
         if (compareDates(a.GetDate(), b.GetDate()) > 0)
             return true;
-        else
-            return false;
+        return false;
     }
 
 }
