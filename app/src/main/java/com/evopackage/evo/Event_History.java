@@ -122,7 +122,7 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                         eventInfo.add(event);
                     }
 
-                    eventInfo = EventHelper.sortEventsByDate(eventInfo, false);
+                    eventInfo = Event.sortEventsByDate(eventInfo, false);
 
                     adaptor.notifyDataSetChanged();
                 }

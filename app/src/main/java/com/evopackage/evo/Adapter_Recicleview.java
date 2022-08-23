@@ -45,7 +45,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         holder.category.setText(events.get(position).GetCategory());
         holder.bindData(events.get(position));
 
-        if (!EventHelper.isFutureEvent(events.get(position)))
+        if (!Event.isFutureEvent(events.get(position)))
             holder.date.setTextColor(0xFFFF0000);
     }
 

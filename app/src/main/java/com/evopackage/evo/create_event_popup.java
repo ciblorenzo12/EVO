@@ -8,7 +8,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,8 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,7 +103,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
                     String eventKey = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
                     event = new Event(eventKey, txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "", isPrivate,
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "", true,
                             txtpass.getText().toString());
 
                     if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() || txtDate.getText().toString().isEmpty()) {
