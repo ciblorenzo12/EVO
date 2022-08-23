@@ -29,7 +29,10 @@
         <entry key="..\:/Evo/app/src/main/res/layout/main_messenges.xml" value="0.18541666666666667" />
         <entry key="..\:/Evo/app/src/main/res/layout/main_messenges_.xml" value="0.17" />
         <entry key="..\:/Evo/app/src/main/res/layout/messanging_chat.xml" value="0.28184281842818426" />
+        <entry key="..\:/Evo/app/src/main/res/layout/people_item.xml" value="0.14791666666666667" />
         <entry key="..\:/Evo/app/src/main/res/layout/profile_page.xml" value="0.18541666666666667" />
+        <entry key="..\:/Evo/app/src/main/res/layout/search_item.xml" value="0.36096014492753625" />
+        <entry key="..\:/Evo/app/src/main/res/layout/setting_page.xml" value="0.25" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.246" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/evt_btn_detail.xml" value="0.1" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.246" />
@@ -57,8 +60,6 @@
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/home_page.xml" value="0.25" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/profile_page.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Giovanny/AndroidStudioProjects/Evo/app/src/main/res/layout/setting_page.xml" value="0.22" />
-        <entry key="..\:/Evo/app/src/main/res/layout/search_item.xml" value="0.36096014492753625" />
-        <entry key="..\:/Evo/app/src/main/res/layout/setting_page.xml" value="0.25" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Users/ciblo/Documents/Evo/app/src/main/res/drawable/ic_user_.xml" value="0.246" />
