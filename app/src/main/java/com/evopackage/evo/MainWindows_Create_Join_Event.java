@@ -256,13 +256,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
             startActivity(_intent);
             finish();
         }
-        if (v.getId() == messenges_btn.getId()) {
 
-        startActivity(new Intent(this,main_messages.class));
-
-
-
-        }
 
     }
 
@@ -284,13 +278,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
     }
 
-    private void Messanges_toDisp(){
 
-
-
-
-
-    }
     private void RequestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             new AlertDialog.Builder(this).setTitle("Permission need it").setMessage("To be able to scan QR code \n you will need the permissions ")

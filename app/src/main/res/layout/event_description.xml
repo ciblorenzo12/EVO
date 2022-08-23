@@ -247,6 +247,22 @@
             app:layout_constraintHorizontal_bias="0.787"
             app:layout_constraintStart_toEndOf="@+id/textView13" />
 
+        <ImageButton
+            android:id="@+id/chatroom"
+            android:layout_width="67dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="128dp"
+            android:background="@drawable/mensages"
+            android:backgroundTint="@color/white"
+            android:tint="#FFFAFA"
+            app:layout_constraintBottom_toTopOf="@+id/cardView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.523"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.168"
+            tools:ignore="SpeakableTextPresentCheck" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

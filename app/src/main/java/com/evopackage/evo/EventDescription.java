@@ -1,11 +1,10 @@
 package com.evopackage.evo;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,13 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EventDescription extends AppCompatActivity {
 
     private Event ev;
    private static String ClickedEvent;
     private Button setUp;
+    private ImageButton chatroom_m;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
    // private EventActivitiesAdapter adapter;
@@ -54,7 +52,7 @@ public class EventDescription extends AppCompatActivity {
         setContentView(R.layout.event_description);
 
         ev = (Event) getIntent().getSerializableExtra("Event");
-
+        chatroom_m = findViewById(R.id.chatroom);
         txtName = findViewById(R.id.txtEventName);
         txtAddress = findViewById(R.id.txtEventAddress);
         txtDate = findViewById(R.id.txtEventDate);
@@ -64,7 +62,12 @@ public class EventDescription extends AppCompatActivity {
         txtAttendees = findViewById(R.id.txtAttendees);
         ClickedEvent = ev.GetKey();
         _activity = new ArrayList<>();
-
+        chatroom_m.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventDescription.this,main_messages.class));
+            }
+        });
             setUp = findViewById(R.id.button);
             if(!firebaseUsers.getKey().equals(ev.GetCreator())) {
                 setUp.setVisibility(View.GONE);
@@ -84,9 +87,7 @@ public class EventDescription extends AppCompatActivity {
                 movetoacdescription(ac);
             }
         });
-       // list = new ArrayList<>();
 
-       // adapter = new EventActivitiesAdapter(list);
 
         rv.setAdapter(adaptor);
 
