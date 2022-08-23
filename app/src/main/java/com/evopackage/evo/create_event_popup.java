@@ -41,7 +41,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private TextView txtDescription;
     private Switch priva;
     private EditText txtpass;
-    private Boolean isPrivate;
+    private Boolean isPrivate = false;
 
     //private DialogListener listener;
     private Event event;
@@ -72,17 +72,20 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
         txtpass = v.findViewById(R.id.txtPassword);
+        txtpass.setText("");
         txtDescription = v.findViewById(R.id.description);
         priva = v.findViewById(R.id.privateSwitch);
         txtDate.setOnClickListener(this);
         txtpass.setVisibility(View.GONE);
+        //isPrivate = false;
         priva.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b) {
                     txtpass.setVisibility(View.GONE);
                     isPrivate = false;}
-                else {txtpass.setVisibility(View.VISIBLE);
+                else {
+                    txtpass.setVisibility(View.VISIBLE);
                     isPrivate = true;
                 }
             }

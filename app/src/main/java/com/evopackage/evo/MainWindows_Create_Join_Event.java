@@ -183,6 +183,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         if(ev.isEventPrivate())
         {
             joinPopUp();
+
         }
         startActivity(i);
     }

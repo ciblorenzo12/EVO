@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Event implements Serializable {
     private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
-    boolean _priva;
+    Boolean _priva;
     private List<String> _people;
     public Event() {};
 

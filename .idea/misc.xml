@@ -29,7 +29,6 @@
         <entry key="..\:/Evo/app/src/main/res/layout/main_messenges.xml" value="0.18541666666666667" />
         <entry key="..\:/Evo/app/src/main/res/layout/main_messenges_.xml" value="0.17" />
         <entry key="..\:/Evo/app/src/main/res/layout/messanging_chat.xml" value="0.28184281842818426" />
-        <entry key="..\:/Evo/app/src/main/res/layout/people_item.xml" value="0.14791666666666667" />
         <entry key="..\:/Evo/app/src/main/res/layout/profile_page.xml" value="0.18541666666666667" />
         <entry key="..\:/Evo/app/src/main/res/layout/search_item.xml" value="0.36096014492753625" />
         <entry key="..\:/Evo/app/src/main/res/layout/setting_page.xml" value="0.25" />
@@ -101,6 +100,7 @@
         <entry key="app/src/main/res/layout/event_description.xml" value="0.165" />
         <entry key="app/src/main/res/layout/event_dialog.xml" value="0.38712321848109155" />
         <entry key="app/src/main/res/layout/event_history.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/people_item.xml" value="0.11296296296296296" />
       </map>
     </option>
   </component>

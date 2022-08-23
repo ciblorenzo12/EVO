@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
@@ -66,12 +68,14 @@ public class ActivityDescription extends AppCompatDialogFragment  {
         guest = FirebaseStorage.getInstance().getReference().child("/images").child(ev).child(ac.GetName());
 
         picGuest.setAdapter(picAdapter);
-//        guest.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                imageGuest.add(uri);
-//            }
-//        });
+        picAdapter.notifyDataSetChanged();
+        //guest.getDownloadUrl().
+       guest.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into((Target) imageGuest);
+            }
+        });
 
 
 
