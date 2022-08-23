@@ -109,7 +109,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         "String uri", "String description");
                                 _events.add(evt);
                             }
-                            _events = EventHelper.sortEventsByDate(_events, true);
+                            _events = Event.sortEventsByDate(_events, true);
                             adaptor.notifyDataSetChanged();
                         }
                     }
