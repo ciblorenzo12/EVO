@@ -106,7 +106,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         snap.child("address").getValue(String.class),
                                         snap.child("category").getValue(String.class),
                                         snap.child("creator").getValue(String.class),
-                                        "String uri", "String description");
+                                        "String uri", "String description",
+                                        snap.child("private").getValue(Boolean.class),
+                                        snap.child("password").getValue(String.class));
                                 _events.add(evt);
                             }
                             _events = Event.sortEventsByDate(_events, true);
