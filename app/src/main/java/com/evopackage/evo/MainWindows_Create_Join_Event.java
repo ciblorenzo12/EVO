@@ -111,7 +111,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         snap.child("password").getValue(String.class));
                                 _events.add(evt);
                             }
-                           // _events = EventHelper.sortEventsByDate(_events, true);
+                            _events = Event.sortEventsByDate(_events, true);
                             adaptor.notifyDataSetChanged();
                         }
                     }
