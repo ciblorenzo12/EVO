@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class Event implements Serializable {
     private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
-    boolean _priva;
+    Boolean _priva;
     private ArrayList<String> _people;
     public Event() {};
 
@@ -57,32 +57,35 @@ public class Event implements Serializable {
     // returns -1 if a < b
     // returns 0 if a = b
     public static int compareDates(String a, String b) {
-        String[] numsA = a.split("/");
-        String[] numsB = b.split("/");
+            if (a==null || b == null)
+                return 0;
 
-        // if year is more recent
-        if (Integer.parseInt(numsA[2]) > Integer.parseInt(numsB[2]))
-            return 1;
-        else if (Integer.parseInt(numsA[2]) < Integer.parseInt(numsB[2]))
-            return -1;
-        else {
-            // if month is more recent
-            if (Integer.parseInt(numsA[0]) > Integer.parseInt(numsB[0]))
+            String[] numsA = a.split("/");
+            String[] numsB = b.split("/");
+
+            // if year is more recent
+            if (Integer.parseInt(numsA[2]) > Integer.parseInt(numsB[2]))
                 return 1;
-            else if (Integer.parseInt(numsA[0]) < Integer.parseInt(numsB[0]))
+            else if (Integer.parseInt(numsA[2]) < Integer.parseInt(numsB[2]))
                 return -1;
             else {
-                // if day is more recent
-                if (Integer.parseInt(numsA[1]) > Integer.parseInt(numsB[1]))
+                // if month is more recent
+                if (Integer.parseInt(numsA[0]) > Integer.parseInt(numsB[0]))
                     return 1;
-                else
+                else if (Integer.parseInt(numsA[0]) < Integer.parseInt(numsB[0]))
                     return -1;
+                else {
+                    // if day is more recent
+                    if (Integer.parseInt(numsA[1]) > Integer.parseInt(numsB[1]))
+                        return 1;
+                    else
+                        return -1;
+                }
             }
         }
-    }
 
     // returns the list of events sort by their date (oldest to newest by default)
-    public static ArrayList<Event> sortEventsByDate(ArrayList<Event> a, boolean reversed) {
+    public static ArrayList<Event> sortEventsByDate(ArrayList<Event> a, Boolean reversed) {
         int n = a.size();
         for (int i = 0; i < n - 1; i++)
             for (int j = 0; j < n - i - 1; j++)
