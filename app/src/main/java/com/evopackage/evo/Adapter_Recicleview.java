@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
 
     private List<Event> events;
     final Adapter_Recicleview.OnItemClickListener l;
+    CardView cv;
 
 
     public Adapter_Recicleview(List<Event> event, Adapter_Recicleview.OnItemClickListener listen) {
@@ -33,6 +35,8 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         View v  = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_clicker,parent,false);
         viewHolderEvents holderEvents_ = new viewHolderEvents(v);
         return holderEvents_;
+
+
     }
 
     @Override
@@ -60,6 +64,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
             name = itemView.findViewById(R.id.Name_evt);
             category=itemView.findViewById(R.id.Category_evt);
             date= itemView.findViewById(R.id.Date_evt);
+            cv = itemView.findViewById(R.id.cv);
         }
 
         public void bindData(Event event) {

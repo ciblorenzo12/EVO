@@ -82,4 +82,8 @@
     <string name="attendees">Attendees</string>
     <string name="Eventactivities">Activities Scheduled</string>
     <string name="Attending">· Attending</string>
+    <string name="day1">Day1</string>
+    <string name="night">Night</string>
+    <string name="Light">Light Mode</string>
+    <string name="Night">Night Mode</string>
 </resources>
