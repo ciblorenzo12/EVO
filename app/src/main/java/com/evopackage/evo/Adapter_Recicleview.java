@@ -18,6 +18,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
     final Adapter_Recicleview.OnItemClickListener l;
 
 
+
     public Adapter_Recicleview(List<Event> event, Adapter_Recicleview.OnItemClickListener listen) {
         events = event;
         this.l = listen;
@@ -73,5 +74,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
                 }
             });
         }
+
+
     }
 }

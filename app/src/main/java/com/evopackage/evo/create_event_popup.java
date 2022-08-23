@@ -8,7 +8,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,8 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,7 +48,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
     private static String current_event;
     private static String current_eventID;
-    private static ArrayList<String> _events = new ArrayList<>();
+    private static ArrayList<String> people = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

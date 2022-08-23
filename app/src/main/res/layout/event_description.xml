@@ -263,6 +263,16 @@
             app:layout_constraintVertical_bias="0.168"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <Button
+            android:id="@+id/Join_Event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00BCD4"
+            android:text="Join Event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/qrvt" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

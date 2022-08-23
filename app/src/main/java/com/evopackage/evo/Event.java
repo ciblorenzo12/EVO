@@ -1,21 +1,13 @@
 package com.evopackage.evo;
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Event implements Serializable {
     private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
     boolean _priva;
-    private List<String> _people;
+    private ArrayList<String> _people;
     public Event() {};
 
     public Event(String key, String name, String date, String location, String category, String creator, String uri, String description, Boolean priva, String password) {

@@ -36,7 +36,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private FirebaseUser user;
     private int Camera_Permission_Request = 1;
     private String[] perm_ = {Manifest.permission.CAMERA};//add permitions to this array
-    private boolean permission_granted;
+    private boolean permission_granted, isAttending;
     private ImageButton btn;
     private ImageButton evtBtn;
     private ImageButton qr, settings, join,back_settings;
@@ -51,6 +51,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     Adapter_Recicleview adaptor;
     LinearLayoutManager managerL;
     private Button logout;
+    private ArrayList<String> peopleUIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         managerL = new LinearLayoutManager(this);
         recicleviw.setLayoutManager(managerL);
         _events = new ArrayList<>();
+        peopleUIDs = new ArrayList<>();
+
+        isAttending = false;
 
 
         adaptor = new Adapter_Recicleview(_events, new Adapter_Recicleview.OnItemClickListener() {
@@ -99,6 +103,11 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                             _events.clear();
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
+                                peopleUIDs.clear();
+
+                                for(DataSnapshot guestSnap : snap.child("people").getChildren()){
+                                    peopleUIDs.add(guestSnap.getKey());
+                                }
 
                                 Event evt = new Event(snap.getKey(),
                                         snap.child("name").getValue(String.class),
@@ -180,6 +189,10 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private void movetodescription(Event ev) {
         Intent i = new Intent(this, EventDescription.class);
         i.putExtra("Event", ev);
+//        if(ev.isEventPrivate() == true)// && isAttending == false)
+//        {
+//            joinPopUp();
+//        }
         startActivity(i);
     }
 
@@ -293,21 +306,5 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
     }
 
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-//
-//    }
-//
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-//
-//    }
 
-    // @Override
-    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-//
-//    }
 }

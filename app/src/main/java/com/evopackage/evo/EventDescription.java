@@ -24,14 +24,15 @@ import java.util.ArrayList;
 public class EventDescription extends AppCompatActivity {
 
     private Event ev;
-   private static String ClickedEvent;
-    private Button setUp;
+    private static String ClickedEvent;
+    private Button setUp, Join_Evt;
     private ImageButton chatroom_m;
     private TextView txtName, txtAddress, txtDate, txtCategory, txtDescription, txtCreator, txtAttendees;
     private RecyclerView rv;
    // private EventActivitiesAdapter adapter;
     private ArrayList<Activity> list;
-    private DatabaseReference firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    private DatabaseReference firebaseUsers;
+    private DatabaseReference eventRef;
     //private EventActivitiesAdapter adapter;
 
     private LinearLayoutManager managerL;
@@ -61,7 +62,35 @@ public class EventDescription extends AppCompatActivity {
         txtCreator = findViewById(R.id.eventcreatorr);
         txtAttendees = findViewById(R.id.txtAttendees);
         ClickedEvent = ev.GetKey();
+        Join_Evt = findViewById(R.id.Join_Event);
         _activity = new ArrayList<>();
+
+        eventRef = FirebaseDatabase.getInstance().getReference().child("events");
+        firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        FirebaseDatabase.getInstance().getReference().child("events").child(ev.GetKey()).child("people").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()){
+                    Join_Evt.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Join_Evt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventRef.child(ev.GetKey()).child("people").child(firebaseUsers.getKey()).setValue("Guest");
+                firebaseUsers.child("user-events").child(ev.GetKey()).setValue(ev.GetName());
+                Join_Evt.setVisibility(View.GONE);
+            }
+        });
+
         chatroom_m.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
