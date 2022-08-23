@@ -1,5 +1,6 @@
 package com.evopackage.evo;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,9 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         holder.date.setText(events.get(position).GetDate());
         holder.category.setText(events.get(position).GetCategory());
         holder.bindData(events.get(position));
+
+        if (!Event.isFutureEvent(events.get(position)))
+            holder.date.setTextColor(0xFFFF0000);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.evopackage.evo;
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Picture;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,25 +14,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class ActivityDescription extends AppCompatDialogFragment  {
 
     private Activity ac;
+    private String ev;
     private TextView txtName;
+    private RecyclerView picGuest;
     private TextView txtDes;
     private TextView txtDate;
+    private ArrayList<Uri> imageGuest;
+    StorageReference guest;
+    PictureAdapter picAdapter;
 
 
-    public ActivityDescription(Activity _ac){
+
+
+    public ActivityDescription(Activity _ac, String _ev){
         ac = _ac;
+        ev = _ev;
     }
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-
-
-    }
 
     public ActivityDescription() {
         super();
@@ -47,7 +59,22 @@ public class ActivityDescription extends AppCompatDialogFragment  {
         View vr = inflater.inflate(R.layout.activity_description, null);
         txtName = vr.findViewById(R.id.txtActivityName);
         txtDate = vr.findViewById(R.id.txtActivityDate);
+        picGuest = vr.findViewById(R.id.rvact2);
         txtDes = vr.findViewById(R.id.txtActivityDes);
+        imageGuest = new ArrayList<>();
+        picAdapter = new PictureAdapter(imageGuest, ev, ac);
+        guest = FirebaseStorage.getInstance().getReference().child("/images").child(ev).child(ac.GetName());
+
+        picGuest.setAdapter(picAdapter);
+//        guest.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                imageGuest.add(uri);
+//            }
+//        });
+
+
+
         populateData();
 
         builder.setView(vr)

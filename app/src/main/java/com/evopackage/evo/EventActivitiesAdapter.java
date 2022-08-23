@@ -44,6 +44,7 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
         holder.date.setText(list2.get(position).GetTime());
         holder.bindData(list2.get(position));
 
+
     }
 
     @Override
