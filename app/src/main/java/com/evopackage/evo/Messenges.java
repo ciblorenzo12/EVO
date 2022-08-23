@@ -2,13 +2,20 @@ package com.evopackage.evo;
 
 public class Messenges {
 
-private String sender,date,messenger;
+private String sender;
+    private String date;
+    private String messenger;
+
+
+    private String uid;
+
     public Messenges(){};
 
-    public Messenges(String sender, String date, String messenger) {
+    public Messenges(String sender, String date, String messenger,String uid) {
         this.sender = sender;
         this.date = date;
         this.messenger = messenger;
+        this.uid = uid;
     }
 
 
@@ -37,4 +44,12 @@ private String sender,date,messenger;
     public void setMessenger(String messenger) {
         this.messenger = messenger;
     }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
 }
