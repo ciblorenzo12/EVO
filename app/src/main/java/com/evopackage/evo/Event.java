@@ -3,12 +3,11 @@ package com.evopackage.evo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Event implements Serializable {
     private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
-    Boolean _priva;
-    private List<String> _people;
+    boolean _priva;
+    private ArrayList<String> _people;
     public Event() {};
 
     public Event(String key, String name, String date, String location, String category, String creator, String uri, String description, Boolean priva, String password) {

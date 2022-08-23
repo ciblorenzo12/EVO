@@ -67,7 +67,7 @@ public class Join_Event extends AppCompatDialogFragment implements View.OnClickL
             evtCode = eventCode.getText().toString().trim();
             eventCode.setText("");
             if(evtCode.isEmpty()){
-                eventCode.setError("Please enter the event's code to join.");
+                eventCode.setError("Please enter the event's code or password to join.");
                 eventCode.requestFocus();
                 return;
             }

@@ -1,5 +1,6 @@
 package com.evopackage.evo;
 
+import android.content.Context;
 import android.graphics.Picture;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,13 +49,16 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
     public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
         Uri pi = pictureList.get(position);
 
-        //FirebaseStorage storage = FirebaseStorage.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
-       // mStorageRef = storage.getReference().child("/images").child(ev).child(ac.GetName());
+        mStorageRef = storage.getReference().child("/images").child(ev).child(ac.GetName());
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(holder.picture);
+            }
+        });
 
-                Glide.with(holder.itemView.getContext())
-                        .load(pi)
-                        .into(holder.picture);
 
 
     }
@@ -72,7 +77,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
         {
             super(itemView);
 
-            picture = (ImageView) itemView.findViewById(R.id.imageGuest);
+            picture = itemView.findViewById(R.id.imageGuest);
         }
 
 
