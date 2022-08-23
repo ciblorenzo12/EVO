@@ -106,10 +106,12 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         snap.child("address").getValue(String.class),
                                         snap.child("category").getValue(String.class),
                                         snap.child("creator").getValue(String.class),
-                                        "String uri", "String description");
+                                        "String uri", "String description",
+                                        snap.child("private").getValue(Boolean.class),
+                                        snap.child("password").getValue(String.class));
                                 _events.add(evt);
                             }
-                            _events = EventHelper.sortEventsByDate(_events, true);
+                           // _events = EventHelper.sortEventsByDate(_events, true);
                             adaptor.notifyDataSetChanged();
                         }
                     }
@@ -157,8 +159,8 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
     private void joinPopUp() {
-        create_event_popup evtPopUp = new create_event_popup();
-        evtPopUp.show(getSupportFragmentManager(), "Join Dialog");
+        Join_Event join = new Join_Event();
+        join.show(getSupportFragmentManager(), "Join Dialog");
     }
 
     //Search
@@ -178,6 +180,10 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private void movetodescription(Event ev) {
         Intent i = new Intent(this, EventDescription.class);
         i.putExtra("Event", ev);
+        if(ev.isEventPrivate())
+        {
+            joinPopUp();
+        }
         startActivity(i);
     }
 
@@ -303,21 +309,5 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
     }
 
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
-//
-//    }
-//
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-//
-//    }
 
-    // @Override
-    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-
-//    @Override
-//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
-//
-//    }
 }

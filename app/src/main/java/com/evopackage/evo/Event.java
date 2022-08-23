@@ -8,13 +8,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Event implements Serializable {
-    private String _key, _name, _date, _location, _category, _uri, _description, _creator;
-
+    private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
+    boolean _priva;
+    private List<String> _people;
     public Event() {};
 
-    public Event(String key, String name, String date, String location, String category, String creator, String uri, String description) {
+    public Event(String key, String name, String date, String location, String category, String creator, String uri, String description, Boolean priva, String password) {
         _key = key;
         _name = name;
         _date = date;
@@ -23,6 +25,10 @@ public class Event implements Serializable {
         _creator = creator;
         _uri = uri;
         _description = description;
+        _priva = priva;
+       _people = null;
+
+       _password = password;
     }
 
     public String GetKey() { return _key; }
@@ -37,8 +43,18 @@ public class Event implements Serializable {
 
     public String GetCreator() { return _creator; }
 
+    public int getPeopleCount() { return _people.size();}
+
+    public void addPeople(String people) { _people.add(people);}
+
     public String GetUri() { return _uri; }
 
+    public String GetPassword() { return _password;}
+
     public String GetDescription() { return _description; }
+
+    public Boolean isEventPrivate() { return _priva;}
+
+    public void SetEventPrivate(boolean prive){ _priva = prive;}
 
 }

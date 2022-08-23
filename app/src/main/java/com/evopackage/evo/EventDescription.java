@@ -81,7 +81,7 @@ public class EventDescription extends AppCompatActivity {
 
             @Override
             public void OnItemClick(Activity ac) {
-                movetodescription(ac);
+                movetoacdescription(ac);
             }
         });
        // list = new ArrayList<>();
@@ -123,8 +123,8 @@ public class EventDescription extends AppCompatActivity {
 
     }
 
-    private void movetodescription(Activity ac) {
-        ActivityDescription description = new ActivityDescription(ac);
+    private void movetoacdescription(Activity ac) {
+        ActivityDescription description = new ActivityDescription(ac, ev.GetKey());
         description.show(getSupportFragmentManager(), "ActivityDescription");
     }
 
