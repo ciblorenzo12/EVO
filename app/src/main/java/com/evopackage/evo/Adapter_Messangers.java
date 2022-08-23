@@ -2,6 +2,7 @@ package com.evopackage.evo;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -24,9 +28,9 @@ public class Adapter_Messangers extends RecyclerView.Adapter<Adapter_Messangers.
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private List<Messenges> messenges;
    private Context context;
+   private StorageReference pictureReference= FirebaseStorage.getInstance().getReference();
+   private DatabaseReference userref = FirebaseDatabase.getInstance().getReference().child(EventDescription.GetClickedEvent()).child("Messange");
 
-
-   private StorageReference refStorage = FirebaseStorage.getInstance().getReference().child("user_profile_pics");
     public Adapter_Messangers(Context context, List<Messenges> messenges ) {
         this.messenges = messenges;
         this.context = context;
@@ -43,18 +47,37 @@ public class Adapter_Messangers extends RecyclerView.Adapter<Adapter_Messangers.
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Messangers.viewHolderEvents holder, int position) {
-       StorageReference file  = refStorage.child(user.getUid()).child("profile.png");
-        Picasso.get().load(String.valueOf(file)).into(holder.profile);
+
+
+
+
+
      holder.name.setText(messenges.get(position).getSender());
      holder.date.setText(messenges.get(position).getDate());
      holder.messenger.setText((messenges.get(position).getMessenger()));
 
      if (messenges.get(position).getSender().contains(user.getDisplayName())) {
          holder.card.setCardBackgroundColor(Color.GREEN);
-         holder.card.setRadius(40);
+         holder.card.setRadius(50);
+         StorageReference profileRef = pictureReference.child("user_profile_pics/"+user.getUid()+"/profile.jpg");
+         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+             @Override
+             public void onSuccess(Uri uri) {
+                 Picasso.get().load(uri).into(holder.profile);
+             }
+         });
      }else {
+
+         StorageReference profileRef = pictureReference.child("user_profile_pics/"+main_messages.getUid()+"/profile.jpg");
+         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+             @Override
+             public void onSuccess(Uri uri) {
+                 Picasso.get().load(uri).into(holder.profile);
+             }
+         });
+
          holder.card.setCardBackgroundColor(Color.CYAN);
-         holder.card.setRadius(40);
+         holder.card.setRadius(50);
      }
     }
 
@@ -68,6 +91,8 @@ public class Adapter_Messangers extends RecyclerView.Adapter<Adapter_Messangers.
         TextView name,date,messenger;
         CardView card;
         ImageView profile;
+
+
         public viewHolderEvents(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.Name_msg);

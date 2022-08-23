@@ -34,6 +34,10 @@ public class main_messages extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth Auth_;
     private DatabaseReference refMessanging;
+
+
+
+    private static String uid;
     @Override
     public void onCreate(Bundle savedInstanceState){
         setContentView(R.layout.main_messenges_);
@@ -67,7 +71,7 @@ sv = findViewById(R.id.scrollView2);
 
 
         String Date = df.format(System.currentTimeMillis());
-        Messenges mensage = new Messenges(Name, Date,mess.getText().toString());
+        Messenges mensage = new Messenges(Name, Date,mess.getText().toString(), user.getUid());
 
         refMessanging.child("events").child(EventDescription.GetClickedEvent()).child("Message").push().setValue(mensage);
         mess.setText("");
@@ -78,7 +82,7 @@ sv = findViewById(R.id.scrollView2);
     @Override
     protected void onStart() {
         super.onStart();
-        Messanges_toDisp(EventDescription.GetClickedEvent());
+            Messanges_toDisp(EventDescription.GetClickedEvent());
     }
 
     private void Messanges_toDisp(String event) {
@@ -91,9 +95,12 @@ sv = findViewById(R.id.scrollView2);
 
                     Messenges messenges = new Messenges(snap.child("sender").getValue(String.class),
                             snap.child("date").getValue(String.class),
-                            snap.child("messenger").getValue(String.class));
+                            snap.child("messenger").getValue(String.class),snap.child("uid").getValue(String.class));
                     messenges_List.add(messenges);
+                 if(snap.child("uid").getValue(String.class)!= user.getUid()) {
 
+                 uid =snap.child("uid").getValue(String.class);
+                 }
                 }
                 reciclemsg.scrollToPosition(messenges_List.size()-1);
                 adaptor_m.notifyDataSetChanged();
@@ -104,4 +111,7 @@ sv = findViewById(R.id.scrollView2);
 
             }
         });    }
+    public static String getUid() {
+        return uid;
+    }
 }
