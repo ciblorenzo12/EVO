@@ -5,18 +5,23 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +39,9 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
     private TextView txtDate;
     private EditText txtAddress;
     private TextView txtDescription;
+    private Switch priva;
+    private EditText txtpass;
+    private Boolean isPrivate;
 
     //private DialogListener listener;
     private Event event;
@@ -50,6 +58,7 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("CutPasteId")
     @NonNull
     @Override
@@ -62,9 +71,24 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
         txtName = v.findViewById(R.id.txtName);
         txtDate = v.findViewById(R.id.txtDate);
         txtAddress = v.findViewById(R.id.txtLocation);
+        txtpass = v.findViewById(R.id.txtPassword);
         txtDescription = v.findViewById(R.id.description);
-
+        priva = v.findViewById(R.id.privateSwitch);
         txtDate.setOnClickListener(this);
+        txtpass.setVisibility(View.GONE);
+        priva.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(!b) {
+                    txtpass.setVisibility(View.GONE);
+                    isPrivate = false;}
+                else {txtpass.setVisibility(View.VISIBLE);
+                    isPrivate = true;
+                }
+            }
+        });
+
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.theme, android.R.layout.select_dialog_item);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
         spinner.setAdapter(adapter);
@@ -79,7 +103,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
 
                     String eventKey = FirebaseDatabase.getInstance().getReference().child("events").push().getKey();
                     event = new Event(eventKey, txtName.getText().toString(), txtDate.getText().toString(),
-                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "");
+                            txtAddress.getText().toString(), spinner.getSelectedItem().toString(), user.getUid(), "", "", isPrivate,
+                            txtpass.getText().toString());
 
                     if (txtName.getText().toString().isEmpty() || txtAddress.getText().toString().isEmpty() || txtDate.getText().toString().isEmpty()) {
                         dialog.dismiss();
@@ -100,6 +125,8 @@ public class create_event_popup extends AppCompatDialogFragment implements Adapt
                         firebaseEvent.child("creator").setValue(event.GetCreator());
                         firebaseEvent.child("people").child(current_user.getUid()).setValue("Creator");
                         firebaseUsers.child("user-events").child(current_eventID).setValue(current_event);
+                        firebaseEvent.child("private").setValue(event.isEventPrivate());
+                        firebaseEvent.child("password").setValue(event.GetPassword());
                     }
                 });
         return builder.create();

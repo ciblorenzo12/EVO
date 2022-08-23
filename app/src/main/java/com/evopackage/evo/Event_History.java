@@ -117,7 +117,8 @@ public class Event_History extends AppCompatActivity implements create_event_pop
                                 eventsRef.child(snap.getKey()).child("address").getValue(String.class),
                                 eventsRef.child(snap.getKey()).child("category").getValue(String.class),
                                 userRef.child(eventsRef.child(snap.getKey()).child("creator").getValue(String.class)).child("_firstname").getValue().toString()+" "+userRef.child(eventsRef.child(snap.getKey()).child("creator").getValue(String.class)).child("_lastname").getValue().toString(),
-                                "String uri", "String description");
+                                "String uri", "String description", eventsRef.child(snap.getKey()).child("private").getValue(Boolean.class),
+                                eventsRef.child(snap.getKey()).child("password").getValue(String.class));
                         eventInfo.add(event);
                     }
 
