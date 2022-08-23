@@ -106,9 +106,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
                                         snap.child("address").getValue(String.class),
                                         snap.child("category").getValue(String.class),
                                         snap.child("creator").getValue(String.class),
-                                        "String uri", "String description",
-                                        snap.child("private").getValue(Boolean.class),
-                                        snap.child("password").getValue(String.class));
+                                        "String uri", "String description");
                                 _events.add(evt);
                             }
                             _events = Event.sortEventsByDate(_events, true);
@@ -180,10 +178,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     private void movetodescription(Event ev) {
         Intent i = new Intent(this, EventDescription.class);
         i.putExtra("Event", ev);
-        if(ev.isEventPrivate())
-        {
-            joinPopUp();
-        }
         startActivity(i);
     }
 
@@ -297,5 +291,21 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
     }
 
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAdder) {
+//
+//    }
+//
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 
+    // @Override
+    //  public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+
+//    @Override
+//    public void applyTexts(String _evtName, String _evtDate, String _evtAddr, String _evtTheme) {
+//
+//    }
 }
