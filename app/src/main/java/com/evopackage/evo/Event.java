@@ -57,7 +57,7 @@ public class Event implements Serializable {
     // returns -1 if a < b
     // returns 0 if a = b
     public static int compareDates(String a, String b) {
-            if (a==null || b == null)
+            if (a == null || b == null)
                 return 0;
 
             String[] numsA = a.split("/");
