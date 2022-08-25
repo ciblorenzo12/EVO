@@ -78,8 +78,10 @@ public class Event implements Serializable {
                     // if day is more recent
                     if (Integer.parseInt(numsA[1]) > Integer.parseInt(numsB[1]))
                         return 1;
-                    else
+                    else if (Integer.parseInt(numsA[1]) < Integer.parseInt(numsB[1]))
                         return -1;
+                    else
+                        return 0;
                 }
             }
         }
@@ -101,7 +103,7 @@ public class Event implements Serializable {
     public static boolean isFutureEvent(Event e) {
         Calendar c = Calendar.getInstance();
         String currentDate = (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
-        if (compareDates(e.GetDate(), currentDate) > 0)
+        if (compareDates(e.GetDate(), currentDate) >= 0)
             return true;
         return false;
     }
