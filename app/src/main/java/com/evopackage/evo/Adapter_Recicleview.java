@@ -1,5 +1,6 @@
 package com.evopackage.evo;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +39,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
         return holderEvents_;
 
 
+
     }
 
     @Override
@@ -65,6 +68,19 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
             category=itemView.findViewById(R.id.Category_evt);
             date= itemView.findViewById(R.id.Date_evt);
             cv = itemView.findViewById(R.id.cv);
+
+            if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+
+                 int c = Color.parseColor("grey");
+
+                if(cv != null){
+                    cv.setBackgroundResource(R.color.black);}
+                 name.setTextColor(c);
+                 date.setTextColor(c);
+                 category.setTextColor(c);
+
+                }
+
         }
 
         public void bindData(Event event) {
@@ -73,6 +89,7 @@ public class Adapter_Recicleview extends RecyclerView.Adapter<Adapter_Reciclevie
                 public void onClick(View v) {
                     l.OnItemClick(event);
                 }
+
             });
         }
     }

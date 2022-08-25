@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -64,6 +66,7 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
 
         if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+
             getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         }
@@ -82,24 +85,24 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_windows_create_join_event);
-        swi = findViewById(R.id.switch1);
+//        swi = findViewById(R.id.switch1);
+//
+//        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+//           swi.setChecked(true);
+//
+//        }
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-           swi.setChecked(true);
-
-        }
-
-        swi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(swi.isChecked())
-                    setDayNight(0);
-
-                else
-                    setDayNight(1);
-
-            }
-        });
+//        swi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(swi.isChecked())
+//                    setDayNight(0);
+//
+//                else
+//                    setDayNight(1);
+//
+//            }
+//        });
 
 
         refdata = FirebaseDatabase.getInstance().getReference().child("events");
@@ -187,14 +190,9 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(this, EventDescription.class);
-//
-//                startActivity(i);
+                showPopup(v);
             }
         });
-
-
-
 
     }
 
@@ -204,28 +202,29 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
         if(theme==0){
             getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            restaret();
+//            restaret();
         }
         else{
             getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            restaret();
+//            restaret();
         }
     }
 
      private void restaret() {
+         finish();
          Intent i = new Intent(getApplicationContext(), MainWindows_Create_Join_Event.class );
          startActivity(i);
-         finish();
+
      }
 
 
-//     public void showPopup(View v)
-//    {
-//        PopupMenu p = new PopupMenu(this, v);
-//        p.setOnMenuItemClickListener(this);
-//        p.inflate(R.menu.menu1);
-//        p.show();
-//    }
+     public void showPopup(View v)
+    {
+        PopupMenu p = new PopupMenu(this, v);
+        p.setOnMenuItemClickListener(this::onMenuItemClick);
+        p.inflate(R.menu.menu1);
+        p.show();
+    }
 
 
     private void movetodescription(Event ev) {
@@ -288,32 +287,36 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
         }
     }
 
-//    @Override
-//    public boolean onMenuItemClick(MenuItem item) {
-//
-//        switch (item.getItemId()){
-//            case R.id.night11:
-//                getDelegate().applyDayNight();
-//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                cv = findViewById(R.id.cv);
-//
-//                return true;
-//
-//            case R.id.day:
-//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//
-//                return true;
-//
-//        }
-//
-//        return false;
-//    }
-//
-//    private void restartApp() {
-//        Intent i = new Intent(getApplicationContext(),MainWindows_Create_Join_Event.class);
-//        startActivity(i);
-//        finish();
-//    }
+
+    public boolean onMenuItemClick(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.night11:
+               // getDelegate().applyDayNight();
+                setDayNight(0);
+              //  getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                restartApp();
+                return true;
+
+
+
+            case R.id.day:
+                //getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                 setDayNight(1);
+                return true;
+
+        }
+
+        return false;
+    }
+
+    private void restartApp() {
+        finish();
+        Intent i = new Intent(getApplicationContext(),MainWindows_Create_Join_Event.class);
+        startActivity(i);
+
+    }
 
     ;
 }

@@ -9,6 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
+
     android:alpha="20"
     android:hint="@string/Adress"
     tools:ignore="SpeakableTextPresentCheck">
@@ -17,9 +18,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
-        app:cardBackgroundColor="?attr/cardcolor"
         android:layout_height="157dp"
         android:alpha="80"
+
         android:rotation="0"
         android:rotationX="0"
         android:rotationY="0"
@@ -32,7 +33,6 @@
             android:layout_height="151dp"
             android:alpha="500"
             android:animateLayoutChanges="true"
-            android:background="@color/white"
             android:scrollbarStyle="outsideOverlay"
             tools:visibility="visible">
 

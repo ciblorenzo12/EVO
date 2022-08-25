@@ -1,17 +1,21 @@
 package com.evopackage.evo;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivitiesAdapter.viewH>{
 
+    private CardView c;
     private ArrayList<Activity> list2;
     public EventActivitiesAdapter(ArrayList<Activity> l){
         list2 = l;
@@ -52,6 +56,19 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
             name = itemView.findViewById(R.id.actname);
             date = itemView.findViewById(R.id.actdate);
             loc = itemView.findViewById(R.id.actlocation);
+
+            c = itemView.findViewById(R.id.cvactiv);
+            if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+
+                int ci = Color.parseColor("grey");
+                if(c != null){
+                c.setBackgroundResource(R.color.black);}
+                name.setTextColor(ci);
+                date.setTextColor(ci);
+                loc.setTextColor(ci);
+
+
+            }
         }
 
 

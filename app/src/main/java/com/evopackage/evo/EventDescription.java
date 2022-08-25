@@ -1,5 +1,6 @@
 package com.evopackage.evo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +38,7 @@ public class EventDescription extends AppCompatActivity {
     private RecyclerView rv2;
     private DatabaseReference refdata2;
     private ArrayList<String> list2;
+     CardView ad, des, org, act, at;
     private Peopleadapter adapter2;
 
     @Override
@@ -44,6 +48,7 @@ public class EventDescription extends AppCompatActivity {
         setContentView(R.layout.event_description);
 
         ev = (Event) getIntent().getSerializableExtra("Event");
+
 
         txtName = findViewById(R.id.txtEventName);
         txtAddress = findViewById(R.id.txtEventAddress);
@@ -130,6 +135,41 @@ public class EventDescription extends AppCompatActivity {
 
             }
         });
+
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+
+            ad = findViewById(R.id.cvad);
+            org = findViewById(R.id.cvor);
+
+
+            des = findViewById(R.id.cvdes);
+
+            ad.setBackgroundResource(R.color.grey);
+            org.setBackgroundResource(R.color.grey);
+            des.setBackgroundResource(R.color.grey);
+
+            at  = findViewById(R.id.cvat);
+
+            if(at != null){
+                at.setBackgroundResource(R.color.grey);
+            }
+            act  = findViewById(R.id.cvact);
+            if (act != null){
+
+                act.setBackgroundResource(R.color.grey);
+            }
+
+            int ci = Color.parseColor("black");
+
+            txtName.setTextColor(ci);
+            txtAddress.setTextColor(ci);
+            txtDate.setTextColor(ci);
+            txtCategory.setTextColor(ci);
+            txtDescription.setTextColor(ci);
+            txtCreator.setTextColor(ci);
+
+
+        }
 
 
 
