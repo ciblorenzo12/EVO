@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Apptheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="cardcolor">#FFFFFF</item>
+        <item name="backgroundcolor">#FFFFFF</item>
+        <item name="textcolor">#000000</item>
+        <item name="othercolor">#393939</item>
+    </style>
+
+    <style name="darktheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="cardcolor">#393939</item>
+        <item name="backgroundcolor">#000000</item>
+        <item name="textcolor">#393939</item>
+        <item name="othercolor">#393939</item>
+    </style>
+
+</resources>

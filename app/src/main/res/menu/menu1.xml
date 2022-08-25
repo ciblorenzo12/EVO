@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/night11"
+            android:title="@string/Night"/>
+    <item android:id="@+id/day"
+        android:title="@string/Light"/>
+
+</menu>
