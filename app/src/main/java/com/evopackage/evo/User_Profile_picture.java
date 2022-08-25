@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,13 +25,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class User_Profile_picture extends AppCompatActivity implements View.OnClickListener {
     //Firebase stuff
     private FirebaseAuth _authetication;
     private FirebaseDatabase _database = FirebaseDatabase.getInstance();
+    StorageReference storageRef;
     //Changes to be made to data on firebase
     private EditText _firstName, _lastName, _phoneNumber,_userID;
+
+    FirebaseUser user;
 
     //Clickable buttons
     //ProfPicture should open up the phones photo library and pick one to be the picture
@@ -46,7 +52,8 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_user_profile_setting);
 
         _authetication = FirebaseAuth.getInstance();
-        FirebaseUser user = _authetication.getCurrentUser();
+        user = _authetication.getCurrentUser();
+        storageRef = FirebaseStorage.getInstance().getReference();
         //EditText
         _firstName = findViewById(R.id.ProfFirstName);
         _lastName = findViewById(R.id.ProfLastName);
@@ -91,20 +98,32 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1000){
-            if(resultCode == Activity.RESULT_OK){
-                Uri profilePicUri = data.getData();
-                ProfPicture.setImageURI(profilePicUri);
+            Uri imageUri = data.getData();
+            //ProfPicture.setImageURI(imageUri);
 
-                UploadImagetoFirebase(profilePicUri);
-            }
+            uploadImageToFirebase(imageUri);
         }
     }
 
-    private void UploadImagetoFirebase(Uri profilePicUri) {
-       // DatabaseReference fileRef = FirebaseDatabase.getInstance().getReference().child("users").child(_authetication.getCurrentUser().getUid()).child("_uri");
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("user_profile_pics/"+_authetication.getCurrentUser().getUid()+"/profile.jpg");
-        fileRef.putFile(profilePicUri).addOnSuccessListener(taskSnapshot -> Toast.makeText(User_Profile_picture.this,"Image Uploaded.",Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(User_Profile_picture.this,"Upload Failed.",Toast.LENGTH_SHORT).show());
-
+    private void uploadImageToFirebase(Uri image) {
+        StorageReference fileRef = storageRef.child("user_profile_pics").child(user.getUid()).child("profile.jpg");
+        fileRef.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(User_Profile_picture.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(ProfPicture);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(User_Profile_picture.this, "Image Failed to Upload", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void SaveProfileChanges() {
@@ -112,6 +131,7 @@ public class User_Profile_picture extends AppCompatActivity implements View.OnCl
         String _FirstName = _firstName.getText().toString().trim();
         String _LastName = _lastName.getText().toString().trim();
         String _PhoneNum = _phoneNumber.getText().toString().trim();
+
 
 
         //User_information info = User_information();

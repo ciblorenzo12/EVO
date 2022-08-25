@@ -17,8 +17,17 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
 
     private CardView c;
     private ArrayList<Activity> list2;
-    public EventActivitiesAdapter(ArrayList<Activity> l){
+    final EventActivitiesAdapter.OnItemClickListener ac;
+
+    public EventActivitiesAdapter(ArrayList<Activity> l, EventActivitiesAdapter.OnItemClickListener listen){
         list2 = l;
+        this.ac = listen;
+    }
+
+    public interface OnItemClickListener
+    {
+        void OnItemClick(Activity ac);
+
 
     }
 
@@ -37,6 +46,7 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
         holder.loc.setText(list2.get(position).GetAddress());
         holder.name.setText(list2.get(position).GetName());
         holder.date.setText(list2.get(position).GetTime());
+        holder.bindData(list2.get(position));
 
     }
 
@@ -70,7 +80,14 @@ public class EventActivitiesAdapter extends RecyclerView.Adapter<EventActivities
 
             }
         }
-
+        public void bindData(Activity activity) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ac.OnItemClick(activity);
+                }
+            });
+        }
 
     }
 }

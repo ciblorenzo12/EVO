@@ -54,6 +54,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(firebase_login_activity);
 
 
@@ -96,7 +99,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(this, Register_user.class));
         }
         if (v.getId() == _forgotPass.getId()) {
-            startActivity(new Intent(this, MainWindows_Create_Join_Event.class));
+            startActivity(new Intent(this, Forgot_password.class));
 
 
         }
@@ -105,7 +108,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             signin();
 
         }
+
     }
+
+
 
     //Sign in Method
     private void signin() {
@@ -151,12 +157,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressbar_.setVisibility(View.VISIBLE);
         _authent.signInWithEmailAndPassword(_EMAIL, _PASSWORD).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+while (_userdata==null){
+    progressbar_.setVisibility(View.VISIBLE);
+  _userdata=  _authent.getCurrentUser();
 
+}
                 if (_userdata.isEmailVerified()) {
 
                     startActivity(new Intent(Login.this, MainWindows_Create_Join_Event.class));
 
-                } else {
+                }   if (!_userdata.isEmailVerified())  {
                     _userdata.sendEmailVerification();
                     Toast.makeText(Login.this, "Check your email for verification", Toast.LENGTH_LONG).show();
                 }
@@ -165,7 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             } else {
 
-                Toast.makeText(Login.this, "Ups something went wrong please check your credentials", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "Something went wrong, please check your credentials", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -200,7 +210,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
 
                         UI_Update();
-                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber(),"Events"," ");
+                  User_information data = new User_information(_authent.getCurrentUser().getDisplayName()," "," ", _authent.getCurrentUser().getEmail()," ",_authent.getCurrentUser().getPhoneNumber(),"Events"," "," ");
                         _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
                                 .getUid()).setValue(data);
                     }
@@ -215,7 +225,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Intent intent_ = new Intent(Login.this, MainWindows_Create_Join_Event.class);
         startActivity(intent_);
         Login.this.finish();
-        Toast.makeText(this, "Successfully ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Welcome back "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
     }
@@ -226,6 +236,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (_userdata != null) {
             Intent intent_ = new Intent(Login.this, MainWindows_Create_Join_Event.class);
             startActivity(intent_);
+            this.finish();
         }
         super.onStart();
 

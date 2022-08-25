@@ -2,7 +2,7 @@ package com.evopackage.evo;
 
 public class   User_information {
 
-    public String _firstname, _lastname, _dob, _email, _password, _phone,_event,_uri;
+    public String _firstname, _lastname, _dob, _email, _password, _phone,_event,_uri, _display;
 
     public String get_firstname() {
         return _firstname;
@@ -68,8 +68,9 @@ public class   User_information {
         this._uri = _uri;
     }
 
-    public User_information(String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone, String Event, String Uri) {
+    public User_information(String _Firstname, String _Lastname, String _Dob, String _Email, String _Password, String _Phone, String Event, String Uri, String _Display) {
 
+        _display = _Display;
         _firstname = _Firstname;
         _lastname = _Lastname;
         _dob = _Dob;

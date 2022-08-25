@@ -27,7 +27,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     //firebase Auth
     private FirebaseAuth _authentication;
     //information need it
-    private EditText _fullname, _lastname, _email, _password, _phone, _dob;
+    private EditText _displayname, _fullname, _lastname, _email, _password, _phone, _dob;
 
     //buttons
     private Button _registerBtn;
@@ -40,6 +40,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_register_user);
 
         _authentication = FirebaseAuth.getInstance();
+        _displayname = findViewById(R.id.register_displayname);
         _fullname = findViewById(R.id.register_firstname);
         _lastname = findViewById(R.id.register_lastname);
         _email = findViewById(R.id.register_email);
@@ -91,6 +92,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
     }
 
     private void RegisterUser() {
+        String _DisplayName = _displayname.getText().toString().trim();
         String _FirstName = _fullname.getText().toString().trim();
         String _LastName = _lastname.getText().toString().trim();
         String _Email = _email.getText().toString().trim();
@@ -98,6 +100,23 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
         String _Phone = _phone.getText().toString().trim();
         String _Dob = _dob.getText().toString().trim();
 
+        if(_DisplayName.isEmpty()){
+            _displayname.setError("Please enter a display name");
+            _displayname.requestFocus();
+            return;
+        }
+
+        //if (_DisplayName.length() < 10){
+          //  _displayname.setError("Display name must be at least 10 characters");
+          //  _displayname.requestFocus();
+         //   return;
+       // }
+
+       // if(_DisplayName.length() > 24){
+       //     _displayname.setError("Display name must be 24 characters or less");
+       //     _displayname.requestFocus();
+       //     return;
+        //}
 
         if (_FirstName.isEmpty()) {
             _fullname.setError("Please enter your first name");
@@ -162,7 +181,7 @@ public class Register_user extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
-                        User_information users = new User_information(_FirstName, _LastName, _Dob, _Email, _Password, _Phone,"Events"," ");
+                        User_information users = new User_information(_DisplayName,_FirstName, _LastName, _Dob, _Email, _Password, _Phone,"Events"," ");
                         _database.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())
                                         .getUid()).setValue(users)
                                 .addOnCompleteListener
