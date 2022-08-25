@@ -57,7 +57,7 @@ public class Event implements Serializable {
     // returns -1 if a < b
     // returns 0 if a = b
     public static int compareDates(String a, String b) {
-            if (a==null || b == null)
+            if (a == null || b == null)
                 return 0;
 
             String[] numsA = a.split("/");
@@ -109,8 +109,7 @@ public class Event implements Serializable {
     private static boolean eventGreater(Event a, Event b) {
         if (compareDates(a.GetDate(), b.GetDate()) > 0)
             return true;
-        else
-            return false;
+        return false;
     }
 
 }
