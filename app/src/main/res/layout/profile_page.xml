@@ -5,6 +5,7 @@
     android:id="@+id/pro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back1"
     tools:context=".Profile_Page">
 
     <ImageButton
@@ -29,25 +30,24 @@
         android:id="@+id/profilepicture"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@id/DisplayName"
-        app:layout_constraintCircleRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/EditProfile"
-        app:layout_constraintHeight="match_constraint"
-        app:layout_constraintHorizontal_bias="0.58"
-        app:layout_constraintStart_toEndOf="@+id/profileBack"
-        app:layout_constraintTop_toBottomOf="@+id/EditProfile"
-        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileBack"
         app:srcCompat="@drawable/profile" />
 
     <TextView
         android:id="@+id/DisplayName"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#808080"
         android:text="TextView"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/FullName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +56,8 @@
     <TextView
         android:id="@+id/FullName"
         android:layout_width="170dp"
+        android:textColor="#808080"
+
         android:layout_height="50dp"
         android:layout_marginTop="56dp"
         android:text=""
@@ -67,6 +69,8 @@
 
     <TextView
         android:id="@+id/DOB"
+        android:textColor="#808080"
+
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="56dp"
@@ -82,7 +86,6 @@
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="32dp"
         android:onClick="onClick"
         android:text="Event History"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,11 +97,11 @@
 
     <ImageButton
         android:id="@+id/EditProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="52dp"
+        android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047"

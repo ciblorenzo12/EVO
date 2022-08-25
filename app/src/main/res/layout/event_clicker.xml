@@ -9,22 +9,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
+
     android:alpha="20"
     android:hint="@string/Adress"
     tools:ignore="SpeakableTextPresentCheck">
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="157dp"
-
-
         android:alpha="80"
+
         android:rotation="0"
         android:rotationX="0"
-
         android:rotationY="0"
-        app:cardBackgroundColor="#C411C8FF"
         app:cardCornerRadius="30dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
@@ -34,7 +33,6 @@
             android:layout_height="151dp"
             android:alpha="500"
             android:animateLayoutChanges="true"
-            android:background="@color/white"
             android:scrollbarStyle="outsideOverlay"
             tools:visibility="visible">
 
@@ -87,7 +85,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="69dp"
-                app:tint="#00E2FF"
                 app:srcCompat="@drawable/iiiiiiiiiiiiiiiiiii" />
 
 

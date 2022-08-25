@@ -1,22 +1,18 @@
 package com.evopackage.evo;
-import android.content.Intent;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Picture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -101,5 +97,6 @@ public class ActivityDescription extends AppCompatDialogFragment  {
 
 
     }
+
 }
 

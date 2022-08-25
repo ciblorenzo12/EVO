@@ -84,4 +84,8 @@
     <string name="text" />
     <string name="say_hi">Say hi</string>
     <string name="Attending">· Attending</string>
+    <string name="day1">Day1</string>
+    <string name="night">Night</string>
+    <string name="Light">Light Mode</string>
+    <string name="Night">Night Mode</string>
 </resources>

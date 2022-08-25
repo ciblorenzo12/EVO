@@ -15,14 +15,15 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvactiv"
         android:layout_width="match_parent"
+
+
         android:layout_height="90dp"
-
-
         android:alpha="80"
         android:rotation="0"
-        android:rotationX="0"
 
+        android:rotationX="0"
         android:rotationY="0"
         app:cardCornerRadius="8dp"
         app:cardPreventCornerOverlap="true"
@@ -50,12 +51,12 @@
 
             <TextView
                 android:id="@+id/actname"
-                android:layout_width="362dp"
-                android:layout_height="19dp"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="3dp"
                 android:textColor="#000"
                 android:textSize="17sp" />
 

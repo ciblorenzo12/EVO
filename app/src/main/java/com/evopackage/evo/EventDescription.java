@@ -1,10 +1,13 @@
 package com.evopackage.evo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.ArrayList;
 
@@ -64,7 +71,7 @@ public class EventDescription extends AppCompatActivity {
         ClickedEvent = ev.GetKey();
         Join_Evt = findViewById(R.id.Join_Event);
         _activity = new ArrayList<>();
-
+        GenerateQr(EventDescription.GetClickedEvent());
         eventRef = FirebaseDatabase.getInstance().getReference().child("events");
         firebaseUsers = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -121,7 +128,6 @@ public class EventDescription extends AppCompatActivity {
         rv.setAdapter(adaptor);
 
         refdata.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -189,4 +195,24 @@ public class EventDescription extends AppCompatActivity {
 
         return ClickedEvent;
     }
+    private void GenerateQr(String qr) {
+        QRCodeWriter writer = new QRCodeWriter();
+
+        try {
+            BitMatrix bitMatrix = writer.encode(qr, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            ((ImageView) findViewById(R.id.qrvt)).setImageBitmap(bmp);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -24,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.959"
-        app:tint="@color/teal_700"
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <ImageButton
@@ -69,7 +68,6 @@
         android:layout_height="63dp"
         android:layout_marginStart="40dp"
         android:background="@drawable/qr"
-        android:backgroundTint="#C411C8FF"
         android:clickable="true"
         android:contentDescription="@string/Btn_test"
         android:focusable="true"
@@ -99,7 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958"
-        app:tint="@color/teal_700"
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck" />
 
     <TextView
@@ -108,7 +105,6 @@
         android:layout_height="101dp"
         android:layout_marginStart="5dp"
         android:text="@string/evo1"
-        android:textColor="@color/white"
         android:textSize="90sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +121,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/_motto"
-        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +207,7 @@
         android:id="@+id/searchView_Main"
         android:layout_width="346dp"
         android:layout_height="27dp"
-        android:background="@color/white"
+        android:background="#12D5D2D2"
         android:queryHint="@string/search"
         app:iconifiedByDefault="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -224,8 +219,9 @@
         app:queryHint="Search Event " />
 
     <ScrollView
-        android:layout_width="0dp"
+        android:id="@+id/scrollView2"
 
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"

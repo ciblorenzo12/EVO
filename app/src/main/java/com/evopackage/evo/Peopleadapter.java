@@ -1,11 +1,14 @@
 package com.evopackage.evo;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 public class Peopleadapter extends RecyclerView.Adapter<Peopleadapter.viewH> {
 
     private ArrayList<String> list3;
-
+    private CardView c;
     public Peopleadapter(ArrayList<String> l){
           list3 = l;
     }
@@ -42,6 +45,18 @@ public class Peopleadapter extends RecyclerView.Adapter<Peopleadapter.viewH> {
             super(itemView);
 
             name = itemView.findViewById(R.id.peoplename);
+
+            c = itemView.findViewById(R.id.cvpeop);
+            if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+
+                int ci = Color.parseColor("grey");
+
+                if(c != null){
+                    c.setBackgroundResource(R.color.black);}
+                name.setTextColor(ci);
+
+
+            }
         }
 
 

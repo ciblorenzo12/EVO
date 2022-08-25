@@ -21,6 +21,7 @@
             android:layout_marginTop="16dp"
             android:text="TextView"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="22dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -44,8 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
+            android:textColor="#808080"
             android:text="@string/Adress"
             app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="TextContrastCheck"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtEventDate"
@@ -53,6 +56,8 @@
 
         <TextView
             android:id="@+id/txtEventDate"
+            android:textColor="@color/black"
+
             android:layout_width="96dp"
             android:layout_height="22dp"
             android:layout_marginTop="20dp"
@@ -66,13 +71,15 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="140dp"
+            android:textColor="#808080"
+
             android:layout_height="24dp"
             android:layout_marginTop="36dp"
             android:text="@string/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cvad"
             tools:text="@string/description" />
 
         <ImageView
@@ -89,24 +96,28 @@
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#808080"
+
             android:layout_marginTop="64dp"
             android:text="@string/scan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4"
+            app:layout_constraintTop_toBottomOf="@+id/cvat"
             tools:text="@string/scan" />
 
         <TextView
             android:id="@+id/txtAttendees"
             android:layout_width="288dp"
+            android:textColor="#808080"
+
             android:layout_height="27dp"
             android:layout_marginTop="44dp"
             android:text="@string/attendees"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.018"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView5"
+            app:layout_constraintTop_toBottomOf="@+id/cvact"
             tools:text="@string/attendees" />
 
         <TextView
@@ -114,15 +125,17 @@
             android:layout_width="67dp"
             android:layout_height="18dp"
             android:layout_marginTop="28dp"
+            android:textColor="#808080"
+
             android:text="@string/creator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView3"
+            app:layout_constraintTop_toBottomOf="@+id/cvdes"
             tools:text="@string/creator" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/cvor"
             android:layout_width="301dp"
             android:layout_height="46dp"
             android:layout_marginTop="44dp"
@@ -137,13 +150,15 @@
                 android:id="@+id/eventcreatorr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#808080"
+
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="12dp"
                 android:text="TextView" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cvad"
             android:layout_width="311dp"
             android:layout_height="52dp"
             android:layout_marginTop="36dp"
@@ -157,13 +172,15 @@
                 android:id="@+id/txtEventAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#808080"
+
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="12dp"
                 android:text="TextView" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
+            android:id="@+id/cvdes"
             android:layout_width="312dp"
             android:layout_height="149dp"
             android:layout_marginTop="28dp"
@@ -177,6 +194,8 @@
                 android:id="@+id/descriptionev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#808080"
+
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="10dp"
@@ -185,7 +204,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView4"
+            android:id="@+id/cvat"
             android:layout_width="300dp"
             android:layout_height="213dp"
             android:layout_marginTop="48dp"
@@ -210,16 +229,18 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#808080"
+
             android:layout_marginTop="40dp"
             android:text="@string/Eventactivities"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.011"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cvor"
             tools:text="@string/Eventactivities" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView5"
+            android:id="@+id/cvact"
             android:layout_width="307dp"
             android:layout_height="212dp"
             android:layout_marginTop="16dp"
@@ -231,9 +252,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvact"
-                android:overScrollMode="never"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="12dp"
+                android:overScrollMode="never" />
         </androidx.cardview.widget.CardView>
 
         <Button
@@ -242,7 +267,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/cardView5"
+            app:layout_constraintBottom_toTopOf="@+id/cvact"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.787"
             app:layout_constraintStart_toEndOf="@+id/textView13" />
