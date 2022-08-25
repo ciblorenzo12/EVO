@@ -1,14 +1,21 @@
 package com.evopackage.evo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Event implements Serializable {
     private String _key, _name, _date, _location, _category, _uri, _description, _creator, _password;
     Boolean _priva;
-    private ArrayList<String> _people;
-    public Event() {};
+    private List<String> _people;
+    public Event() {}
 
     public Event(String key, String name, String date, String location, String category, String creator, String uri, String description, Boolean priva, String password) {
         _key = key;
@@ -20,7 +27,8 @@ public class Event implements Serializable {
         _uri = uri;
         _description = description;
         _priva = priva;
-       _people = null;
+       _people = new ArrayList<>();
+       _people.add(_creator);
 
        _password = password;
     }
@@ -40,6 +48,19 @@ public class Event implements Serializable {
     public int getPeopleCount() { return _people.size();}
 
     public void addPeople(String people) { _people.add(people);}
+
+    public boolean isPeopleOnEvent(String people){
+        boolean isCheck = false;
+        for(int i = 0; i < getPeopleCount(); i++)
+        {
+            if(_people.get(i) == people)
+            {
+                isCheck = true;
+            }
+        }
+
+        return isCheck;
+    }
 
     public String GetUri() { return _uri; }
 

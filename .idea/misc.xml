@@ -98,6 +98,7 @@
         <entry key="app/src/main/res/layout/activities_item.xml" value="0.5679565429687501" />
         <entry key="app/src/main/res/layout/activity_description.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_pic_guest.xml" value="0.15092592592592594" />
+        <entry key="app/src/main/res/layout/event_clicker.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/event_description.xml" value="0.165" />
         <entry key="app/src/main/res/layout/event_dialog.xml" value="0.38712321848109155" />
         <entry key="app/src/main/res/layout/event_history.xml" value="0.240625" />

@@ -31,7 +31,10 @@ import java.util.ArrayList;
 
 public class MainWindows_Create_Join_Event extends AppCompatActivity implements /*create_event_popup.DialogListener,*/ View.OnClickListener {
 
-    private FirebaseAuth auth;
+    //messanging
+
+
+    private String auth = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private FirebaseDatabase search;
     private FirebaseUser user;
     private int Camera_Permission_Request = 1;
@@ -63,9 +66,6 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 
 
         setContentView(R.layout.setting_page);
-        //messanging
-
-
 
 
         logout = findViewById(R.id.logout);
@@ -187,13 +187,30 @@ public class MainWindows_Create_Join_Event extends AppCompatActivity implements 
 //    } ?? merge conflicts
 
     private void movetodescription(Event ev) {
-        Intent i = new Intent(this, EventDescription.class);
-        i.putExtra("Event", ev);
-//        if(ev.isEventPrivate() == true)// && isAttending == false)
-//        {
-//            joinPopUp();
-//        }
-        startActivity(i);
+
+        if (ev.isEventPrivate() == true)// && isAttending == false)
+        {
+
+            if (!ev.isPeopleOnEvent(auth.toString())) {
+                joinPopUp();
+
+            }
+            else if(ev.isPeopleOnEvent(auth.toString()))
+            {
+                Intent i = new Intent(this, EventDescription.class);
+                i.putExtra("Event", ev);
+                startActivity(i);
+            }
+
+        }
+        else
+        {
+            Intent i = new Intent(this, EventDescription.class);
+            i.putExtra("Event", ev);
+            startActivity(i);
+        }
+
+
     }
 
     //Search
